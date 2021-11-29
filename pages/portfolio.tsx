@@ -3,9 +3,9 @@ import TabHeader from '~/components/widgets/TabHeader'
 
 const PortfolioPage = () => {
   return (
-    <div>
+    <div className="font-calibre">
       <TabHeader name="Portfolio" />
-      <main className="bg-navy">
+      <main>
         <Portfolio />
       </main>
     </div>

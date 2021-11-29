@@ -7,3 +7,40 @@
     @apply text-base bg-white;
   }
 }
+
+@layer components {
+  .portfolio-navigation-item {
+    @apply px-2 py-2 font-medium cursor-pointer text-small hover:text-green;
+  }
+}
+
+@font-face {
+  font-family: 'Calibre';
+  src: url(../public/static/fonts/Calibre-Medium.woff2);
+  font-style: medium;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Calibre';
+  src: url(../public/static/fonts/Calibre-Regular.woff2);
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Calibre';
+  src: url(../public/static/fonts/Calibre-Semibold.woff2);
+  font-style: bold;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url(../public/static/fonts/SFMono-Regular.woff2);
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}

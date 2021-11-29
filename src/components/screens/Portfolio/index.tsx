@@ -1,10 +1,12 @@
-import PortfolioHeader from './Header'
+import PortfolioHeader from '~/components/layouts/PortfolioHeader/index.tsx'
+import PortfolioIntroduce from '~/components/widgets/PortfolioIntroduce'
 
 const Portfolio = () => {
   return (
-    <div>
+    <section className="pb-10 bg-navy">
       <PortfolioHeader />
-    </div>
+      <PortfolioIntroduce />
+    </section>
   )
 }
 
