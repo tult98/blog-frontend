@@ -3,7 +3,7 @@ import PortfolioIntroduce from '~/components/widgets/PortfolioIntroduce'
 
 const Portfolio = () => {
   return (
-    <section className="pb-10 bg-navy">
+    <section className="min-h-screen pb-10 bg-navy">
       <PortfolioHeader />
       <PortfolioIntroduce />
     </section>
