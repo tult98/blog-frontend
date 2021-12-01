@@ -14,6 +14,22 @@
   }
 }
 
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
 @font-face {
   font-family: 'Calibre';
   src: url(../public/fonts/Calibre-Medium.woff2);

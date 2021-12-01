@@ -21,6 +21,7 @@ module.exports = {
       },
       animation: {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
+        fadeIn: 'fadeIn 1s ease-in',
       },
       keyframes: {
         fadeInButton: {
@@ -31,6 +32,10 @@ module.exports = {
             backgroundColor: '#233554',
           },
         },
+        fadeIn: {
+          '0%': { transform: 'translateY(-100px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
       },
       fontFamily: {
         calibre: ['Calibre'],
@@ -38,6 +43,9 @@ module.exports = {
       },
       fontSize: {
         small: '0.8125rem',
+      },
+      transitionDelay: {
+        400: '400ms',
       },
     },
   },
