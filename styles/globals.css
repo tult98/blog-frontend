@@ -10,7 +10,7 @@
 
 @layer components {
   .portfolio-navigation-item {
-    @apply px-2 py-2 font-medium cursor-pointer text-small hover:text-green;
+    @apply px-2 py-2 font-medium opacity-0 cursor-pointer text-small hover:text-green;
   }
 }
 

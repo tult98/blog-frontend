@@ -13,7 +13,7 @@ const Navigation = () => {
       <li className="animation-delay-300 portfolio-navigation-item animate-fadeIn">
         <span className="text-xs text-green">04. </span>Contact
       </li>
-      <li className="flex flex-row items-center px-4 ml-4 text-base border rounded-sm cursor-pointer animation-delay-400 animate-fadeIn hover:animate-fadeInButton border-green text-green text-small">
+      <li className="flex flex-row items-center px-4 ml-4 text-base border rounded-sm opacity-0 cursor-pointer animation-delay-400 animate-fadeIn hover:animate-fadeInButton border-green text-green text-small">
         Resume
       </li>
     </ul>
