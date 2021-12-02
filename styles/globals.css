@@ -12,6 +12,15 @@
   .portfolio-navigation-item {
     @apply px-2 py-2 font-medium opacity-0 cursor-pointer text-small hover:text-green;
   }
+  .styled-btn {
+    @apply py-5 text-sm font-medium border rounded cursor-pointer mt-14 px-7 text-green border-green hover:animate-fadeInButton font-sfmono;
+  }
+}
+
+@layer utilities {
+  .center {
+    @apply absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2;
+  }
 }
 
 .animation-delay-100 {

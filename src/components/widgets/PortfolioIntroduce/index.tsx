@@ -14,7 +14,7 @@ const PortfolioIntroduce = () => {
         strength is logical thinking, programming, teamwork skill, and
         self-study.
       </p>
-      <button className="py-5 text-sm border rounded hover:animate-fadeInButton font-sfmono mt-14 px-7 text-green border-green text-semibold">
+      <button className="hover:animate-fadeInButton styled-btn">
         Check out my work!
       </button>
     </div>
