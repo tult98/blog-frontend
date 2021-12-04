@@ -22,6 +22,7 @@ module.exports = {
       animation: {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
         fadeIn: 'fadeIn 1s ease-in forwards',
+        fadeInFromBottom: 'fadeInFromBottom 0.2s ease-in-out forwards',
       },
       keyframes: {
         fadeInButton: {
@@ -35,6 +36,10 @@ module.exports = {
         fadeIn: {
           '0%': { transform: 'translateY(-100px)', opacity: 0 },
           '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        fadeInFromBottom: {
+          '0%': { opacity: 0, transform: 'translateY(10px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
         },
       },
       fontFamily: {
