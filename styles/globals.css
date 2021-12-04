@@ -59,6 +59,10 @@
   animation-delay: 2000ms;
 }
 
+.vertical-rl {
+  writing-mode: vertical-rl;
+}
+
 @font-face {
   font-family: 'Calibre';
   src: url(../public/fonts/Calibre-Medium.woff2);

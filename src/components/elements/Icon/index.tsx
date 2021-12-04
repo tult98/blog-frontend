@@ -5,17 +5,17 @@ interface Props {
   name: string
   viewBox?: string
   style: string
-  onClick: () => void
+  onClick?: () => void
 }
 
-const Icon = ({ name, viewBox = '0 0 24 24', style }: Props) => {
+const Icon = ({ name, viewBox = '0 0 24 24', style, onClick }: Props) => {
   const svgStyle =
     paths[name].type === 'stroke'
       ? { stroke: 'currentColor', fill: 'none' }
       : { fill: 'currentColor' }
 
   return (
-    <div className={style}>
+    <div className={style} onClick={onClick}>
       <svg
         width="100%"
         height="100%"
