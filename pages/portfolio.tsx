@@ -5,7 +5,7 @@ const PortfolioPage = () => {
   return (
     <div className="font-calibre">
       <TabHeader name="Portfolio" />
-      <main>
+      <main className="overflow-y-auto portfolio-sidebar">
         <Portfolio />
       </main>
     </div>

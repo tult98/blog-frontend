@@ -1,7 +1,8 @@
 import ContactInfoItem from '~/components/elements/ContactInfoItem'
 import PortfolioHeader from '~/components/layouts/PortfolioHeader/index.tsx'
-import ContactInfoContainer from '~/components/widgets/ContactInfoContainer'
-import PortfolioIntroduce from '~/components/widgets/PortfolioIntroduce'
+import AboutMe from '~/components/modules/Portfolio/AboutMe'
+import ContactInfoContainer from '~/components/modules/Portfolio/ContactInfoContainer'
+import PortfolioIntroduce from '~/components/modules/Portfolio/PortfolioIntroduce'
 
 interface ISocialAccount {
   name: string
@@ -32,7 +33,10 @@ const Portfolio = () => {
   return (
     <section className="min-h-screen pb-10 bg-navy">
       <PortfolioHeader />
-      <PortfolioIntroduce />
+      <div className="mx-auto max-w-1000px">
+        <PortfolioIntroduce />
+        <AboutMe />
+      </div>
       <ContactInfoContainer style="left-5 bottom-0">
         <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
           {socialAccounts.map((item, index) => (

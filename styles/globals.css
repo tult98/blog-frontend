@@ -67,6 +67,10 @@
   writing-mode: vertical-rl;
 }
 
+.portfolio-sidebar::-webkit-scrollbar {
+  background-color: #0a192f;
+}
+
 @font-face {
   font-family: 'Calibre';
   src: url(../public/fonts/Calibre-Medium.woff2);

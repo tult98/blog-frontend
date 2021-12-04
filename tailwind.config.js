@@ -19,6 +19,9 @@ module.exports = {
         },
         green: '#64ffda',
       },
+      maxWidth: {
+        '1000px': '1000px',
+      },
       animation: {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
         fadeIn: 'fadeIn 1s ease-in forwards',
