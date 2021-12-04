@@ -24,6 +24,7 @@ module.exports = {
         fadeIn: 'fadeIn 1s ease-in forwards',
         fadeInFromBottom: 'fadeInFromBottom 0.2s ease-in-out forwards',
         slideUpLittle: 'slideUpLittle 0.2s ease-in-out forwards',
+        appear: 'appear 0.2s ease-in-out forwards',
       },
       keyframes: {
         fadeInButton: {
@@ -45,6 +46,10 @@ module.exports = {
         slideUpLittle: {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(-5px)' },
+        },
+        appear: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
         },
       },
       fontFamily: {

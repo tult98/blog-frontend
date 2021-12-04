@@ -16,9 +16,9 @@ const PortfolioIntroduce = () => {
         strength is logical thinking, programming, teamwork skill, and
         self-study.
       </p>
-      <button className="opacity-0 hover:animate-fadeInButton styled-btn animate-fadeInFromBottom animation-delay-2000">
-        Check out my work!
-      </button>
+      <div className="inline-block opacity-0 animate-fadeInFromBottom animation-delay-2000">
+        <div className="styled-btn">Check out my work!</div>
+      </div>
     </section>
   )
 }

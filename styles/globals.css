@@ -59,6 +59,10 @@
   animation-delay: 2000ms;
 }
 
+.animation-delay-2s3 {
+  animation-delay: 2.3s;
+}
+
 .vertical-rl {
   writing-mode: vertical-rl;
 }

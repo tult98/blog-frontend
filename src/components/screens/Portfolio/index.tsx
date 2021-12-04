@@ -34,7 +34,7 @@ const Portfolio = () => {
       <PortfolioHeader />
       <PortfolioIntroduce />
       <ContactInfoContainer style="left-5 bottom-0">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
           {socialAccounts.map((item, index) => (
             <ContactInfoItem key={index} name={item.name} url={item.url} />
           ))}
@@ -42,7 +42,7 @@ const Portfolio = () => {
         </div>
       </ContactInfoContainer>
       <ContactInfoContainer style="right-5 bottom-0">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
           <p className="py-3 text-xs cursor-pointer text-slate-light font-sfmono vertical-rl hover:text-green hover:animate-slideUpLittle">
             lethanhtu1551998@gmail.com
           </p>
