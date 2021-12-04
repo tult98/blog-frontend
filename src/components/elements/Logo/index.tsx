@@ -27,7 +27,7 @@ const Logo = () => {
   }
 
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <svg
         ref={logoRef}
         id="logo"

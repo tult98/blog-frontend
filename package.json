@@ -5,7 +5,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint-fix": "next lint --cache --fix",
+    "ts-check": "tsc --noemit",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "12.0.4",
@@ -20,9 +23,22 @@
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "postcss": "^8.4.4",
     "prettier": "^2.5.0",
     "tailwindcss": "^2.2.19",
     "typescript": "4.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "bash -c 'yarn ts-check'",
+      "bash -c 'yarn lint-fix'"
+    ]
   }
 }
