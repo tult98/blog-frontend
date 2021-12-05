@@ -1,8 +1,18 @@
-const MobileMenu = ({ isOpen }: { isOpen: boolean }) => {
+const MobileMenu = ({
+  isOpen,
+  shouldAnimate,
+}: {
+  isOpen: boolean
+  shouldAnimate: boolean
+}) => {
   return (
     <ul
-      className={`fixed top-0 right-0 z-10 flex flex-col items-center justify-center w-4/5 h-screen md:static bg-navy-light md:bg-transparent md:w-auto md:h-auto md:flex md:flex-row text-slate-light font-sfmono ${
-        isOpen ? 'animate-fadeInFromRight' : 'animate-fadeOutFromRight'
+      className={`fixed top-0 left-full z-10 flex flex-col items-center justify-center w-4/5 h-screen md:static bg-navy-light md:bg-transparent md:w-auto md:h-auto md:flex md:flex-row text-slate-light font-sfmono ${
+        shouldAnimate
+          ? isOpen
+            ? 'animate-fadeInFromRight'
+            : 'animate-fadeOutFromRight'
+          : ''
       }`}
     >
       <li className="min-w-150px md:min-w-min md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none">

@@ -5,15 +5,19 @@ import PCMenu from './PCMenu'
 
 const Navigation = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
+  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false)
 
   const onToggleMenu = () => {
     setIsOpenMenu(!isOpenMenu)
+    if (!shouldAnimate) {
+      setShouldAnimate(true)
+    }
   }
 
   return (
     <>
       <div className="md:hidden">
-        <MobileMenu isOpen={isOpenMenu} />
+        <MobileMenu isOpen={isOpenMenu} shouldAnimate={shouldAnimate} />
       </div>
       <div className="hidden md:block">
         <PCMenu />

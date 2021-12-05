@@ -60,12 +60,12 @@ module.exports = {
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
         fadeInFromRight: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0)' },
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         fadeOutFromRight: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(100%)' },
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
         },
         slideUpLittle: {
           '0%': { transform: 'translateY(0)' },
