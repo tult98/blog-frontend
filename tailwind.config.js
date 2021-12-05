@@ -26,6 +26,7 @@ module.exports = {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
         fadeIn: 'fadeIn 1s ease-in forwards',
         fadeInFromBottom: 'fadeInFromBottom 0.2s ease-in-out forwards',
+        fadeInFromBottomSlow: 'fadeInFromBottomSlow 0.6s ease-in-out forwards',
         slideUpLittle: 'slideUpLittle 0.2s ease-in-out forwards',
         appear: 'appear 0.2s ease-in-out forwards',
       },
@@ -44,6 +45,10 @@ module.exports = {
         },
         fadeInFromBottom: {
           '0%': { opacity: 0, transform: 'translateY(10px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeInFromBottomSlow: {
+          '0%': { opacity: 0, transform: 'translateY(100px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
         slideUpLittle: {

@@ -1,9 +1,42 @@
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import avatar from '../../../../../public/avatar.jpg'
 
 const AboutMe = () => {
+  const aboutMeRef = useRef<HTMLElement>(null)
+  const [observer, setObserver] = useState<IntersectionObserver | null>(null)
+  const [isInterSecting, setIsInterSecting] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!aboutMeRef.current) {
+      return
+    }
+    setObserver(
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInterSecting(true)
+          }
+        })
+      }),
+    )
+  }, [aboutMeRef])
+
+  useEffect(() => {
+    if (!observer) {
+      return
+    }
+    observer.observe(aboutMeRef.current!)
+  }, [observer])
+
   return (
-    <section id="about" className="pt-24">
+    <section
+      id="about"
+      className={`mt-24 opacity-0 ${
+        isInterSecting ? 'animate-fadeInFromBottomSlow animation-delay-200' : ''
+      }`}
+      ref={aboutMeRef}
+    >
       <div className="flex flex-row items-center mt-3 mb-10">
         <h2 className="text-3xl font-semibold text-slate-lightest">
           <span className="mr-2 text-lg font-normal text-green font-sfmono">
