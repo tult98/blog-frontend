@@ -1,6 +1,6 @@
 const PortfolioIntroduce = () => {
   return (
-    <section className="pb-24">
+    <section className="min-h-screen pb-24 mt-24 md:mt-0">
       <p className="text-sm opacity-0 md:text-base text-green font-sfmono animate-fadeInFromBottom animation-delay-1600">
         Hi, my name is
       </p>

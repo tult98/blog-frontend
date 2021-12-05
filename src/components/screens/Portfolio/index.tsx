@@ -31,7 +31,7 @@ const Portfolio = () => {
   ] as ISocialAccount[]
 
   return (
-    <section className="min-h-screen pb-10 bg-navy">
+    <section className="pb-10 bg-navy">
       <PortfolioHeader />
       <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
         <PortfolioIntroduce />

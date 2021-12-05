@@ -32,7 +32,7 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className={`md:mt-24 mt-10 opacity-0 ${
+      className={`md:mt-24 mt-10 opacity-0 min-h-screen ${
         isInterSecting ? 'animate-fadeInFromBottomSlow animation-delay-200' : ''
       }`}
       ref={aboutMeRef}
