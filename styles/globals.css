@@ -15,6 +15,9 @@
   .styled-btn {
     @apply py-5 text-sm font-medium border rounded cursor-pointer mt-14 px-7 text-green border-green hover:animate-fadeInButton font-sfmono;
   }
+  .portfolio-navigation-item-sm {
+    @apply px-2 py-2 text-xl font-medium opacity-100 cursor-pointer hover:text-green;
+  }
 }
 
 @layer utilities {

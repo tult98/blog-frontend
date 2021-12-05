@@ -22,11 +22,19 @@ module.exports = {
       maxWidth: {
         '1000px': '1000px',
       },
+      minWidth: {
+        '150px': '150px',
+      },
+      screens: {
+        'max-md': { max: '767px' },
+      },
       animation: {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
         fadeIn: 'fadeIn 1s ease-in forwards',
         fadeInFromBottom: 'fadeInFromBottom 0.2s ease-in-out forwards',
         fadeInFromBottomSlow: 'fadeInFromBottomSlow 0.6s ease-in-out forwards',
+        fadeInFromRight: 'fadeInFromRight 0.5s ease-in-out forwards',
+        fadeOutFromRight: 'fadeOutFromRight 0.5s ease-in-out forwards',
         slideUpLittle: 'slideUpLittle 0.2s ease-in-out forwards',
         appear: 'appear 0.2s ease-in-out forwards',
       },
@@ -50,6 +58,14 @@ module.exports = {
         fadeInFromBottomSlow: {
           '0%': { opacity: 0, transform: 'translateY(100px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeInFromRight: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        fadeOutFromRight: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
         },
         slideUpLittle: {
           '0%': { transform: 'translateY(0)' },
