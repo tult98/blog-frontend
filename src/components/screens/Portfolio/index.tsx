@@ -33,11 +33,11 @@ const Portfolio = () => {
   return (
     <section className="min-h-screen pb-10 bg-navy">
       <PortfolioHeader />
-      <div className="mx-auto max-w-1000px">
+      <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
         <PortfolioIntroduce />
         <AboutMe />
       </div>
-      <ContactInfoContainer style="left-5 bottom-0">
+      <ContactInfoContainer style="left-5 bottom-0 hidden md:block">
         <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
           {socialAccounts.map((item, index) => (
             <ContactInfoItem key={index} name={item.name} url={item.url} />
@@ -45,7 +45,7 @@ const Portfolio = () => {
           <div className="w-px h-24 bg-slate-light"></div>
         </div>
       </ContactInfoContainer>
-      <ContactInfoContainer style="right-5 bottom-0">
+      <ContactInfoContainer style="right-5 bottom-0 hidden md:block">
         <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
           <p className="py-3 text-xs cursor-pointer text-slate-light font-sfmono vertical-rl hover:text-green hover:animate-slideUpLittle">
             lethanhtu1551998@gmail.com

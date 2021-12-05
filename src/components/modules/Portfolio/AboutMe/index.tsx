@@ -32,21 +32,21 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className={`mt-24 opacity-0 ${
+      className={`md:mt-24 mt-10 opacity-0 ${
         isInterSecting ? 'animate-fadeInFromBottomSlow animation-delay-200' : ''
       }`}
       ref={aboutMeRef}
     >
       <div className="flex flex-row items-center mt-3 mb-10">
-        <h2 className="text-3xl font-semibold text-slate-lightest">
+        <h2 className="text-2xl font-semibold md:text-3xl text-slate-lightest">
           <span className="mr-2 text-lg font-normal text-green font-sfmono">
             01.
           </span>{' '}
           About Me
         </h2>
-        <div className="relative h-px ml-5 w-52 bg-navy-lightest -top-1"></div>
+        <div className="relative w-20 h-px ml-5 md:w-52 bg-navy-lightest -top-1"></div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="gap-4 md:grid md:grid-cols-2">
         <div>
           <p className="mb-4 text-xl text-slate">
             Hello! My name is Tu and I enjoy creating things that live on the
@@ -95,7 +95,7 @@ const AboutMe = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-row items-center justify-center w-full h-full">
+        <div className="items-center justify-center hidden w-full h-full md:flex md:flex-row">
           <Image
             src={avatar}
             alt="avatar"
