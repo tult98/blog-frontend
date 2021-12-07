@@ -1,7 +1,7 @@
 const Experience = () => {
   const companies = [{ name: 'Rikkeisoft', isActive: true }]
   return (
-    <div className="items-center pt-24 mx-auto max-w-700px">
+    <div className="items-center min-h-screen pt-24 mx-auto max-w-700px">
       <div className="flex flex-row items-center">
         <h1 className="mt-2 mb-10 text-3xl font-semibold text-slate-lightest">
           <span className="text-lg font-normal text-green font-sfmono">
