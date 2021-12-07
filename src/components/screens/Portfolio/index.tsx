@@ -2,6 +2,7 @@ import ContactInfoItem from '~/components/elements/ContactInfoItem'
 import PortfolioHeader from '~/components/layouts/PortfolioHeader/index.tsx'
 import AboutMe from '~/components/modules/Portfolio/AboutMe'
 import ContactInfoContainer from '~/components/modules/Portfolio/ContactInfoContainer'
+import Experience from '~/components/modules/Portfolio/Experience'
 import PortfolioIntroduce from '~/components/modules/Portfolio/PortfolioIntroduce'
 
 interface ISocialAccount {
@@ -36,6 +37,7 @@ const Portfolio = () => {
       <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
         <PortfolioIntroduce />
         <AboutMe />
+        <Experience />
       </div>
       <ContactInfoContainer style="left-5 bottom-0 hidden md:block">
         <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">

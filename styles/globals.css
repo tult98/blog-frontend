@@ -73,6 +73,7 @@
 .skill-item::before {
   content: '▹';
   left: 0px;
+  padding-right: 4px;
   color: #64ffda;
   font-size: 14px;
   line-height: 12px;
