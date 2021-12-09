@@ -42,7 +42,7 @@ const Experience = ({ isInView }: { isInView: boolean }) => {
             </div>
           ))}
         </div>
-        <div className="w-9/12 px-1 py-2 mt-10 font-sfmono md:mt-0">
+        <div className="w-full px-1 py-2 mt-10 md:w-9/12 font-sfmono md:mt-0">
           <h1 className="text-2xl font-semibold text-slate-lightest font-calibre">
             Frontend Developer
           </h1>
