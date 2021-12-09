@@ -3,6 +3,8 @@ import PortfolioHeader from '~/components/layouts/PortfolioHeader/index.tsx'
 import AboutMe from '~/components/modules/Portfolio/AboutMe'
 import ContactInfoContainer from '~/components/modules/Portfolio/ContactInfoContainer'
 import Experience from '~/components/modules/Portfolio/Experience'
+import Footer from '~/components/modules/Portfolio/Footer'
+import GetInTouch from '~/components/modules/Portfolio/GetInTouch'
 import PortfolioIntroduce from '~/components/modules/Portfolio/PortfolioIntroduce'
 
 interface ISocialAccount {
@@ -32,12 +34,14 @@ const Portfolio = () => {
   ] as ISocialAccount[]
 
   return (
-    <section className="pb-10 bg-navy">
+    <section className="bg-navy">
       <PortfolioHeader />
       <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
         <PortfolioIntroduce />
         <AboutMe />
         <Experience />
+        <GetInTouch />
+        <Footer />
       </div>
       <ContactInfoContainer style="left-5 bottom-0 hidden md:block">
         <div className="flex flex-col items-center opacity-0 animate-appear animation-delay-2s3">
