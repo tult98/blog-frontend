@@ -1,7 +1,15 @@
-import useInterSecting from '~/hooks/useIntereSecting'
+import useInterSecting from '~/hooks/useInterSecting'
 
-const GetInTouch = () => {
+const GetInTouch = ({ isInView }: { isInView: boolean }) => {
   const { htmlRef: getInTouchRef, isInterSecting } = useInterSecting()
+
+  if (isInView) {
+    getInTouchRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
+  }
+
   return (
     <section
       ref={getInTouchRef}

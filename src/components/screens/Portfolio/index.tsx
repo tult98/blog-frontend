@@ -6,6 +6,7 @@ import Experience from '~/components/modules/Portfolio/Experience'
 import Footer from '~/components/modules/Portfolio/Footer'
 import GetInTouch from '~/components/modules/Portfolio/GetInTouch'
 import PortfolioIntroduce from '~/components/modules/Portfolio/PortfolioIntroduce'
+import usePortfolioNavigation from '~/hooks/usePortfolioNavigation'
 
 interface ISocialAccount {
   name: string
@@ -13,6 +14,7 @@ interface ISocialAccount {
 }
 
 const Portfolio = () => {
+  const { navigationItemsStatus, onSwitchSection } = usePortfolioNavigation()
   const socialAccounts = [
     {
       name: 'github',
@@ -35,12 +37,12 @@ const Portfolio = () => {
 
   return (
     <section className="bg-navy">
-      <PortfolioHeader />
+      <PortfolioHeader onSwitchSection={onSwitchSection} />
       <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
         <PortfolioIntroduce />
-        <AboutMe />
-        <Experience />
-        <GetInTouch />
+        <AboutMe isInView={navigationItemsStatus.about} />
+        <Experience isInView={navigationItemsStatus.experience} />
+        <GetInTouch isInView={navigationItemsStatus.contact} />
         <Footer />
       </div>
       <ContactInfoContainer style="left-5 bottom-0 hidden md:block">

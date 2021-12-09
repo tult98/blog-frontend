@@ -1,14 +1,18 @@
 import Image from 'next/image'
-import useInterSecting from '~/hooks/useIntereSecting'
+import useInterSecting from '~/hooks/useInterSecting'
 import avatar from '../../../../../public/avatar.jpg'
 
-const AboutMe = () => {
+const AboutMe = ({ isInView }: { isInView: boolean }) => {
   const { htmlRef: aboutMeRef, isInterSecting } = useInterSecting()
+
+  if (isInView) {
+    aboutMeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 
   return (
     <section
       id="about"
-      className={`md:mt-24 mt-10 opacity-0 min-h-screen ${
+      className={`md:pt-24 mt-10 opacity-0 min-h-screen ${
         isInterSecting ? 'animate-fadeInFromBottomSlow animation-delay-200' : ''
       }`}
       ref={aboutMeRef}

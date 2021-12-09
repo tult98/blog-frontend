@@ -1,9 +1,11 @@
 const MobileMenu = ({
   isOpen,
   shouldAnimate,
+  onSwitchSection,
 }: {
   isOpen: boolean
   shouldAnimate: boolean
+  onSwitchSection: (sectionName: string) => void
 }) => {
   return (
     <ul
@@ -15,17 +17,29 @@ const MobileMenu = ({
           : ''
       }`}
     >
-      <li className="min-w-150px md:min-w-min md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none">
+      <li
+        onClick={() => onSwitchSection('about')}
+        className="min-w-150px md:min-w-min md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none"
+      >
         <span className="text-base md:text-xs text-green">01. </span> About
       </li>
-      <li className="min-w-150px md:min-w-min animation-delay-100 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none">
+      <li
+        onClick={() => onSwitchSection('experience')}
+        className="min-w-150px md:min-w-min animation-delay-100 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none"
+      >
         <span className="text-base md:text-xs text-green">02. </span>
-        Skills
+        Experience
       </li>
-      <li className="min-w-150px md:min-w-min animation-delay-200 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none">
+      <li
+        onClick={() => onSwitchSection('work')}
+        className="min-w-150px md:min-w-min animation-delay-200 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none"
+      >
         <span className="text-base md:text-xs text-green">03. </span>Work
       </li>
-      <li className="min-w-150px md:min-w-min animation-delay-300 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none">
+      <li
+        onClick={() => onSwitchSection('contact')}
+        className="min-w-150px md:min-w-min animation-delay-300 md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none"
+      >
         <span className="text-base md:text-xs text-green">04. </span>
         Contact
       </li>

@@ -3,7 +3,11 @@ import Icon from '~/components/elements/Icon'
 import MobileMenu from './MobileMenu'
 import PCMenu from './PCMenu'
 
-const Navigation = () => {
+const Navigation = ({
+  onSwitchSection,
+}: {
+  onSwitchSection: (sectionName: string) => void
+}) => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const [shouldAnimate, setShouldAnimate] = useState<boolean>(false)
 
@@ -17,10 +21,14 @@ const Navigation = () => {
   return (
     <>
       <div className="md:hidden">
-        <MobileMenu isOpen={isOpenMenu} shouldAnimate={shouldAnimate} />
+        <MobileMenu
+          isOpen={isOpenMenu}
+          shouldAnimate={shouldAnimate}
+          onSwitchSection={onSwitchSection}
+        />
       </div>
       <div className="hidden md:block">
-        <PCMenu />
+        <PCMenu onSwitchSection={onSwitchSection} />
       </div>
       <Icon
         name="menu"

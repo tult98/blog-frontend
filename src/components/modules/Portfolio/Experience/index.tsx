@@ -1,8 +1,16 @@
-import useInterSecting from '~/hooks/useIntereSecting'
+import useInterSecting from '~/hooks/useInterSecting'
 
-const Experience = () => {
+const Experience = ({ isInView }: { isInView: boolean }) => {
   const { htmlRef: experienceRef, isInterSecting } = useInterSecting()
   const companies = [{ name: 'Rikkeisoft', isActive: true }]
+
+  if (isInView) {
+    experienceRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
+  }
+
   return (
     <section
       ref={experienceRef}
