@@ -1,33 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import useInterSecting from '~/hooks/useIntereSecting'
 import avatar from '../../../../../public/avatar.jpg'
 
 const AboutMe = () => {
-  const aboutMeRef = useRef<HTMLElement>(null)
-  const [observer, setObserver] = useState<IntersectionObserver | null>(null)
-  const [isInterSecting, setIsInterSecting] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (!aboutMeRef.current) {
-      return
-    }
-    setObserver(
-      new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInterSecting(true)
-          }
-        })
-      }),
-    )
-  }, [aboutMeRef])
-
-  useEffect(() => {
-    if (!observer) {
-      return
-    }
-    observer.observe(aboutMeRef.current!)
-  }, [observer])
+  const { htmlRef: aboutMeRef, isInterSecting } = useInterSecting()
 
   return (
     <section
