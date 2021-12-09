@@ -32,7 +32,7 @@ const Navigation = ({
       </div>
       <Icon
         name="menu"
-        style="w-8 h-8 text-green absolute right-4 block md:hidden z-20"
+        style="w-8 h-8 text-green fixed right-4 block md:hidden z-20"
         onClick={onToggleMenu}
       />
     </>
