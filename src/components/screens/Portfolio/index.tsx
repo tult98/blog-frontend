@@ -6,6 +6,7 @@ import Experience from '~/components/modules/Portfolio/Experience'
 import Footer from '~/components/modules/Portfolio/Footer'
 import GetInTouch from '~/components/modules/Portfolio/GetInTouch'
 import PortfolioIntroduce from '~/components/modules/Portfolio/PortfolioIntroduce'
+import Work from '~/components/modules/Portfolio/Work'
 import usePortfolioNavigation from '~/hooks/usePortfolioNavigation'
 
 interface ISocialAccount {
@@ -42,6 +43,7 @@ const Portfolio = () => {
         <PortfolioIntroduce />
         <AboutMe isInView={navigationItemsStatus.about} />
         <Experience isInView={navigationItemsStatus.experience} />
+        <Work isInView={navigationItemsStatus.work} />
         <GetInTouch isInView={navigationItemsStatus.contact} />
         <Footer />
       </div>

@@ -19,7 +19,7 @@ const Experience = ({ isInView }: { isInView: boolean }) => {
       }`}
     >
       <div className="flex flex-row items-center">
-        <h1 className="mt-2 mb-10 text-3xl font-semibold text-slate-lightest">
+        <h1 className="mt-2 mb-10 text-2xl md:text-3xl font-semibold text-slate-lightest">
           <span className="text-lg font-normal text-green font-sfmono">
             02.
           </span>{' '}
