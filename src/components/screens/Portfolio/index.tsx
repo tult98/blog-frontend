@@ -16,6 +16,7 @@ interface ISocialAccount {
 
 const Portfolio = () => {
   const { navigationItemsStatus, onSwitchSection } = usePortfolioNavigation()
+
   const socialAccounts = [
     {
       name: 'github',
