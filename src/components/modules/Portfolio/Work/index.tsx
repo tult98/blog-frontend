@@ -41,15 +41,15 @@ const Work = ({ isInView }: { isInView: boolean }) => {
       ref={workRef}
     >
       <div className="flex flex-row items-center">
-        <h1 className="md:text-3xl text-2xl text-slate-lightest font-semibold mt-2 mb-10">
-          <span className="text-green font-sfmono text-lg font-normal">
+        <h1 className="mt-2 mb-10 text-2xl font-semibold md:text-3xl text-slate-lightest">
+          <span className="text-lg font-normal text-green font-sfmono">
             03.{' '}
           </span>{' '}
           Some things I&#39;ve built
         </h1>
         <div className="relative w-20 h-px ml-5 md:w-52 bg-navy-lightest -top-5"></div>
       </div>
-      <div className="grid md:grid-cols-3 gap-4 grid-cols-1">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {works.map((work, idx) => (
           <WorkItem
             key={idx}

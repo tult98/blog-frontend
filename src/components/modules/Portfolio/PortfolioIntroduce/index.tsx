@@ -1,4 +1,8 @@
-const PortfolioIntroduce = () => {
+const PortfolioIntroduce = ({
+  onSwitchSection,
+}: {
+  onSwitchSection: (sectionName: string) => void
+}) => {
   return (
     <section className="min-h-screen pb-24 mt-24 md:mt-0">
       <p className="text-sm opacity-0 md:text-base text-green font-sfmono animate-fadeInFromBottom animation-delay-1600">
@@ -17,7 +21,9 @@ const PortfolioIntroduce = () => {
         self-study.
       </p>
       <div className="inline-block opacity-0 animate-fadeInFromBottom animation-delay-2000">
-        <div className="styled-btn">Check out my work!</div>
+        <div className="styled-btn" onClick={() => onSwitchSection('work')}>
+          Check out my work!
+        </div>
       </div>
     </section>
   )

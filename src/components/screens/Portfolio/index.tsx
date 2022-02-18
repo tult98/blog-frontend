@@ -41,7 +41,7 @@ const Portfolio = () => {
     <section className="bg-navy">
       <PortfolioHeader onSwitchSection={onSwitchSection} />
       <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
-        <PortfolioIntroduce />
+        <PortfolioIntroduce onSwitchSection={onSwitchSection} />
         <AboutMe isInView={navigationItemsStatus.about} />
         <Experience isInView={navigationItemsStatus.experience} />
         <Work isInView={navigationItemsStatus.work} />
