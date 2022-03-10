@@ -26,7 +26,12 @@ const GetInTouch = ({ isInView }: { isInView: boolean }) => {
         is always open. Whether you have a question or just want to say hi, I’ll
         try my best to get back to you!
       </p>
-      <button className="mt-12 capitalize styled-btn">Say hello</button>
+      <a
+        href="mailto:lethanhtu1551998@gmail.com"
+        className="mt-12 capitalize styled-btn"
+      >
+        Say hello
+      </a>
     </section>
   )
 }
