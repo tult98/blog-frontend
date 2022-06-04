@@ -33,6 +33,28 @@ const Home: NextPage = () => {
               </a>
             </Link>
           </div>
+          <div className="mt-8 text-sm text-center font-sfmono text-slate-lightest md:text-base">
+            <p>
+              Get to know more about me?{' '}
+              <a
+                href="https://tult.notion.site/Web-dev-resouces-d58c1e9217e64543a138609ed8e8d683"
+                className="underline text-green"
+                target={'_blank'}
+              >
+                Check out my common book
+              </a>
+            </p>
+            <p>
+              Check out{' '}
+              <a
+                href="https://website-optimization-slide.vercel.app/"
+                className="underline text-green"
+                target={'_blank'}
+              >
+                my latest seminar slide
+              </a>
+            </p>
+          </div>
         </div>
       </main>
 
