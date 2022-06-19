@@ -20,13 +20,12 @@ const Portfolio = () => {
   const socialAccounts = [
     {
       name: 'github',
-      url: 'https://github.com/lethanhtupk',
+      url: 'https://github.com/tult98',
     },
     {
       name: 'linkedin',
       url: 'https://www.linkedin.com/in/tu-le-thanh1505/',
     },
-    ,
     {
       name: 'facebook',
       url: 'https://www.facebook.com/le.thanhtu.129',
