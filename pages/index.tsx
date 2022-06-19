@@ -1,13 +1,34 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import TabHeader from '~/components/widgets/TabHeader'
+import { signInWithGoogle } from '~/services/firebase'
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
+  const onSignIn = async () => {
+    try {
+      await signInWithGoogle()
+      router.push('/blogs')
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <div>
       <TabHeader />
 
       <main className="min-h-screen bg-navy font-calibre">
+        <div className="fixed top-0 flex flex-row justify-end items-center w-full bg-navy-lightest h-[60px]">
+          <button
+            className="h-full px-4 text-sm text-center hover:bg-navy-light font-sfmono text-slate-lightest md:text-base"
+            onClick={onSignIn}
+          >
+            Sign in
+          </button>
+        </div>
         <div className="flex flex-col items-center w-4/5 center md:w-auto">
           <h1 className="text-4xl font-bold uppercase md:text-5xl text-green">
             Coming Soon
