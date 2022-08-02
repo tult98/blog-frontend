@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
 // import { useRouter } from 'next/router'
 // import Link from 'next/link'
-// import TabHeader from '~/components/widgets/TabHeader'
+import TabHeader from '~/components/widgets/TabHeader'
 // import { signInWithGoogle } from '~/services/firebase'
-import BlogContainer from '~/components/widgets/BlogContainer'
+import BlogContainer from '~/components/modules/Blog/BlogContainer'
+import BlogHeader from '~/components/layouts/BlogHeader'
 
 const Home: NextPage = () => {
   // const router = useRouter()
@@ -18,11 +19,15 @@ const Home: NextPage = () => {
   // }
 
   return (
-    <div>
-      <main className="min-h-screen">
-        <BlogContainer />
-      </main>
-    </div>
+    <>
+      <TabHeader name="Blogs" />
+      <div>
+        <main className="relative flex flex-col items-center min-h-screen">
+          <BlogHeader />
+          <BlogContainer />
+        </main>
+      </div>
+    </>
   )
 }
 
