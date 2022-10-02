@@ -21,12 +21,13 @@ const WorkItem = ({
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    ref.current?.addEventListener('mouseenter', onMouseEnter)
-    ref.current?.addEventListener('mouseleave', onMouseLeave)
+    const workItemRef = ref.current
+    workItemRef?.addEventListener('mouseenter', onMouseEnter)
+    workItemRef?.addEventListener('mouseleave', onMouseLeave)
 
     return () => {
-      ref.current?.removeEventListener('mouseenter', onMouseEnter)
-      ref.current?.removeEventListener('mouseleave', onMouseLeave)
+      workItemRef?.removeEventListener('mouseenter', onMouseEnter)
+      workItemRef?.removeEventListener('mouseleave', onMouseLeave)
     }
   }, [])
 

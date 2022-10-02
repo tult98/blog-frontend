@@ -2,7 +2,11 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { colors } from '~/theme/variables/platform'
 
-const Logo = () => {
+interface Props {
+  shouldFillLogo?: boolean
+}
+
+const Logo = ({ shouldFillLogo = false }: Props) => {
   const [hover, setHover] = useState<boolean>(false)
   const logoRef = useRef<SVGSVGElement>(null)
 
@@ -44,7 +48,7 @@ const Logo = () => {
           <g transform="translate(11.000000, 5.000000)">
             <polygon
               id="Shape"
-              fill={hover ? colors['navy-lightest'] : 'none'}
+              fill={hover || shouldFillLogo ? colors['navy-lightest'] : 'none'}
               stroke={colors.green}
               strokeWidth="5"
               strokeLinecap="round"

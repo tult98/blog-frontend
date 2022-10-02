@@ -1,5 +1,5 @@
 import ContactInfoItem from '~/components/elements/ContactInfoItem'
-import PortfolioHeader from '~/components/layouts/PortfolioHeader/index.tsx'
+import PortfolioHeader from '~/components/layouts/PortfolioHeader'
 import AboutMe from '~/components/modules/Portfolio/AboutMe'
 import ContactInfoContainer from '~/components/modules/Portfolio/ContactInfoContainer'
 import Experience from '~/components/modules/Portfolio/Experience'
