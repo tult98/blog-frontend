@@ -11,5 +11,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.MY_PAT }}
-          repository: blog-center # target repository
+          repository: https://github.com/tult98/blog-center # target repository
           event-type: sync-shared-submodule
