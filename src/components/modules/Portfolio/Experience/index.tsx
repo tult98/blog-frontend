@@ -1,8 +1,42 @@
+import { useMemo, useState } from 'react'
 import useInterSecting from '~/hooks/useInterSecting'
+
+interface ICompany {
+  name: string
+  isActive: boolean
+  title: string
+  workingTime: string
+  responsibility: string[]
+}
+
+const DEFAULT_COMPANIES: ICompany[] = [
+  {
+    name: 'Rikkeisoft',
+    isActive: false,
+    title: 'Frontend Developer',
+    workingTime: 'August 2020 - August 2022',
+    responsibility: [
+      'Maintain, implement the new features as well as refactor existing code to improve re-usability and performance.',
+      'Working with different frameworks, platforms such as JavaScript, Typescript, ReactJS, NextJS, NodeJS, GraphQL, ... etc.',
+      'Communicate with customers like engineers, Product manager or CTO to clarify the problems and solutions.',
+    ],
+  },
+  {
+    name: 'Xpon Digital',
+    isActive: true,
+    title: 'Fullstack Developer',
+    workingTime: 'August 2022 - Present',
+    responsibility: [
+      'Improve the lighthouse score by 50%.',
+      'Update version Next.js to the latest from version 5.x.',
+      'Setup development environment for team, migrate to function component, TypeScript, and refactoring code base.',
+    ],
+  },
+]
 
 const Experience = ({ isInView }: { isInView: boolean }) => {
   const { htmlRef: experienceRef, isInterSecting } = useInterSecting()
-  const companies = [{ name: 'Rikkeisoft', isActive: true }]
+  const [companies, setCompanies] = useState<ICompany[]>(DEFAULT_COMPANIES)
 
   if (isInView) {
     experienceRef.current?.scrollIntoView({
@@ -10,6 +44,20 @@ const Experience = ({ isInView }: { isInView: boolean }) => {
       block: 'center',
     })
   }
+
+  const onChangeSelectedCompany = (company: ICompany) => {
+    const newCompanies = companies.map((item) => {
+      if (company.name !== item.name) {
+        return { ...item, isActive: false }
+      }
+      return { ...item, isActive: true }
+    })
+    setCompanies(newCompanies)
+  }
+
+  const selectedCompany = useMemo(() => {
+    return companies.find((company) => company.isActive)
+  }, [companies])
 
   return (
     <section
@@ -32,6 +80,7 @@ const Experience = ({ isInView }: { isInView: boolean }) => {
           {companies.map((company, index) => (
             <div
               key={index}
+              onClick={() => onChangeSelectedCompany(company)}
               className={`flex flex-row items-center md:border-l-2 md:border-b-0 border-b-2 w-32 px-5 py-4 text-xs cursor-pointer h-11 hover:bg-navy-lightest hover:text-green ${
                 company.isActive
                   ? 'bg-navy-lightest text-green border-green'
@@ -44,21 +93,14 @@ const Experience = ({ isInView }: { isInView: boolean }) => {
         </div>
         <div className="w-full px-1 py-2 mt-10 md:w-9/12 font-sfmono md:mt-0">
           <h1 className="text-2xl font-semibold text-slate-lightest font-calibre">
-            Frontend Developer
+            {selectedCompany?.title}
           </h1>
-          <p className="mb-6 text-xs">August 2020 - Present</p>
-          <p className="mb-2 text-lg font-calibre skill-item">
-            Maintain, implement the new features as well as refactor existing
-            code to improve re-usability and performance.
-          </p>
-          <p className="mb-2 text-lg font-calibre skill-item">
-            Working with different frameworks, platforms such as JavaScript,
-            Typescript, ReactJS, NextJS, NodeJS, GraphQL, ... etc.
-          </p>
-          <p className="text-lg font-calibre skill-item">
-            Communicate with customers like engineers, Product manager or CTO to
-            clarify the problems and solutions.
-          </p>
+          <p className="mb-6 text-xs">{selectedCompany?.workingTime}</p>
+          {selectedCompany?.responsibility?.map((job, index) => (
+            <p key={index} className="mb-2 text-lg font-calibre skill-item">
+              {job}
+            </p>
+          ))}
         </div>
       </div>
     </section>
