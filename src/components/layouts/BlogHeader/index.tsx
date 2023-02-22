@@ -22,10 +22,11 @@ const BlogHeader = () => {
             {category.title}
           </li>
         ))}
-        <Link href="/portfolio">
-          <a className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200">
-            About me
-          </a>
+        <Link
+          href="/portfolio"
+          className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200"
+        >
+          About me
         </Link>
         <li className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200">
           Contact me

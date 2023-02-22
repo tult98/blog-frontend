@@ -31,7 +31,7 @@ const Logo = ({ shouldFillLogo = false }: Props) => {
   }
 
   return (
-    <Link href="/" passHref>
+    <Link href="/" passHref legacyBehavior>
       <svg
         ref={logoRef}
         id="logo"

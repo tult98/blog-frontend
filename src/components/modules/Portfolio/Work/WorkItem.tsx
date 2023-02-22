@@ -51,23 +51,19 @@ const WorkItem = ({
         />
         <div className="flex flex-row items-center">
           {githubURL ? (
-            <Link href={githubURL} passHref>
-              <a target="_blank">
-                <Icon
-                  name="github"
-                  style="w-5 h-5 text-slate-light border-1 hover:text-green"
-                />
-              </a>
+            <Link href={githubURL} passHref target="_blank">
+              <Icon
+                name="github"
+                style="w-5 h-5 text-slate-light border-1 hover:text-green"
+              />
             </Link>
           ) : null}
           {deployURL ? (
-            <Link href={deployURL} passHref>
-              <a target="_blank">
-                <Icon
-                  name="externalLink"
-                  style="w-6 h-6 text-slate-light ml-4 hover:text-green"
-                />
-              </a>
+            <Link href={deployURL} passHref target="_blank">
+              <Icon
+                name="externalLink"
+                style="w-6 h-6 text-slate-light ml-4 hover:text-green"
+              />
             </Link>
           ) : null}
         </div>
