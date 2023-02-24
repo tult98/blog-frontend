@@ -79,6 +79,15 @@
   line-height: 12px;
 }
 
+.animate-slideIn {
+  transform: translateX(0);
+  transition: 1s ease-in-out;
+}
+
+.animate-slideOut {
+  transition: 1s ease-in-out;
+}
+
 @font-face {
   font-family: 'Calibre';
   src: url(/fonts/Calibre-Medium.woff2);
