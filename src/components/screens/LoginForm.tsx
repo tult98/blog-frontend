@@ -4,11 +4,12 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import Input from '~/components/elements/Input'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
-import { LOGIN } from '~/queries/auth'
+import { ITokens, LOGIN } from '~/queries/auth'
 import {
   notificationState,
   NOTIFICATION_TYPE,
 } from '~/recoil/atoms/notificationState'
+import { setAccessToken, setRefreshToken } from '~/utils/auth'
 import { isValidEmail } from '~/utils/validators'
 
 const LoginForm = () => {
@@ -18,21 +19,21 @@ const LoginForm = () => {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const setNotification = useSetRecoilState(notificationState)
-  const [login, { data, loading, error }] = useLazyQuery(LOGIN, {
-    variables: account,
-  })
-
-  console.log('=================data:', data)
+  const [login, { data, loading, error }] =
+    useLazyQuery<{ login: ITokens }>(LOGIN)
 
   useEffect(() => {
-    if (data) {
-      setNotification({
-        isShow: true,
-        type: NOTIFICATION_TYPE.INFORMING,
-        title: 'You have been logged in.',
-        autoClose: true,
-      })
+    if (!data) {
+      return
     }
+    setNotification({
+      isShow: true,
+      type: NOTIFICATION_TYPE.INFORMING,
+      title: 'You have been logged in.',
+      autoClose: true,
+    })
+    setAccessToken(data.login.accessToken)
+    setRefreshToken(data.login.refreshToken)
   }, [data])
 
   useEffect(() => {
@@ -93,7 +94,7 @@ const LoginForm = () => {
       return
     }
     // no error
-    login()
+    login({ variables: account })
   }
 
   return (

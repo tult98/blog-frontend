@@ -1,20 +1,59 @@
 import {
   ApolloClient,
+  ApolloLink,
+  concat,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
   StoreObject,
 } from '@apollo/client'
+import { NextResponse } from 'next/server'
 import { useMemo } from 'react'
+import { getAccessToken } from '~/utils/auth'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
+
+const getHeaders = () => {
+  const headers: HeadersInit = {}
+  const token = getAccessToken()
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`
+  } else {
+    // Not found access token -> push to login page
+    NextResponse.redirect('/login')
+  }
+  return headers
+}
+
+const createLink = () => {
+  const httpLink = new HttpLink({
+    uri: process.env.GRAPHQL_SERVER_ENDPOINT ?? 'http://localhost:4000',
+  })
+
+  const authLink = new ApolloLink((operation, forward) => {
+    operation.setContext(({ headers = {} }) => ({
+      headers: {
+        ...headers,
+        ...getHeaders(),
+      },
+    }))
+    return forward(operation)
+  })
+
+  // const logoutLink = onError(({ networkError }) => {
+  //   // @ts-expect-error
+  //   if (networkError?.statusCode === 401) {
+  //     // TODO: do logout
+  //   }
+  // })
+
+  return concat(authLink, httpLink)
+}
 
 const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({
-      uri: process.env.GRAPHQL_SERVER_ENDPOINT ?? 'http://localhost:4000',
-    }),
+    link: createLink(),
     cache: new InMemoryCache(),
   })
 }
