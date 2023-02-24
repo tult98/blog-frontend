@@ -13,7 +13,7 @@ const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: 'GRAPHQL_SERVER_ENDPOINT',
+      uri: process.env.GRAPHQL_SERVER_ENDPOINT ?? 'http://localhost:4000',
     }),
     cache: new InMemoryCache(),
   })
