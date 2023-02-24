@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import { REGISTER } from '~/mutations/auth'
@@ -9,8 +9,17 @@ import {
 } from '~/recoil/atoms/notificationState'
 import { isValidEmail, isValidPassword } from '~/utils/validators'
 
+const initialAccount = {
+  firstName: '',
+  lastName: '',
+  fullName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+}
+
 const RegisterForm = (): JSX.Element => {
-  const [account, setAccount] = useState<Record<string, string>>()
+  const [account, setAccount] = useState<Record<string, string>>(initialAccount)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const setNotification = useSetRecoilState(notificationState)
   const [mutate, { data, loading, error }] = useMutation(REGISTER, {
@@ -21,6 +30,7 @@ const RegisterForm = (): JSX.Element => {
     if (error) {
       setNotification({
         isShow: true,
+        autoClose: true,
         type: NOTIFICATION_TYPE.DANGEROUS,
         title: 'Cannot register your account!',
         message: 'There was an error while registering your account',
@@ -39,46 +49,62 @@ const RegisterForm = (): JSX.Element => {
     }
   }, [data, setNotification])
 
-  const validateRequiredText = (event: ChangeEvent<HTMLInputElement>) => {
+  const validateRequiredText = (
+    name: string,
+    value: string,
+    shouldUpdateErrors = true,
+  ) => {
     const newErrors = { ...errors }
-    if (!event.target.value) {
-      newErrors[event.target.name] = 'This field is required.'
+    if (!value) {
+      newErrors[name] = 'This field is required.'
     } else {
-      delete newErrors[event.target.name]
+      delete newErrors[name]
     }
-    setErrors(newErrors)
+    if (shouldUpdateErrors) {
+      setErrors(newErrors)
+    }
     return newErrors
   }
 
-  const validateEmail = (event: ChangeEvent<HTMLInputElement>) => {
+  const validateEmail = (email: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
-    if (!isValidEmail(event.target.value)) {
-      newErrors[event.target.name] = 'Email is invalid.'
+    if (!isValidEmail(email)) {
+      newErrors.email = 'Email is invalid.'
+    } else {
+      delete newErrors.email
     }
-    setErrors(newErrors)
+    if (shouldUpdateErrors) {
+      setErrors(newErrors)
+    }
     return newErrors
   }
 
-  const validatePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const validatePassword = (password: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
-    if (!isValidPassword(event.target.value)) {
-      newErrors[event.target.name] = 'Password is too weak.'
+    if (!isValidPassword(password)) {
+      newErrors.password = 'Password is too weak.'
     } else {
       delete newErrors.password
     }
-    setErrors(newErrors)
+    if (shouldUpdateErrors) {
+      setErrors(newErrors)
+    }
     return newErrors
   }
 
-  const validateConfirmPassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const validateConfirmPassword = (
+    confirmPassword: string,
+    shouldUpdateErrors = true,
+  ) => {
     const newErrors = { ...errors }
-    if (event.target.value !== account?.password) {
-      newErrors[event.target.name] =
-        "Password and confirm password doesn't match"
+    if (confirmPassword !== account?.password) {
+      newErrors.confirmPassword = "Password and confirm password doesn't match"
     } else {
       delete newErrors.confirmPassword
     }
-    setErrors(newErrors)
+    if (shouldUpdateErrors) {
+      setErrors(newErrors)
+    }
     return errors
   }
 
@@ -88,12 +114,35 @@ const RegisterForm = (): JSX.Element => {
     setAccount(newAccount)
   }
 
-  const onSubmit = useCallback(() => {
-    if (Object.keys(errors)?.length) {
+  const onSubmit = () => {
+    let newErrors: Record<string, string> = {}
+    Object.keys(account).forEach((key) => {
+      if (key === 'email') {
+        newErrors = { ...newErrors, ...validateEmail(account.email, false) }
+      } else if (key === 'password') {
+        newErrors = {
+          ...newErrors,
+          ...validatePassword(account.password, false),
+        }
+      } else if (key === 'confirmPassword') {
+        newErrors = {
+          ...newErrors,
+          ...validateConfirmPassword(account.confirmPassword, false),
+        }
+      } else {
+        newErrors = {
+          ...newErrors,
+          ...validateRequiredText(key, account[key], false),
+        }
+      }
+    })
+    if (Object.keys(newErrors)?.length) {
+      setErrors(newErrors)
       return
     }
+    // no error
     mutate()
-  }, [errors, mutate])
+  }
 
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
@@ -147,7 +196,12 @@ const RegisterForm = (): JSX.Element => {
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                           value={account?.firstName ?? ''}
                           onChange={onChangeText}
-                          onBlur={validateRequiredText}
+                          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                            validateRequiredText(
+                              event.target.name,
+                              event.target.value,
+                            )
+                          }
                         />
                       </div>
                       {errors?.firstName && (
@@ -188,7 +242,12 @@ const RegisterForm = (): JSX.Element => {
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                           value={account?.lastName ?? ''}
                           onChange={onChangeText}
-                          onBlur={validateRequiredText}
+                          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                            validateRequiredText(
+                              event.target.name,
+                              event.target.value,
+                            )
+                          }
                         />
                       </div>
                       {errors?.lastName && (
@@ -230,7 +289,12 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.fullName ?? ''}
                         onChange={onChangeText}
-                        onBlur={validateRequiredText}
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                          validateRequiredText(
+                            event.target.name,
+                            event.target.value,
+                          )
+                        }
                       />
                     </div>
                     {errors?.fullName && (
@@ -271,7 +335,9 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.email ?? ''}
                         onChange={onChangeText}
-                        onBlur={validateEmail}
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                          validateEmail(event.target.value)
+                        }
                       />
                     </div>
                     {errors?.email && (
@@ -313,7 +379,9 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.password ?? ''}
                         onChange={onChangeText}
-                        onBlur={validatePassword}
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                          validatePassword(event.target.value)
+                        }
                       />
                     </div>
                     {errors?.password && (
@@ -355,7 +423,9 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.confirmPassword ?? ''}
                         onChange={onChangeText}
-                        onBlur={validateConfirmPassword}
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+                          validateConfirmPassword(event.target.value)
+                        }
                       />
                     </div>
                     {errors?.confirmPassword && (
@@ -398,6 +468,12 @@ const RegisterForm = (): JSX.Element => {
                       </a>
                     </p>
                   </div>
+                  {error &&
+                    error?.graphQLErrors.map((error, index) => (
+                      <p key={index} className="text-sm text-red-500">
+                        *{error.message}
+                      </p>
+                    ))}
                 </div>
               </form>
             </div>

@@ -11,12 +11,12 @@ const Notification = () => {
 
   const iconColor = useMemo(() => {
     if (notification.type === NOTIFICATION_TYPE.INFORMING) {
-      return 'text-green-600'
+      return 'text-emerald-500'
     }
     if (notification.type === NOTIFICATION_TYPE.WARNING) {
-      return 'text-yellow-600'
+      return 'text-amber-500'
     }
-    return 'text-red-600'
+    return 'text-rose-500'
   }, [notification.type])
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Notification = () => {
         })
       }, 3000)
     }
-  }, [notification, setNotification])
+  }, [notification.autoClose])
 
   const onClose = () => {
     setNotification({

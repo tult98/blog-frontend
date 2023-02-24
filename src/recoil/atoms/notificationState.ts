@@ -18,9 +18,7 @@ interface INotification {
 export const notificationState = atom({
   key: 'notificationState',
   default: {
-    isShow: true,
+    isShow: false,
     type: NOTIFICATION_TYPE.INFORMING,
-    title: 'Your account is created!',
-    message: 'Please log in to your account now.',
   } as INotification,
 })
