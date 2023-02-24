@@ -8,3 +8,18 @@ export const LOGIN = gql`
     }
   }
 `
+
+export const ME = gql`
+  query Me {
+    me {
+      id
+      email
+      firstName
+      lastName
+      fullName
+      role
+      createdAt
+      updatedAt
+    }
+  }
+`
