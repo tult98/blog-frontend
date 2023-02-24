@@ -18,19 +18,25 @@ const RegisterForm = (): JSX.Element => {
   })
 
   useEffect(() => {
-    setNotification({
-      type: NOTIFICATION_TYPE.DANGEROUS,
-      title: 'Cannot register your account!',
-      message: 'There was an error while registering your account',
-    })
+    if (error) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.DANGEROUS,
+        title: 'Cannot register your account!',
+        message: 'There was an error while registering your account',
+      })
+    }
   }, [error, setNotification])
 
   useEffect(() => {
-    setNotification({
-      type: NOTIFICATION_TYPE.INFORMING,
-      title: 'You account has been created!',
-      message: 'You can log in now.',
-    })
+    if (data) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.INFORMING,
+        title: 'You account has been created!',
+        message: 'You can log in now.',
+      })
+    }
   }, [data, setNotification])
 
   const validateRequiredText = (event: ChangeEvent<HTMLInputElement>) => {

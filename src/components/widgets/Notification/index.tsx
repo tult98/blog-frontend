@@ -39,7 +39,7 @@ const Notification = () => {
 
   return (
     <div
-      className={`fixed top-5 ${
+      className={`fixed top-5 z-10 ${
         notification?.isShow
           ? 'animate-slideIn right-5'
           : 'animate-slideOut -right-full'
