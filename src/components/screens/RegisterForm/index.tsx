@@ -180,7 +180,7 @@ const RegisterForm = (): JSX.Element => {
                           id="lastName"
                           placeholder="Last name"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                          value={account?.lastName}
+                          value={account?.lastName ?? ''}
                           onChange={onChangeText}
                           onBlur={validateRequiredText}
                         />
@@ -222,7 +222,7 @@ const RegisterForm = (): JSX.Element => {
                         id="fullName"
                         placeholder="Enter your full name"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={account?.fullName}
+                        value={account?.fullName ?? ''}
                         onChange={onChangeText}
                         onBlur={validateRequiredText}
                       />
@@ -263,7 +263,7 @@ const RegisterForm = (): JSX.Element => {
                         id="email"
                         placeholder="Enter email to get started"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={account?.email}
+                        value={account?.email ?? ''}
                         onChange={onChangeText}
                         onBlur={validateEmail}
                       />
@@ -305,7 +305,7 @@ const RegisterForm = (): JSX.Element => {
                         id="password"
                         placeholder="Enter your password"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={account?.password}
+                        value={account?.password ?? ''}
                         onChange={onChangeText}
                         onBlur={validatePassword}
                       />
@@ -347,7 +347,7 @@ const RegisterForm = (): JSX.Element => {
                         id="confirmPassword"
                         placeholder="Confirm your password"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={account?.confirmPassword}
+                        value={account?.confirmPassword ?? ''}
                         onChange={onChangeText}
                         onBlur={validateConfirmPassword}
                       />
