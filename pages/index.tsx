@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
-import TabHeader from '~/components/widgets/TabHeader'
-import BlogContainer from '~/components/modules/Blog/BlogContainer'
 import BlogHeader from '~/components/layouts/BlogHeader'
+import BlogContainer from '~/components/modules/Blog/BlogContainer'
+import TabHeader from '~/components/widgets/TabHeader'
 
 const Home: NextPage = () => {
   return (
