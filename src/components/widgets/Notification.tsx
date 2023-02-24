@@ -28,7 +28,7 @@ const Notification = () => {
         })
       }, 3000)
     }
-  }, [notification.autoClose])
+  }, [notification])
 
   const onClose = () => {
     setNotification({
