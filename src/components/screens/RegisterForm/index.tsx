@@ -1,14 +1,44 @@
-import { ChangeEvent, useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import LoadingIndicator from '~/components/elements/LoadingIndicator'
+import { REGISTER } from '~/mutations/auth'
+import {
+  notificationState,
+  NOTIFICATION_TYPE,
+} from '~/recoil/atoms/notificationState'
 import { isValidEmail, isValidPassword } from '~/utils/validators'
 
 const RegisterForm = (): JSX.Element => {
-  const [data, setData] = useState<Record<string, string>>()
+  const [account, setAccount] = useState<Record<string, string>>()
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const setNotification = useSetRecoilState(notificationState)
+  const [mutate, { data, loading, error }] = useMutation(REGISTER, {
+    variables: account,
+  })
+
+  useEffect(() => {
+    setNotification({
+      type: NOTIFICATION_TYPE.DANGEROUS,
+      title: 'Cannot register your account!',
+      message: 'There was an error while registering your account',
+    })
+  }, [error, setNotification])
+
+  useEffect(() => {
+    setNotification({
+      type: NOTIFICATION_TYPE.INFORMING,
+      title: 'You account has been created!',
+      message: 'You can log in now.',
+    })
+  }, [data, setNotification])
 
   const validateRequiredText = (event: ChangeEvent<HTMLInputElement>) => {
     const newErrors = { ...errors }
     if (!event.target.value) {
       newErrors[event.target.name] = 'This field is required.'
+    } else {
+      delete newErrors[event.target.name]
     }
     setErrors(newErrors)
     return newErrors
@@ -27,6 +57,8 @@ const RegisterForm = (): JSX.Element => {
     const newErrors = { ...errors }
     if (!isValidPassword(event.target.value)) {
       newErrors[event.target.name] = 'Password is too weak.'
+    } else {
+      delete newErrors.password
     }
     setErrors(newErrors)
     return newErrors
@@ -34,19 +66,28 @@ const RegisterForm = (): JSX.Element => {
 
   const validateConfirmPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const newErrors = { ...errors }
-    if (event.target.value !== data?.password) {
+    if (event.target.value !== account?.password) {
       newErrors[event.target.name] =
         "Password and confirm password doesn't match"
+    } else {
+      delete newErrors.confirmPassword
     }
     setErrors(newErrors)
     return errors
   }
 
   const onChangeText = (event: ChangeEvent<HTMLInputElement>) => {
-    const newData = { ...data }
-    newData[event.target.name] = event.target.value
-    setData(newData)
+    const newAccount = { ...account }
+    newAccount[event.target.name] = event.target.value
+    setAccount(newAccount)
   }
+
+  const onSubmit = useCallback(() => {
+    if (Object.keys(errors)?.length) {
+      return
+    }
+    mutate()
+  }, [errors, mutate])
 
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
@@ -63,7 +104,7 @@ const RegisterForm = (): JSX.Element => {
         <div className="relative max-w-md mx-auto mt-8 md:mt-16">
           <div className="overflow-hidden bg-white rounded-md shadow-md">
             <div className="px-4 py-6 sm:px-8 sm:py-7">
-              <form action="#" method="POST">
+              <form>
                 <div className="space-y-5">
                   <div className="grid grid-cols-2 space-x-4">
                     <div>
@@ -98,7 +139,7 @@ const RegisterForm = (): JSX.Element => {
                           id="firstName"
                           placeholder="First name"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                          value={data?.firstName ?? ''}
+                          value={account?.firstName ?? ''}
                           onChange={onChangeText}
                           onBlur={validateRequiredText}
                         />
@@ -139,7 +180,7 @@ const RegisterForm = (): JSX.Element => {
                           id="lastName"
                           placeholder="Last name"
                           className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                          value={data?.lastName}
+                          value={account?.lastName}
                           onChange={onChangeText}
                           onBlur={validateRequiredText}
                         />
@@ -181,7 +222,7 @@ const RegisterForm = (): JSX.Element => {
                         id="fullName"
                         placeholder="Enter your full name"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={data?.fullName}
+                        value={account?.fullName}
                         onChange={onChangeText}
                         onBlur={validateRequiredText}
                       />
@@ -222,7 +263,7 @@ const RegisterForm = (): JSX.Element => {
                         id="email"
                         placeholder="Enter email to get started"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={data?.email}
+                        value={account?.email}
                         onChange={onChangeText}
                         onBlur={validateEmail}
                       />
@@ -264,7 +305,7 @@ const RegisterForm = (): JSX.Element => {
                         id="password"
                         placeholder="Enter your password"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={data?.password}
+                        value={account?.password}
                         onChange={onChangeText}
                         onBlur={validatePassword}
                       />
@@ -306,7 +347,7 @@ const RegisterForm = (): JSX.Element => {
                         id="confirmPassword"
                         placeholder="Confirm your password"
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
-                        value={data?.confirmPassword}
+                        value={account?.confirmPassword}
                         onChange={onChangeText}
                         onBlur={validateConfirmPassword}
                       />
@@ -319,9 +360,22 @@ const RegisterForm = (): JSX.Element => {
                   </div>
                   <div>
                     <button
-                      type="submit"
-                      className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+                      type="button"
+                      className={`inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border ${
+                        loading ? 'opacity-60' : 'opacity-100'
+                      } border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700`}
+                      onClick={onSubmit}
                     >
+                      {loading && (
+                        <LoadingIndicator
+                          positionStyle="mr-1"
+                          options={{
+                            width: '30',
+                            height: '30',
+                            color: '#E9F8F9',
+                          }}
+                        />
+                      )}
                       Create account
                     </button>
                   </div>
