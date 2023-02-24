@@ -25,10 +25,11 @@ const Notification = () => {
         setNotification({
           ...notification,
           isShow: false,
+          autoClose: false,
         })
       }, 3000)
     }
-  }, [notification])
+  }, [notification?.autoClose])
 
   const onClose = () => {
     setNotification({

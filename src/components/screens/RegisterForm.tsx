@@ -43,9 +43,9 @@ const RegisterForm = (): JSX.Element => {
     if (data) {
       setNotification({
         isShow: true,
+        autoClose: true,
         type: NOTIFICATION_TYPE.INFORMING,
         title: 'You account has been created!',
-        message: 'You can log in now.',
       })
     }
   }, [data, setNotification])
@@ -69,8 +69,10 @@ const RegisterForm = (): JSX.Element => {
 
   const validateEmail = (email: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
-    if (!isValidEmail(email)) {
-      newErrors.email = 'Email is invalid.'
+    if (!email) {
+      newErrors.email = 'Please enter your email address.'
+    } else if (!isValidEmail(email)) {
+      newErrors.email = 'This is invalid email address.'
     } else {
       delete newErrors.email
     }
@@ -456,7 +458,12 @@ const RegisterForm = (): JSX.Element => {
                       Create account
                     </button>
                   </div>
-
+                  {error &&
+                    error?.graphQLErrors.map((error, index) => (
+                      <p key={index} className="text-sm text-red-500">
+                        {error.message}
+                      </p>
+                    ))}
                   <div className="text-center">
                     <p className="text-base text-gray-600">
                       Already have an account?{' '}
@@ -469,12 +476,6 @@ const RegisterForm = (): JSX.Element => {
                       </Link>
                     </p>
                   </div>
-                  {error &&
-                    error?.graphQLErrors.map((error, index) => (
-                      <p key={index} className="text-sm text-red-500">
-                        *{error.message}
-                      </p>
-                    ))}
                 </div>
               </form>
             </div>
