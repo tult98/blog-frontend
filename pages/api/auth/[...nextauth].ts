@@ -62,7 +62,28 @@ const callbacks = {
       token.accessToken = user.accessToken
       token.expiresAt = user.expiresAt
       token.refreshToken = user.refreshToken
-      return token
+      try {
+        const client = new ApolloClient({
+          ssrMode: true,
+          link: new HttpLink({
+            uri: process.env.GRAPHQL_SERVER_ENDPOINT ?? 'http://localhost:4000',
+            headers: {
+              Authorization: token.accessToken,
+            },
+          }),
+          cache: new InMemoryCache(),
+        })
+        const {
+          data: { me },
+        } = await client.query<{ me: IUser }>({
+          query: ME,
+        })
+        token.user = { id: me.id, email: me.email, role: me.role }
+      } catch (error: unknown) {
+        console.error('Error fetching logged in user', error)
+      } finally {
+        return token
+      }
     } else if (Date.now() < new Date(token.expiresAt).getMilliseconds()) {
       // If the access token has not expired yet, return it
       return token
@@ -87,29 +108,9 @@ const callbacks = {
     session: CustomSession
     token: JWT
   }) => {
-    try {
-      session.error = token.error
-      const client = new ApolloClient({
-        ssrMode: true,
-        link: new HttpLink({
-          uri: process.env.GRAPHQL_SERVER_ENDPOINT ?? 'http://localhost:4000',
-          headers: {
-            Authorization: token.accessToken,
-          },
-        }),
-        cache: new InMemoryCache(),
-      })
-      const {
-        data: { me },
-      } = await client.query<{ me: IUser }>({
-        query: ME,
-      })
-      session.user = { id: me.id, email: me.email, role: me.role }
-    } catch (error: unknown) {
-      console.error('Error fetching logged in user', error)
-    } finally {
-      return session
-    }
+    session.error = token.error
+    session.user = token.user
+    return session
   },
 }
 

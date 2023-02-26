@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -21,6 +21,9 @@ const LoginForm = () => {
   const setNotification = useSetRecoilState(notificationState)
   // @ts-expect-error
   const [login, { data, loading, error }] = useLazyQuery(LOGIN)
+  const { data: session, status } = useSession()
+
+  console.log('==================', session, status)
 
   useEffect(() => {
     if (data) {
