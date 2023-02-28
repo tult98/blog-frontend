@@ -9,8 +9,6 @@ const Home: NextPage = () => {
   // @ts-expect-error
   const { data, error, loading } = useQuery(ME)
 
-  console.log('=================data', data)
-
   return (
     <>
       <TabHeader name="Blogs" />

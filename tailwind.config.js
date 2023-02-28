@@ -94,5 +94,5 @@ module.exports = {
       animation: ['hover', 'focus'],
     },
   },
-  plugins: [],
+  plugins: [required('daisyui')],
 }
