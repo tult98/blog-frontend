@@ -94,5 +94,5 @@ module.exports = {
       animation: ['hover', 'focus'],
     },
   },
-  plugins: [required('daisyui')],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
 }

@@ -79,7 +79,12 @@ const callbacks = {
         } = await client.query<{ me: IUser }>({
           query: ME,
         })
-        token.user = { id: me.id, email: me.email, role: me.role }
+        token.user = {
+          id: me.id,
+          email: me.email,
+          role: me.role,
+          name: me.fullName,
+        }
       } catch (error: unknown) {
         console.error('Error fetching logged in user', error)
       } finally {

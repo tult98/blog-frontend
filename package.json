@@ -24,6 +24,7 @@
     "sharp": "^0.31.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
     "@types/react-pdf": "^5.0.9",
