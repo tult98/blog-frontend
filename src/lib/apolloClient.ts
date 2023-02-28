@@ -6,19 +6,19 @@ import {
   StoreObject,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { getSession } from 'next-auth/react'
+import { CustomSession } from 'pages/api/auth/[...nextauth]'
 import { useMemo } from 'react'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
-  const authLink = setContext((_, { headers }) => {
-    // get the authentication token from local storage if it exists
-    // const token = localStorage.getItem('token')
-    // return the headers to the context so httpLink can read them
+  const authLink = setContext(async (_, { headers }) => {
+    const session = (await getSession()) as CustomSession | null
     return {
       headers: {
         ...headers,
-        // authorization: token ? `Bearer ${token}` : '',
+        authorization: session?.accessToken ?? '',
       },
     }
   })

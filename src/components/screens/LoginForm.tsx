@@ -1,11 +1,10 @@
-import { useLazyQuery } from '@apollo/client'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, SignInResponse } from 'next-auth/react'
 import Link from 'next/link'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import Input from '~/components/elements/Input'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
-import { LOGIN } from '~/queries/auth'
 import {
   notificationState,
   NOTIFICATION_TYPE,
@@ -19,34 +18,9 @@ const LoginForm = () => {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const setNotification = useSetRecoilState(notificationState)
-  // @ts-expect-error
-  const [login, { data, loading, error }] = useLazyQuery(LOGIN)
-  const { data: session, status } = useSession()
-
-  console.log('==================', session, status)
-
-  useEffect(() => {
-    if (data) {
-      setNotification({
-        isShow: true,
-        type: NOTIFICATION_TYPE.INFORMING,
-        title: 'You have been logged in.',
-        autoClose: true,
-      })
-    }
-  }, [data])
-
-  useEffect(() => {
-    if (error) {
-      setNotification({
-        isShow: true,
-        type: NOTIFICATION_TYPE.DANGEROUS,
-        title: 'Login failed',
-        message: 'Cannot log in into your account.',
-        autoClose: true,
-      })
-    }
-  }, [error])
+  const router = useRouter()
+  const [submitting, setSubmitting] = useState<boolean>(false)
+  const [serverError, setServerError] = useState<string>()
 
   const validateEmail = (email: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
@@ -82,7 +56,7 @@ const LoginForm = () => {
     setAccount(newAccount)
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     let newErrors: Record<string, string> = {}
     newErrors = {
       ...newErrors,
@@ -94,8 +68,33 @@ const LoginForm = () => {
       return
     }
     // no error
-    // login({ variables: account })
-    signIn('credentials', account)
+    setSubmitting(true)
+    const { error, ok, url } = (await signIn('credentials', {
+      ...account,
+      redirect: false,
+      callbackUrl: '/',
+    })) as SignInResponse
+
+    if (ok) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.INFORMING,
+        title: 'You have been logged in.',
+        autoClose: true,
+      })
+      router.push(url as string)
+    }
+    if (error) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.DANGEROUS,
+        title: 'Login failed',
+        message: 'Cannot log in into your account.',
+        autoClose: true,
+      })
+      setServerError('Email or password is incorrect.')
+    }
+    setSubmitting(false)
   }
 
   return (
@@ -205,11 +204,11 @@ const LoginForm = () => {
                   <button
                     type="button"
                     className={`inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700 ${
-                      loading ? 'opacity-60' : ''
+                      submitting ? 'opacity-60' : ''
                     }`}
                     onClick={onSubmit}
                   >
-                    {loading && (
+                    {submitting && (
                       <LoadingIndicator
                         positionStyle="mr-1"
                         options={{
@@ -222,12 +221,9 @@ const LoginForm = () => {
                     Log in
                   </button>
                 </div>
-                {error &&
-                  error.graphQLErrors.map((error, index) => (
-                    <p key={index} className="text-sm text-red-500">
-                      {error.message}
-                    </p>
-                  ))}
+                {serverError && (
+                  <p className="text-sm text-red-500">{serverError}</p>
+                )}
                 <div className="text-center">
                   <p className="text-base text-gray-600">
                     Don’t have an account?{' '}

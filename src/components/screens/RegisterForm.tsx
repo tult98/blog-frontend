@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -45,9 +46,14 @@ const RegisterForm = (): JSX.Element => {
         isShow: true,
         autoClose: true,
         type: NOTIFICATION_TYPE.INFORMING,
-        title: 'You account has been created!',
+        title: 'You account has been created! Logging you in...',
       })
     }
+    signIn('credentials', {
+      email: account.email,
+      password: account.password,
+      callbackUrl: '/',
+    })
   }, [data, setNotification])
 
   const validateRequiredText = (

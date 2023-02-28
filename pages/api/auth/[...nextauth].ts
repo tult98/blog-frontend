@@ -18,9 +18,10 @@ interface JWT {
   error?: 'RefreshAccessTokenError'
 }
 
-interface CustomSession extends Session {
+export interface CustomSession extends Session {
   user: CustomUser
   error?: 'RefreshAccessTokenError'
+  accessToken: string
 }
 
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
@@ -84,7 +85,7 @@ const callbacks = {
       } finally {
         return token
       }
-    } else if (Date.now() < new Date(token.expiresAt).getMilliseconds()) {
+    } else if (Date.now() < new Date(token.expiresAt).getTime()) {
       // If the access token has not expired yet, return it
       return token
     } else {
@@ -110,6 +111,7 @@ const callbacks = {
   }) => {
     session.error = token.error
     session.user = token.user
+    session.accessToken = token.accessToken
     return session
   },
 }
@@ -118,7 +120,7 @@ export const options = {
   providers,
   callbacks,
   pages: {},
-  secret: 'your_secret',
+  secret: process.env.NEXT_AUTH_SECRET ?? '', //Used to encrypt the NextAuth.js JWT
 }
 
 const Auth = (req: NextApiRequest, res: NextApiResponse) =>

@@ -8,6 +8,7 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
+
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={session}>
