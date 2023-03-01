@@ -48,12 +48,12 @@ const RegisterForm = (): JSX.Element => {
         type: NOTIFICATION_TYPE.INFORMING,
         title: 'You account has been created! Logging you in...',
       })
+      signIn('credentials', {
+        email: account.email,
+        password: account.password,
+        callbackUrl: '/',
+      })
     }
-    signIn('credentials', {
-      email: account.email,
-      password: account.password,
-      callbackUrl: '/',
-    })
   }, [data, setNotification])
 
   const validateRequiredText = (

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
+    "@tanstack/react-table": "^8.7.9",
     "daisyui": "^2.51.2",
     "date-fns": "^2.29.3",
     "graphql": "^16.6.0",
