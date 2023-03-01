@@ -2,18 +2,15 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { AuthOptions, Session, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { initializeApollo } from '~/lib/apolloClient'
+import { createApolloClient, initializeApollo } from '~/lib/apolloClient'
 import { IUser } from '~/models/user'
-import { LOGIN, ME } from '~/queries/auth'
+import { GET_NEW_TOKEN, IToken, LOGIN, ME } from '~/queries/auth'
 
 interface CustomUser extends User {
   role: number
 }
 
-interface JWT {
-  accessToken: string
-  refreshToken: string
-  expiresAt: string
+interface JWT extends IToken {
   user: CustomUser
   error?: 'RefreshAccessTokenError'
 }
@@ -25,23 +22,38 @@ export interface CustomSession extends Session {
 }
 
 const refreshAccessToken = async (token: JWT): Promise<JWT> => {
-  // TODO: call refresh token query
-  return token
+  const apolloClient = createApolloClient()
+  const {
+    data: { getNewToken },
+  } = await apolloClient.query<{
+    getNewToken: IToken
+  }>({
+    query: GET_NEW_TOKEN,
+    variables: { refreshToken: token.refreshToken },
+  })
+  return {
+    ...token,
+    accessToken: getNewToken.accessToken,
+    refreshToken: getNewToken.refreshToken,
+    expiresAt: getNewToken.expiresAt,
+  }
 }
 
 const providers = [
-  // @ts-expect-error
   CredentialsProvider({
     id: 'credentials',
     name: 'Credentials',
+    // @ts-expect-error
     async authorize(credentials) {
       try {
         const apolloClient = initializeApollo({})
-        const { data } = await apolloClient.query({
+        const {
+          data: { login },
+        } = await apolloClient.query<{ login: IToken }>({
           variables: credentials,
           query: LOGIN,
         })
-        return data.login
+        return login
       } catch (e: any) {
         console.error('Error login', e)
         throw new Error(e)
