@@ -1,6 +1,6 @@
 import { ITreeNode } from '~/components/widgets/Tree'
 
-const DASHBOARD_PREFIX = '/dashboard'
+export const DASHBOARD_PREFIX = '/dashboard'
 // sidebar item for dashboard
 
 export const dashboardItems: ITreeNode[] = [

@@ -2,17 +2,22 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
+  Row,
   useReactTable,
 } from '@tanstack/react-table'
 import { useMemo } from 'react'
 import IndeterminateCheckbox from '~/components/widgets/DataTable/IndeterminateCheckbox'
 import RowAction from '~/components/widgets/DataTable/RowAction'
+import Pagination from '~/components/widgets/Pagination'
 
 interface Props<TData> {
   columns: ColumnDef<TData, any>[]
   data: TData[]
   enableSelection?: boolean
   enableAction?: boolean
+  onPressDetails?: (row: Row<TData>) => void
+  onPressDelete?: (row: Row<TData>) => void
 }
 
 const DataTable = <TData extends object>({
@@ -20,16 +25,23 @@ const DataTable = <TData extends object>({
   data,
   enableAction,
   enableSelection,
+  onPressDetails,
+  onPressDelete,
 }: Props<TData>) => {
   const allColumns = useMemo<ColumnDef<TData>[]>(() => {
     if (!columns) {
       return []
     }
     const allColumns = [...columns]
-    if (enableAction) {
+    if (enableAction && onPressDetails && onPressDelete) {
       allColumns.push({
         id: 'actions',
-        cell: ({ row }) => <RowAction row={row} />,
+        cell: ({ row }) => (
+          <RowAction
+            onPressDetails={() => onPressDetails(row)}
+            onPressDelete={() => onPressDelete(row)}
+          />
+        ),
       })
     }
     if (enableSelection) {
@@ -61,14 +73,16 @@ const DataTable = <TData extends object>({
     return allColumns
   }, [enableAction, enableSelection, columns])
 
-  const { getHeaderGroups, getRowModel } = useReactTable({
-    data,
-    columns: allColumns,
-    getCoreRowModel: getCoreRowModel(),
-  })
+  const { getHeaderGroups, getRowModel, getState, getPageCount } =
+    useReactTable({
+      data,
+      columns: allColumns,
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+    })
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="flex flex-col w-full space-y-4 overflow-x-auto">
       <table className="table w-full">
         <thead>
           {getHeaderGroups().map((headerGroup) => (
@@ -98,6 +112,12 @@ const DataTable = <TData extends object>({
           ))}
         </tbody>
       </table>
+      <div className="self-end">
+        <Pagination
+          currentPage={getState().pagination.pageIndex + 1}
+          totalPage={getPageCount()}
+        />
+      </div>
     </div>
   )
 }

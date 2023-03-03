@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, Row } from '@tanstack/react-table'
+import { useRouter } from 'next/router'
 import { useEffect, useMemo } from 'react'
 import { useSetRecoilState } from 'recoil'
 import BaseLayout from '~/components/layouts/Dashboard/BaseLayout'
@@ -10,6 +11,7 @@ import {
   notificationState,
   NOTIFICATION_TYPE,
 } from '~/recoil/atoms/notificationState'
+import { DASHBOARD_PREFIX } from '~/utils/settings'
 
 const Categories = () => {
   // @ts-expect-error
@@ -18,6 +20,7 @@ const Categories = () => {
       GET_CATEGORIES,
     )
   const setNotification = useSetRecoilState(notificationState)
+  const router = useRouter()
 
   const columns = useMemo<ColumnDef<ICategory>[]>(
     () => [
@@ -44,6 +47,15 @@ const Categories = () => {
     })
   }, [error])
 
+  const onPressDetails = (row: Row<ICategory>) => {
+    router.push(`${DASHBOARD_PREFIX}/categories/${row.original.slug}`)
+  }
+
+  // @ts-expect-error
+  const onPressDelete = (row: Row<ICategory>) => {
+    // TODO: display the confirm modal
+  }
+
   return (
     <BaseLayout title="TuLamThings | Categories">
       <DataTable
@@ -51,6 +63,8 @@ const Categories = () => {
         data={data?.getCategories?.categories ?? []}
         enableSelection={true}
         enableAction={true}
+        onPressDetails={onPressDetails}
+        onPressDelete={onPressDelete}
       />
     </BaseLayout>
   )
