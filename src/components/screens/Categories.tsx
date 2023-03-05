@@ -68,13 +68,6 @@ const Categories = () => {
   }, [results.loading])
 
   useEffect(() => {
-    if (results.data || results.error) {
-      setModalInfo({
-        ...modalInfo,
-        isLoading: false,
-      })
-      onCloseModal()
-    }
     if (results.error) {
       setNotification({
         isShow: true,
@@ -82,15 +75,29 @@ const Categories = () => {
         title: 'Failed to delete the selected category.',
         autoClose: true,
       })
-    } else if (results.data) {
+      setModalInfo({
+        ...modalInfo,
+        isLoading: false,
+      })
+      onCloseModal()
+    }
+  }, [results.error])
+
+  useEffect(() => {
+    if (results.data) {
       setNotification({
         isShow: true,
         type: NOTIFICATION_TYPE.INFORMING,
         title: 'The selected category is deleted.',
         autoClose: true,
       })
+      setModalInfo({
+        ...modalInfo,
+        isLoading: false,
+      })
+      onCloseModal()
     }
-  }, [results])
+  }, [results.data])
 
   const onPressDetails = (row: Row<ICategory>) => {
     router.push(`${DASHBOARD_PREFIX}/categories/${row.original.slug}`)
