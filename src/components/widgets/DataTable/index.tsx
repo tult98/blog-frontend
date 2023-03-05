@@ -120,12 +120,19 @@ const DataTable = <TData extends object>({
           <LoadingIndicator positionStyle="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         </div>
       )}
-      <div className="self-end">
-        <Pagination
-          currentPage={getState().pagination.pageIndex + 1}
-          totalPage={getPageCount()}
-        />
-      </div>
+      {!getPageCount() && (
+        <div className="relative w-full min-h-[64px] text-center">
+          <p className="italic">There is no data to display</p>
+        </div>
+      )}
+      {!!getPageCount() && (
+        <div className="self-end">
+          <Pagination
+            currentPage={getState().pagination.pageIndex + 1}
+            totalPage={getPageCount()}
+          />
+        </div>
+      )}
     </div>
   )
 }
