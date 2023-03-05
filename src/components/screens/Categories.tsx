@@ -119,7 +119,10 @@ const Categories = () => {
 
   return (
     <BaseLayout title="TuLamThings | Categories">
-      <>
+      <div className="flex flex-col space-y-4">
+        <button className="self-end btn btn-primary btn-outline">
+          New category
+        </button>
         <DataTable
           columns={columns}
           data={data?.getCategories?.categories ?? []}
@@ -129,7 +132,7 @@ const Categories = () => {
           onPressDetails={onPressDetails}
           onPressDelete={onPressDelete}
         />
-      </>
+      </div>
     </BaseLayout>
   )
 }

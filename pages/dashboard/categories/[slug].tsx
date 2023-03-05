@@ -8,9 +8,7 @@ const CategoryDetailsPage = () => {
 
   return (
     <BaseLayout title={`TuLamThings | ${slug}`}>
-      <div className="flex justify-center w-full">
-        <CategoryDetails slug={slug as string} />
-      </div>
+      <CategoryDetails slug={slug as string} />
     </BaseLayout>
   )
 }

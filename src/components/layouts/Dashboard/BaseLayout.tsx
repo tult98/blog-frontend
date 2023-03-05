@@ -16,17 +16,20 @@ const BaseLayout = ({ title, children }: Props) => {
         <title>{title}</title>
         <link rel="icon" type="image/x-icon" href="/blog-favicon.png" />
       </Head>
-      <section className="grid grid-cols-12 gap-8">
+      <section className="flex flex-col min-h-screen gap-8">
         <div className="col-span-12 border-b border-gray-200">
           <Header />
         </div>
-        <div className="col-span-2">
-          <SideBar />
+        <div className="relative grid grid-cols-12 gap-24 grow">
+          <div className="col-span-2">
+            <SideBar />
+          </div>
+          <div className="col-span-10 pr-8 space-y-8">
+            <Breadcrumbs />
+            {children}
+          </div>
         </div>
-        <div className="col-span-10 pr-8 space-y-8">
-          <Breadcrumbs />
-          {children}
-        </div>
+
         <Modal />
       </section>
     </>

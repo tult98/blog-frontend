@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
+import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import { ICategory } from '~/models/category'
 import { GET_CATEGORY_BY_SLUG } from '~/queries/category'
 import {
@@ -15,7 +16,6 @@ interface Props {
 const CategoryDetails = ({ slug }: Props) => {
   const [category, setCategory] = useState<ICategory>()
   const setNotification = useSetRecoilState(notificationState)
-  // @ts-expect-error
   const { loading, error, data } = useQuery<{ getCategoryBySlug: ICategory }>(
     GET_CATEGORY_BY_SLUG,
     {
@@ -41,6 +41,12 @@ const CategoryDetails = ({ slug }: Props) => {
       autoClose: true,
     })
   }, [error, setNotification])
+
+  if (loading) {
+    return (
+      <LoadingIndicator positionStyle="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+    )
+  }
 
   return (
     <div className="flex flex-col w-full max-w-3xl">
