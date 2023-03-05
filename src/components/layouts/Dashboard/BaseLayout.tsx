@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Header from '~/components/layouts/Dashboard/Header'
 import SideBar from '~/components/layouts/Dashboard/SideBar'
 import Breadcrumbs from '~/components/widgets/Breadcrumbs'
+import Modal from '~/components/widgets/Modals'
 
 interface Props {
   title: string
@@ -26,6 +27,7 @@ const BaseLayout = ({ title, children }: Props) => {
           <Breadcrumbs />
           {children}
         </div>
+        <Modal />
       </section>
     </>
   )
