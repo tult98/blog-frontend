@@ -12,13 +12,6 @@ const RowAction = ({ onPressDelete, onPressDetails }: Props) => {
         <Icon name="edit" style="w-5 h-5" />
         Edit/Details
       </button>
-      {/* <button
-        className="gap-2 btn btn-secondary btn-sm"
-        onClick={onPressDelete}
-      >
-        <Icon name="close" style="w-5 h-5" />
-        Remove
-      </button> */}
       <label
         htmlFor="global-modal"
         className="btn btn-sm btn-secondary"
