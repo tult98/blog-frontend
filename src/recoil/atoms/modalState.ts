@@ -9,5 +9,5 @@ interface IModalState {
 
 export const modalState = atom<IModalState>({
   key: 'modalState',
-  default: undefined,
+  default: {},
 })
