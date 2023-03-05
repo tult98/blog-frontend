@@ -136,8 +136,10 @@ const callbacks = {
 export const options = {
   providers,
   callbacks,
-  pages: {},
-  secret: process.env.NEXT_AUTH_SECRET ?? '', //Used to encrypt the NextAuth.js JWT
+  pages: {
+    signIn: '/login',
+  },
+  secret: process.env.NEXTAUTH_SECRET ?? '', //Used to encrypt the NextAuth.js JWT
 }
 
 const Auth = (req: NextApiRequest, res: NextApiResponse) =>
