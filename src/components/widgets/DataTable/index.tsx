@@ -7,6 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useMemo } from 'react'
+import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import IndeterminateCheckbox from '~/components/widgets/DataTable/IndeterminateCheckbox'
 import RowAction from '~/components/widgets/DataTable/RowAction'
 import Pagination from '~/components/widgets/Pagination'
@@ -16,6 +17,7 @@ interface Props<TData> {
   data: TData[]
   enableSelection?: boolean
   enableAction?: boolean
+  loading: boolean
   onPressDetails?: (row: Row<TData>) => void
   onPressDelete?: (row: Row<TData>) => void
 }
@@ -25,6 +27,7 @@ const DataTable = <TData extends object>({
   data,
   enableAction,
   enableSelection,
+  loading,
   onPressDetails,
   onPressDelete,
 }: Props<TData>) => {
@@ -112,6 +115,11 @@ const DataTable = <TData extends object>({
           ))}
         </tbody>
       </table>
+      {loading && (
+        <div className="relative w-full min-h-[64px]">
+          <LoadingIndicator positionStyle="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        </div>
+      )}
       <div className="self-end">
         <Pagination
           currentPage={getState().pagination.pageIndex + 1}

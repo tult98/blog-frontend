@@ -14,7 +14,6 @@ import {
 import { DASHBOARD_PREFIX } from '~/utils/settings'
 
 const Categories = () => {
-  // @ts-expect-error
   const { loading, error, data } =
     useQuery<{ getCategories: { categories: ICategory[]; meta: IMeta } }>(
       GET_CATEGORIES,
@@ -63,6 +62,7 @@ const Categories = () => {
         data={data?.getCategories?.categories ?? []}
         enableSelection={true}
         enableAction={true}
+        loading={loading}
         onPressDetails={onPressDetails}
         onPressDelete={onPressDelete}
       />
