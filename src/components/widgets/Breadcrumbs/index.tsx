@@ -41,8 +41,8 @@ const Breadcrumbs = () => {
   return (
     <div className="text-sm breadcrumbs">
       <ul>
-        {breadCrumbItems.map((item) => (
-          <BreadCrumbItem key={item.url} label={item.label} url={item.url} />
+        {breadCrumbItems.map((item, index) => (
+          <BreadCrumbItem key={index} label={item.label} url={item.url} />
         ))}
       </ul>
     </div>
