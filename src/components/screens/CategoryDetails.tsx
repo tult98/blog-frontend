@@ -1,8 +1,10 @@
-import { useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client'
+import { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
+import CategoryForm from '~/components/widgets/CategoryForm'
 import { ICategory } from '~/models/category'
+import { UPDATE_CATEGORY } from '~/mutations/category'
 import { GET_CATEGORY_BY_SLUG } from '~/queries/category'
 import {
   notificationState,
@@ -14,7 +16,6 @@ interface Props {
 }
 
 const CategoryDetails = ({ slug }: Props) => {
-  const [category, setCategory] = useState<ICategory>()
   const setNotification = useSetRecoilState(notificationState)
   const { loading, error, data } = useQuery<{ getCategoryBySlug: ICategory }>(
     GET_CATEGORY_BY_SLUG,
@@ -22,13 +23,29 @@ const CategoryDetails = ({ slug }: Props) => {
       variables: { slug },
     },
   )
+  const [mutate, mutation] = useMutation(UPDATE_CATEGORY)
 
   useEffect(() => {
-    if (!data) {
-      return
+    if (mutation.error) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.DANGEROUS,
+        title: 'Failed to update the category.',
+        autoClose: true,
+      })
     }
-    setCategory(data.getCategoryBySlug)
-  }, [data])
+  }, [mutation.error])
+
+  useEffect(() => {
+    if (mutation.data) {
+      setNotification({
+        isShow: true,
+        type: NOTIFICATION_TYPE.INFORMING,
+        title: 'The category has been updated.',
+        autoClose: true,
+      })
+    }
+  }, [mutation.data])
 
   useEffect(() => {
     if (!error) {
@@ -37,7 +54,7 @@ const CategoryDetails = ({ slug }: Props) => {
     setNotification({
       isShow: true,
       type: NOTIFICATION_TYPE.DANGEROUS,
-      title: 'Failed at getting the category',
+      title: 'Failed to get the category',
       autoClose: true,
     })
   }, [error, setNotification])
@@ -50,44 +67,12 @@ const CategoryDetails = ({ slug }: Props) => {
 
   return (
     <div className="flex flex-col w-full max-w-3xl">
-      <div className="w-full form-control">
-        <label className="label">
-          <span className="label-text">Title</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Title"
-          className="w-full input input-bordered focus:outline-none"
-          value={category?.title ?? ''}
-        />
-      </div>
-
-      <div className="w-full form-control">
-        <label className="label">
-          <span className="label-text">Slug</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Slug"
-          className="w-full input input-bordered focus:outline-none"
-          value={category?.slug ?? ''}
-        />
-      </div>
-
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Description</span>
-        </label>
-        <textarea
-          className="h-24 textarea textarea-bordered focus:outline-none"
-          placeholder="Description"
-          value={category?.description}
-        ></textarea>
-      </div>
-      <div className="self-end mt-8 space-x-2">
-        <button className="btn btn-active btn-primary">Update</button>
-        <button className="btn btn-error">Delete</button>
-      </div>
+      <CategoryForm
+        operator="update"
+        isSubmitting={mutation.loading}
+        category={data?.getCategoryBySlug}
+        onSubmit={mutate}
+      />
     </div>
   )
 }

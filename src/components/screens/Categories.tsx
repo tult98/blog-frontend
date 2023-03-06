@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { ColumnDef, Row } from '@tanstack/react-table'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -23,7 +24,9 @@ const Categories = () => {
     useQuery<{ getCategories: { categories: ICategory[]; meta: IMeta } }>(
       GET_CATEGORIES,
     )
-  const [deleteCategory, results] = useMutation(DELETE_CATEGORY)
+  const [deleteCategory, results] = useMutation(DELETE_CATEGORY, {
+    refetchQueries: [{ query: GET_CATEGORIES }, 'getCategories'],
+  })
 
   const columns = useMemo<ColumnDef<ICategory>[]>(
     () => [
@@ -120,9 +123,12 @@ const Categories = () => {
   return (
     <BaseLayout title="TuLamThings | Categories">
       <div className="flex flex-col space-y-4">
-        <button className="self-end btn btn-primary btn-outline">
+        <Link
+          href={`${DASHBOARD_PREFIX}/categories/create`}
+          className="self-end btn btn-primary btn-outline"
+        >
           New category
-        </button>
+        </Link>
         <DataTable
           columns={columns}
           data={data?.getCategories?.categories ?? []}
