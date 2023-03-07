@@ -120,7 +120,7 @@ const DataTable = <TData extends object>({
           <LoadingIndicator positionStyle="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         </div>
       )}
-      {!getPageCount() && (
+      {!getPageCount() && !loading && (
         <div className="relative w-full min-h-[64px] text-center">
           <p className="italic">There is no data to display</p>
         </div>
