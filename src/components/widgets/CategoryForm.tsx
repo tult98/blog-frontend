@@ -5,7 +5,6 @@ import {
   OperationVariables,
 } from '@apollo/client'
 import { ChangeEvent, useCallback, useState } from 'react'
-import Icon from '~/components/elements/Icon'
 import { ICategory } from '~/models/category'
 
 type OPERATOR = 'create' | 'update'
@@ -83,84 +82,72 @@ const CategoryForm = ({
 
   return (
     <div className="flex flex-col w-full">
-      {/* FIXME: should display the not found page */}
-      {operator === 'update' && !category ? (
-        <div className="absolute flex flex-col items-center text-red-500 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          <Icon name="dangerous" style="w-12 h-12" />
-          <p className="text-center">
-            Cannot get the data. Please double check the URL and re-try later.
-          </p>
-        </div>
-      ) : (
-        <>
-          <div className="w-full form-control">
-            <label className="label">
-              <span className="label-text">Title</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Title"
-              className="w-full input input-bordered focus:outline-none"
-              name="title"
-              value={categoryInput?.title ?? ''}
-              onChange={onChangeText}
-              onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                onValidateText(event.target.name, event.target.value)
-              }
-            />
-            {errors?.title && (
-              <p className="mt-2 text-sm text-red-500">{errors?.title}</p>
-            )}
-          </div>
+      <div className="w-full form-control">
+        <label className="label">
+          <span className="label-text">Title</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Title"
+          className="w-full input input-bordered focus:outline-none"
+          name="title"
+          value={categoryInput?.title ?? ''}
+          onChange={onChangeText}
+          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
+            onValidateText(event.target.name, event.target.value)
+          }
+        />
+        {errors?.title && (
+          <p className="mt-2 text-sm text-red-500">{errors?.title}</p>
+        )}
+      </div>
 
-          <div className="w-full form-control">
-            <label className="label">
-              <span className="label-text">Slug</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Slug"
-              className="w-full input input-bordered focus:outline-none"
-              name="slug"
-              value={
-                categoryInput?.title
-                  ? categoryInput.title.toLowerCase().split(' ').join('-')
-                  : ''
-              }
-              disabled
-            />
-          </div>
+      <div className="w-full form-control">
+        <label className="label">
+          <span className="label-text">Slug</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Slug"
+          className="w-full input input-bordered focus:outline-none"
+          name="slug"
+          value={
+            categoryInput?.title
+              ? categoryInput.title.toLowerCase().split(' ').join('-')
+              : ''
+          }
+          disabled
+        />
+      </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Description</span>
-            </label>
-            <textarea
-              className="h-24 textarea textarea-bordered focus:outline-none"
-              placeholder="Description"
-              name="description"
-              value={categoryInput?.description}
-              onChange={onChangeText}
-              onBlur={(event: ChangeEvent<HTMLTextAreaElement>) =>
-                onValidateText(event.target.name, event.target.value)
-              }
-            ></textarea>
-            {errors?.description && (
-              <p className="mt-2 text-sm text-red-500">{errors?.description}</p>
-            )}
-          </div>
-          <div className="self-end mt-8 space-x-2">
-            <button
-              className={`btn btn-primary ${
-                isSubmitting ? 'loading btn-disabled' : ''
-              }`}
-              onClick={onSubmitForm}
-            >
-              {operator === 'update' ? 'Update' : 'Create'}
-            </button>
-          </div>
-        </>
-      )}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Description</span>
+        </label>
+        <textarea
+          className="h-24 textarea textarea-bordered focus:outline-none"
+          placeholder="Description"
+          name="description"
+          value={categoryInput?.description}
+          onChange={onChangeText}
+          onBlur={(event: ChangeEvent<HTMLTextAreaElement>) =>
+            onValidateText(event.target.name, event.target.value)
+          }
+        ></textarea>
+        {errors?.description && (
+          <p className="mt-2 text-sm text-red-500">{errors?.description}</p>
+        )}
+      </div>
+      <div className="self-end mt-8 space-x-2">
+        <button
+          className={`btn btn-primary ${
+            isSubmitting ? 'loading btn-disabled' : ''
+          }`}
+          onClick={onSubmitForm}
+        >
+          {operator === 'update' ? 'Update' : 'Create'}
+        </button>
+      </div>
     </div>
   )
 }

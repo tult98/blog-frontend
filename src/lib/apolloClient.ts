@@ -1,5 +1,6 @@
 import {
   ApolloClient,
+  from,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
@@ -9,6 +10,13 @@ import { setContext } from '@apollo/client/link/context'
 import { getSession } from 'next-auth/react'
 import { CustomSession } from 'pages/api/auth/[...nextauth]'
 import { useMemo } from 'react'
+
+export enum ServerErrorCode {
+  // FIXME: many built in Error code from apollo haven't listed here
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+  FORBIDDEN = 'FORBIDDEN',
+  NOT_FOUND = 'NOT_FOUND',
+}
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
@@ -29,7 +37,7 @@ export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: authLink.concat(httpLink),
+    link: from([authLink, httpLink]),
     cache: new InMemoryCache(),
   })
 }
