@@ -1,7 +1,7 @@
 import BaseLayout from '~/components/layouts/Dashboard/BaseLayout'
 import CreateCategory from '~/components/screens/CreateCategory'
 
-const CreateCategoryPage = () => {
+const CategoryCreatePage = () => {
   return (
     <BaseLayout title="TuLamThings | create new category">
       <CreateCategory />
@@ -9,4 +9,4 @@ const CreateCategoryPage = () => {
   )
 }
 
-export default CreateCategoryPage
+export default CategoryCreatePage
