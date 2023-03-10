@@ -21,9 +21,7 @@ const RegisterForm = (): JSX.Element => {
   const [account, setAccount] = useState<Record<string, string>>(initialAccount)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const setNotification = useSetRecoilState(notificationState)
-  const [mutate, { data, loading, error }] = useMutation(REGISTER, {
-    variables: account,
-  })
+  const [mutate, { data, loading, error }] = useMutation(REGISTER)
 
   useEffect(() => {
     if (error) {
@@ -140,7 +138,10 @@ const RegisterForm = (): JSX.Element => {
       return
     }
     // no error
-    mutate()
+    delete account.confirmPassword
+    mutate({
+      variables: { input: account },
+    })
   }
 
   return (
