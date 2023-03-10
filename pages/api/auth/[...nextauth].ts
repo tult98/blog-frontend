@@ -50,7 +50,7 @@ const providers = [
         const {
           data: { login },
         } = await apolloClient.query<{ login: IToken }>({
-          variables: credentials,
+          variables: { input: { email: credentials?.email, password: credentials?.password } },
           query: LOGIN,
         })
         return login

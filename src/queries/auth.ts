@@ -7,8 +7,8 @@ export interface IToken {
 }
 
 export const LOGIN = gql`
-  query Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  query Login($input: CredentialsInput!) {
+    login(input: $input) {
       accessToken
       refreshToken
       expiresAt
