@@ -4,13 +4,7 @@ interface IOptions {
   height?: string
 }
 
-const LoadingIndicator = ({
-  positionStyle,
-  options = {},
-}: {
-  positionStyle?: string
-  options?: IOptions
-}) => {
+const LoadingIndicator = ({ positionStyle, options = {} }: { positionStyle?: string; options?: IOptions }) => {
   return (
     <div className={positionStyle || 'center-content-in-screen'}>
       <svg

@@ -11,10 +11,7 @@ interface Props {
 }
 
 const MarkdownEditor = ({ markdown, onChange }: Props) => {
-  const onChangeMarkdown = (
-    _?: string,
-    event?: ChangeEvent<HTMLTextAreaElement>,
-  ) => {
+  const onChangeMarkdown = (_?: string, event?: ChangeEvent<HTMLTextAreaElement>) => {
     if (event) {
       onChange(event)
     }

@@ -5,19 +5,13 @@ import { useSetRecoilState } from 'recoil'
 import CategoryForm from '~/components/widgets/CategoryForm'
 import { CREATE_CATEGORY } from '~/mutations/category'
 import { GET_CATEGORIES } from '~/queries/category'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 import { DASHBOARD_PREFIX } from '~/utils/settings'
 
 const CreateCategory = () => {
-  const [createCategory, { loading, error, data }] = useMutation(
-    CREATE_CATEGORY,
-    {
-      refetchQueries: [{ query: GET_CATEGORIES }, 'getCategories'],
-    },
-  )
+  const [createCategory, { loading, error, data }] = useMutation(CREATE_CATEGORY, {
+    refetchQueries: [{ query: GET_CATEGORIES }, 'getCategories'],
+  })
   const setNotification = useSetRecoilState(notificationState)
   const router = useRouter()
 
@@ -46,11 +40,7 @@ const CreateCategory = () => {
 
   return (
     <div className="w-full max-w-3xl">
-      <CategoryForm
-        operator="create"
-        isSubmitting={loading}
-        onSubmit={createCategory}
-      />
+      <CategoryForm operator="create" isSubmitting={loading} onSubmit={createCategory} />
     </div>
   )
 }

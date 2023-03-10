@@ -11,9 +11,7 @@ const TreeNode = ({ data }: Props) => {
     <>
       {data?.children ? (
         <>
-          <p className="p-4 text-xs font-semibold uppercase text-neutral-500">
-            {data.label}
-          </p>
+          <p className="p-4 text-xs font-semibold uppercase text-neutral-500">{data.label}</p>
           <Tree data={data.children} />
         </>
       ) : (

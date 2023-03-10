@@ -33,11 +33,7 @@ const ResumeViewer = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="fixed z-30 w-full h-full overflow-y-auto -translate-x-1/2 -translate-y-1/2 bg-white min-w-[612px] md:z-10 top-1/2 left-1/2 md:w-auto md:h-5/6">
       <div className="relative z-20 w-full bg-white">
-        <Icon
-          name="close"
-          style="w-6 h-6 text-gray-500 absolute right-2 top-2 cursor-pointer"
-          onClick={onClose}
-        />
+        <Icon name="close" style="w-6 h-6 text-gray-500 absolute right-2 top-2 cursor-pointer" onClick={onClose} />
       </div>
       <Document
         file={file}

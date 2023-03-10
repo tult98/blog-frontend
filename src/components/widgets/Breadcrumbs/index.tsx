@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import BreadCrumbItem, {
-  IBreadCrumbItem,
-} from '~/components/widgets/Breadcrumbs/BreadCrumbItem'
+import BreadCrumbItem, { IBreadCrumbItem } from '~/components/widgets/Breadcrumbs/BreadCrumbItem'
 
 const Breadcrumbs = () => {
   const router = useRouter()

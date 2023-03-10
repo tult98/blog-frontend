@@ -63,13 +63,7 @@ const providers = [
 ]
 
 const callbacks = {
-  jwt: async ({
-    token,
-    user,
-  }: {
-    token: JWT
-    user: Record<string, string>
-  }) => {
+  jwt: async ({ token, user }: { token: JWT; user: Record<string, string> }) => {
     if (user) {
       // This will only be executed at login. Each next invocation will skip this part.
       token.accessToken = user.accessToken
@@ -119,13 +113,7 @@ const callbacks = {
       }
     }
   },
-  session: async ({
-    session,
-    token,
-  }: {
-    session: CustomSession
-    token: JWT
-  }) => {
+  session: async ({ session, token }: { session: CustomSession; token: JWT }) => {
     session.error = token.error
     session.user = token.user
     session.accessToken = token.accessToken

@@ -10,11 +10,7 @@ const Navigation = () => {
 
   return (
     <div>
-      <Icon
-        name="menu"
-        style="w-6 h-6 cursor-pointer"
-        onClick={onToggleNavigation}
-      />
+      <Icon name="menu" style="w-6 h-6 cursor-pointer" onClick={onToggleNavigation} />
     </div>
   )
 }

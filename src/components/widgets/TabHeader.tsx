@@ -1,13 +1,7 @@
 import Head from 'next/head'
 import { ReactElement } from 'react'
 
-const TabHeader = ({
-  name,
-  children,
-}: {
-  name?: string
-  children?: ReactElement
-}) => {
+const TabHeader = ({ name, children }: { name?: string; children?: ReactElement }) => {
   const postfix = name ? ` | ${name}` : ''
   return (
     <Head>

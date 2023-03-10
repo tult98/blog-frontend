@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import ResumeViewer from '~/components/widgets/ResumeViewer'
 
-const PCMenu = ({
-  onSwitchSection,
-}: {
-  onSwitchSection: (sectionName: string) => void
-}) => {
+const PCMenu = ({ onSwitchSection }: { onSwitchSection: (sectionName: string) => void }) => {
   const [isShowResume, setIsShowResume] = useState(false)
 
   const onShowResume = () => {

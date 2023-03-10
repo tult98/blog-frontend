@@ -37,9 +37,7 @@ const Input = ({
             <span className="label-text">{label}</span>
           </label>
         )}
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          {icon}
-        </div>
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">{icon}</div>
 
         <input
           type={type}

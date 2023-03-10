@@ -19,9 +19,7 @@ const Post = ({ post }: Props) => {
       />
       <article className="flex flex-col items-center p-4 text-slate-600">
         <div className="max-w-screen-md">
-          <h1 className="mt-2 text-xl font-bold text-slate-900">
-            {post.title}
-          </h1>
+          <h1 className="mt-2 text-xl font-bold text-slate-900">{post.title}</h1>
           <p className="text-sm text-slate-400">
             {post.category && (
               <span className="mr-1">
@@ -39,9 +37,7 @@ const Post = ({ post }: Props) => {
                 </span>
               </span>
             )}
-            <span className="ml-1">
-              {formatTimeFromUTC(new Date(post.updated_at), 'MMMM-dd-yyyy')}
-            </span>
+            <span className="ml-1">{formatTimeFromUTC(new Date(post.updated_at), 'MMMM-dd-yyyy')}</span>
           </p>
           <p className="my-3.5">{post.content}</p>
         </div>

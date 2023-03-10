@@ -5,14 +5,7 @@ interface IPath {
 export const paths: IPath = {
   close: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />,
   },
   informing: {
     type: 'stroke',
@@ -49,47 +42,19 @@ export const paths: IPath = {
   },
   chevronLeft: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />,
   },
   chevronRight: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M9 5l7 7-7 7"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />,
   },
   doubleChevronLeft: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />,
   },
   doubleChevronRight: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M13 5l7 7-7 7M5 5l7 7-7 7"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />,
   },
   home: {
     type: 'stroke',
@@ -138,12 +103,7 @@ export const paths: IPath = {
     type: 'stroke',
     path: (
       <>
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -186,14 +146,7 @@ export const paths: IPath = {
   },
   menu: {
     type: 'stroke',
-    path: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    ),
+    path: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />,
   },
   folder: {
     type: 'stroke',
@@ -215,11 +168,7 @@ export const paths: IPath = {
           strokeLinejoin="round"
           d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
         />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 6h.008v.008H6V6z"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
       </>
     ),
   },
@@ -253,31 +202,11 @@ export const paths: IPath = {
         <path fill="#607D8B" d="M9 28H12V42H9z" />
         <path fill="#607D8B" d="M9 39H35V42H9z" />
         <path fill="#607D8B" d="M32 28H35V42H32zM15 34H29V37H15z" />
-        <path
-          fill="#A68A6E"
-          d="M14.88 29H28.880000000000003V32H14.88z"
-          transform="rotate(6.142 21.88 30.5)"
-        />
-        <path
-          fill="#EF6C00"
-          d="M29.452 11.646H43.451V14.647H29.452z"
-          transform="rotate(81.234 36.453 13.148)"
-        />
-        <path
-          fill="#FF9800"
-          d="M23.576 13.578H37.574V16.579H23.576z"
-          transform="rotate(60.79 30.576 15.079)"
-        />
-        <path
-          fill="#D38B28"
-          d="M18.395 18.275H32.393V21.276H18.395z"
-          transform="rotate(34.765 25.396 19.777)"
-        />
-        <path
-          fill="#C09553"
-          d="M15.977 23.499H29.976V26.5H15.977z"
-          transform="rotate(19.785 22.978 25.003)"
-        />
+        <path fill="#A68A6E" d="M14.88 29H28.880000000000003V32H14.88z" transform="rotate(6.142 21.88 30.5)" />
+        <path fill="#EF6C00" d="M29.452 11.646H43.451V14.647H29.452z" transform="rotate(81.234 36.453 13.148)" />
+        <path fill="#FF9800" d="M23.576 13.578H37.574V16.579H23.576z" transform="rotate(60.79 30.576 15.079)" />
+        <path fill="#D38B28" d="M18.395 18.275H32.393V21.276H18.395z" transform="rotate(34.765 25.396 19.777)" />
+        <path fill="#C09553" d="M15.977 23.499H29.976V26.5H15.977z" transform="rotate(19.785 22.978 25.003)" />
       </>
     ),
   },

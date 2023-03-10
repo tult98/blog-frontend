@@ -1,11 +1,4 @@
-import {
-  ApolloClient,
-  from,
-  HttpLink,
-  InMemoryCache,
-  NormalizedCacheObject,
-  StoreObject,
-} from '@apollo/client'
+import { ApolloClient, from, HttpLink, InMemoryCache, NormalizedCacheObject, StoreObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { getSession } from 'next-auth/react'
 import { CustomSession } from 'pages/api/auth/[...nextauth]'
@@ -42,9 +35,7 @@ export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   })
 }
 
-export const initializeApollo = (
-  initialState: Record<string, StoreObject | undefined> | null,
-) => {
+export const initializeApollo = (initialState: Record<string, StoreObject | undefined> | null) => {
   const _apolloClient = apolloClient ?? createApolloClient()
   // If your page has Next.js data fetching methods that use Apollo Client,
   // the initial state gets hydrated here
@@ -65,9 +56,7 @@ export const initializeApollo = (
   return _apolloClient
 }
 
-export const useApollo = (
-  initialState: Record<string, StoreObject | undefined>,
-) => {
+export const useApollo = (initialState: Record<string, StoreObject | undefined>) => {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

@@ -34,12 +34,7 @@ const Navigation = ({
   return (
     <>
       <div className="md:hidden">
-        <MobileMenu
-          isOpen={isOpenMenu}
-          shouldAnimate={shouldAnimate}
-          backgroundColor={backgroundColor}
-          items={items}
-        />
+        <MobileMenu isOpen={isOpenMenu} shouldAnimate={shouldAnimate} backgroundColor={backgroundColor} items={items} />
       </div>
       <div className="hidden md:block">
         <PCMenu onSwitchSection={onSwitchSection} />

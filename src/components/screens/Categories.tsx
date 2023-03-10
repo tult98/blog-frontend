@@ -10,20 +10,14 @@ import { ICategory, IMeta } from '~/models/category'
 import { DELETE_CATEGORY } from '~/mutations/category'
 import { GET_CATEGORIES } from '~/queries/category'
 import { modalState } from '~/recoil/atoms/modalState'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 import { DASHBOARD_PREFIX } from '~/utils/settings'
 
 const Categories = () => {
   const router = useRouter()
   const setNotification = useSetRecoilState(notificationState)
   const [modalInfo, setModalInfo] = useRecoilState(modalState)
-  const { loading, error, data } =
-    useQuery<{ getCategories: { categories: ICategory[]; meta: IMeta } }>(
-      GET_CATEGORIES,
-    )
+  const { loading, error, data } = useQuery<{ getCategories: { categories: ICategory[]; meta: IMeta } }>(GET_CATEGORIES)
   const [deleteCategory, results] = useMutation(DELETE_CATEGORY, {
     refetchQueries: [{ query: GET_CATEGORIES }, 'getCategories'],
   })
@@ -123,10 +117,7 @@ const Categories = () => {
   return (
     <BaseLayout title="TuLamThings | Categories">
       <div className="flex flex-col space-y-4">
-        <Link
-          href={`${DASHBOARD_PREFIX}/categories/create`}
-          className="self-end btn btn-primary btn-outline"
-        >
+        <Link href={`${DASHBOARD_PREFIX}/categories/create`} className="self-end btn btn-primary btn-outline">
           New category
         </Link>
         <DataTable

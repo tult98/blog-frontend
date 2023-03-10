@@ -5,10 +5,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import { REGISTER } from '~/mutations/auth'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 import { isValidEmail, isValidPassword } from '~/utils/validators'
 
 const initialAccount = {
@@ -56,11 +53,7 @@ const RegisterForm = (): JSX.Element => {
     }
   }, [data, setNotification])
 
-  const validateRequiredText = (
-    name: string,
-    value: string,
-    shouldUpdateErrors = true,
-  ) => {
+  const validateRequiredText = (name: string, value: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
     if (!value) {
       newErrors[name] = 'This field is required.'
@@ -101,10 +94,7 @@ const RegisterForm = (): JSX.Element => {
     return newErrors
   }
 
-  const validateConfirmPassword = (
-    confirmPassword: string,
-    shouldUpdateErrors = true,
-  ) => {
+  const validateConfirmPassword = (confirmPassword: string, shouldUpdateErrors = true) => {
     const newErrors = { ...errors }
     if (confirmPassword !== account?.password) {
       newErrors.confirmPassword = "Password and confirm password doesn't match"
@@ -157,9 +147,7 @@ const RegisterForm = (): JSX.Element => {
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-            Create free account
-          </h2>
+          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Create free account</h2>
           <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">
             You can create your account in 2 minutes
           </p>
@@ -172,10 +160,7 @@ const RegisterForm = (): JSX.Element => {
                 <div className="space-y-5">
                   <div className="grid grid-cols-2 space-x-4">
                     <div>
-                      <label
-                        htmlFor="firstName"
-                        className="text-base font-medium text-gray-900"
-                      >
+                      <label htmlFor="firstName" className="text-base font-medium text-gray-900">
                         {' '}
                         First name{' '}
                       </label>
@@ -206,22 +191,14 @@ const RegisterForm = (): JSX.Element => {
                           value={account?.firstName ?? ''}
                           onChange={onChangeText}
                           onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                            validateRequiredText(
-                              event.target.name,
-                              event.target.value,
-                            )
+                            validateRequiredText(event.target.name, event.target.value)
                           }
                         />
                       </div>
-                      {errors?.firstName && (
-                        <p className="mt-1 text-red-500">{errors.firstName}</p>
-                      )}
+                      {errors?.firstName && <p className="mt-1 text-red-500">{errors.firstName}</p>}
                     </div>
                     <div>
-                      <label
-                        htmlFor="lastName"
-                        className="text-base font-medium text-gray-900"
-                      >
+                      <label htmlFor="lastName" className="text-base font-medium text-gray-900">
                         {' '}
                         Last name{' '}
                       </label>
@@ -252,23 +229,15 @@ const RegisterForm = (): JSX.Element => {
                           value={account?.lastName ?? ''}
                           onChange={onChangeText}
                           onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                            validateRequiredText(
-                              event.target.name,
-                              event.target.value,
-                            )
+                            validateRequiredText(event.target.name, event.target.value)
                           }
                         />
                       </div>
-                      {errors?.lastName && (
-                        <p className="mt-2 text-red-500">{errors?.lastName}</p>
-                      )}
+                      {errors?.lastName && <p className="mt-2 text-red-500">{errors?.lastName}</p>}
                     </div>
                   </div>
                   <div>
-                    <label
-                      htmlFor="fullName"
-                      className="text-base font-medium text-gray-900"
-                    >
+                    <label htmlFor="fullName" className="text-base font-medium text-gray-900">
                       {' '}
                       Full name{' '}
                     </label>
@@ -299,22 +268,14 @@ const RegisterForm = (): JSX.Element => {
                         value={account?.fullName ?? ''}
                         onChange={onChangeText}
                         onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                          validateRequiredText(
-                            event.target.name,
-                            event.target.value,
-                          )
+                          validateRequiredText(event.target.name, event.target.value)
                         }
                       />
                     </div>
-                    {errors?.fullName && (
-                      <p className="mt-2 text-red-500">{errors.fullName}</p>
-                    )}
+                    {errors?.fullName && <p className="mt-2 text-red-500">{errors.fullName}</p>}
                   </div>
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="text-base font-medium text-gray-900"
-                    >
+                    <label htmlFor="email" className="text-base font-medium text-gray-900">
                       {' '}
                       Email address{' '}
                     </label>
@@ -344,21 +305,14 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.email ?? ''}
                         onChange={onChangeText}
-                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                          validateEmail(event.target.value)
-                        }
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) => validateEmail(event.target.value)}
                       />
                     </div>
-                    {errors?.email && (
-                      <p className="mt-2 text-red-500">{errors?.email}</p>
-                    )}
+                    {errors?.email && <p className="mt-2 text-red-500">{errors?.email}</p>}
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="password"
-                      className="text-base font-medium text-gray-900"
-                    >
+                    <label htmlFor="password" className="text-base font-medium text-gray-900">
                       {' '}
                       Password{' '}
                     </label>
@@ -388,21 +342,14 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.password ?? ''}
                         onChange={onChangeText}
-                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                          validatePassword(event.target.value)
-                        }
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) => validatePassword(event.target.value)}
                       />
                     </div>
-                    {errors?.password && (
-                      <p className="mt-2 text-red-500">{errors?.password}</p>
-                    )}
+                    {errors?.password && <p className="mt-2 text-red-500">{errors?.password}</p>}
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="confirmPassword"
-                      className="text-base font-medium text-gray-900"
-                    >
+                    <label htmlFor="confirmPassword" className="text-base font-medium text-gray-900">
                       {' '}
                       Confirm password{' '}
                     </label>
@@ -432,16 +379,10 @@ const RegisterForm = (): JSX.Element => {
                         className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                         value={account?.confirmPassword ?? ''}
                         onChange={onChangeText}
-                        onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                          validateConfirmPassword(event.target.value)
-                        }
+                        onBlur={(event: ChangeEvent<HTMLInputElement>) => validateConfirmPassword(event.target.value)}
                       />
                     </div>
-                    {errors?.confirmPassword && (
-                      <p className="mt-2 text-red-500">
-                        {errors?.confirmPassword}
-                      </p>
-                    )}
+                    {errors?.confirmPassword && <p className="mt-2 text-red-500">{errors?.confirmPassword}</p>}
                   </div>
                   <div>
                     <button

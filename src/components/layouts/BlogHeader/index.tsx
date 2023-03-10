@@ -15,22 +15,14 @@ const BlogHeader = () => {
     return (
       <div className="w-full text-center text-slate-900">
         {categories.map((category) => (
-          <li
-            className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200"
-            key={category.id}
-          >
+          <li className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200" key={category.id}>
             {category.title}
           </li>
         ))}
-        <Link
-          href="/portfolio"
-          className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200"
-        >
+        <Link href="/portfolio" className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200">
           About me
         </Link>
-        <li className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200">
-          Contact me
-        </li>
+        <li className="w-full py-4 hover:bg-gray-200 hover:cursor-pointer focus:bg-gray-200">Contact me</li>
       </div>
     )
   }

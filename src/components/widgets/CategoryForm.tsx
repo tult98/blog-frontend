@@ -1,9 +1,4 @@
-import {
-  ApolloCache,
-  DefaultContext,
-  MutationFunctionOptions,
-  OperationVariables,
-} from '@apollo/client'
+import { ApolloCache, DefaultContext, MutationFunctionOptions, OperationVariables } from '@apollo/client'
 import { ChangeEvent, useCallback, useState } from 'react'
 import { ICategory } from '~/models/category'
 
@@ -14,45 +9,25 @@ interface Props {
   isSubmitting?: boolean
   operator: OPERATOR
   onSubmit: (
-    options:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined,
+    options: MutationFunctionOptions<any, OperationVariables, DefaultContext, ApolloCache<any>> | undefined,
   ) => void
 }
 
-const CategoryForm = ({
-  category,
-  isSubmitting,
-  operator,
-  onSubmit,
-}: Props) => {
+const CategoryForm = ({ category, isSubmitting, operator, onSubmit }: Props) => {
   const [errors, setErrors] = useState<Record<string, string>>()
-  const [categoryInput, setCategoryInput] = useState<
-    Omit<ICategory, 'id' | 'slug'>
-  >({
+  const [categoryInput, setCategoryInput] = useState<Omit<ICategory, 'id' | 'slug'>>({
     title: category?.title ?? '',
     description: category?.description ?? '',
   })
 
-  const onChangeText = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const onChangeText = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setCategoryInput({
       ...categoryInput,
       [event.target.name]: event.target.value,
     })
   }
 
-  const onValidateText = (
-    name: string,
-    value: string,
-    shouldUpdateState = true,
-  ) => {
+  const onValidateText = (name: string, value: string, shouldUpdateState = true) => {
     const newErrors = { ...errors }
     if (!value) {
       newErrors[name] = 'This field is required.'
@@ -93,13 +68,9 @@ const CategoryForm = ({
           name="title"
           value={categoryInput?.title ?? ''}
           onChange={onChangeText}
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            onValidateText(event.target.name, event.target.value)
-          }
+          onBlur={(event: ChangeEvent<HTMLInputElement>) => onValidateText(event.target.name, event.target.value)}
         />
-        {errors?.title && (
-          <p className="mt-2 text-sm text-red-500">{errors?.title}</p>
-        )}
+        {errors?.title && <p className="mt-2 text-sm text-red-500">{errors?.title}</p>}
       </div>
 
       <div className="w-full form-control">
@@ -111,11 +82,7 @@ const CategoryForm = ({
           placeholder="Slug"
           className="w-full input input-bordered focus:outline-none"
           name="slug"
-          value={
-            categoryInput?.title
-              ? categoryInput.title.toLowerCase().split(' ').join('-')
-              : ''
-          }
+          value={categoryInput?.title ? categoryInput.title.toLowerCase().split(' ').join('-') : ''}
           disabled
         />
       </div>
@@ -130,21 +97,12 @@ const CategoryForm = ({
           name="description"
           value={categoryInput?.description}
           onChange={onChangeText}
-          onBlur={(event: ChangeEvent<HTMLTextAreaElement>) =>
-            onValidateText(event.target.name, event.target.value)
-          }
+          onBlur={(event: ChangeEvent<HTMLTextAreaElement>) => onValidateText(event.target.name, event.target.value)}
         ></textarea>
-        {errors?.description && (
-          <p className="mt-2 text-sm text-red-500">{errors?.description}</p>
-        )}
+        {errors?.description && <p className="mt-2 text-sm text-red-500">{errors?.description}</p>}
       </div>
       <div className="self-end mt-8 space-x-2">
-        <button
-          className={`btn btn-primary ${
-            isSubmitting ? 'loading btn-disabled' : ''
-          }`}
-          onClick={onSubmitForm}
-        >
+        <button className={`btn btn-primary ${isSubmitting ? 'loading btn-disabled' : ''}`} onClick={onSubmitForm}>
           {operator === 'update' ? 'Update' : 'Create'}
         </button>
       </div>

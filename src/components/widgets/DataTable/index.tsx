@@ -40,10 +40,7 @@ const DataTable = <TData extends object>({
       allColumns.push({
         id: 'actions',
         cell: ({ row }) => (
-          <RowAction
-            onPressDetails={() => onPressDetails(row)}
-            onPressDelete={() => onPressDelete(row)}
-          />
+          <RowAction onPressDetails={() => onPressDetails(row)} onPressDelete={() => onPressDelete(row)} />
         ),
       })
     }
@@ -76,13 +73,12 @@ const DataTable = <TData extends object>({
     return allColumns
   }, [enableAction, enableSelection, columns])
 
-  const { getHeaderGroups, getRowModel, getState, getPageCount } =
-    useReactTable({
-      data,
-      columns: allColumns,
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-    })
+  const { getHeaderGroups, getRowModel, getState, getPageCount } = useReactTable({
+    data,
+    columns: allColumns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  })
 
   return (
     <div className="flex flex-col w-full space-y-4 overflow-x-auto">
@@ -92,12 +88,7 @@ const DataTable = <TData extends object>({
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
@@ -107,9 +98,7 @@ const DataTable = <TData extends object>({
           {getRowModel().rows.map((row) => (
             <tr key={row.id} className="hover">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
               ))}
             </tr>
           ))}
@@ -127,10 +116,7 @@ const DataTable = <TData extends object>({
       )}
       {!!getPageCount() && (
         <div className="self-end">
-          <Pagination
-            currentPage={getState().pagination.pageIndex + 1}
-            totalPage={getPageCount()}
-          />
+          <Pagination currentPage={getState().pagination.pageIndex + 1} totalPage={getPageCount()} />
         </div>
       )}
     </div>

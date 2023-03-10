@@ -16,33 +16,17 @@ const Pagination = ({ currentPage, totalPage }: Props) => {
         </strong>
       </p>
       <div className="flex flex-row items-center btn-group">
-        <button
-          className={`btn hover:btn-active ${
-            currentPage === 1 ? 'btn-disabled' : ''
-          }`}
-        >
+        <button className={`btn hover:btn-active ${currentPage === 1 ? 'btn-disabled' : ''}`}>
           <Icon name="doubleChevronLeft" style="w-4 h-4" />
         </button>
-        <button
-          className={`btn hover:btn-active ${
-            currentPage === 1 ? 'btn-disabled' : ''
-          }`}
-        >
+        <button className={`btn hover:btn-active ${currentPage === 1 ? 'btn-disabled' : ''}`}>
           <Icon name="chevronLeft" style="w-4 h-4" />
         </button>
         <button className="btn hover:btn-active">{currentPage}</button>
-        <button
-          className={`btn hover:btn-active ${
-            currentPage === totalPage ? 'btn-disabled' : ''
-          }`}
-        >
+        <button className={`btn hover:btn-active ${currentPage === totalPage ? 'btn-disabled' : ''}`}>
           <Icon name="doubleChevronRight" style="w-4 h-4" />
         </button>
-        <button
-          className={`btn hover:btn-active ${
-            currentPage === totalPage ? 'btn-disabled' : ''
-          }`}
-        >
+        <button className={`btn hover:btn-active ${currentPage === totalPage ? 'btn-disabled' : ''}`}>
           <Icon name="chevronRight" style="w-4 h-4" />
         </button>
       </div>

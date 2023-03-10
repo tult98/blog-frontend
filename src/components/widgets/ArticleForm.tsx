@@ -18,11 +18,7 @@ const ArticleForm = () => {
     })
   }, [articleInput?.title])
 
-  const onValidate = (
-    name: string,
-    value: string,
-    shouldUpdateState = true,
-  ) => {
+  const onValidate = (name: string, value: string, shouldUpdateState = true) => {
     const newErrors = { ...errors }
     if (!value) {
       newErrors[name] = 'This field is required.'
@@ -35,9 +31,7 @@ const ArticleForm = () => {
     return newErrors
   }
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setArticleInput({
       ...articleInput,
       [event.target.name]: event.target.value,
@@ -63,9 +57,7 @@ const ArticleForm = () => {
         label="Title"
         placeholder="Enter your title"
         inputStyle="w-full input input-bordered focus:outline-none"
-        onValidate={(event: ChangeEvent<HTMLInputElement>) =>
-          onValidate(event.target.name, event.target.value)
-        }
+        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
         onChange={onChange}
         error={errors?.title}
       />
@@ -78,9 +70,7 @@ const ArticleForm = () => {
         placeholder="Slug will be updated base on the title"
         inputStyle="w-full input input-bordered focus:outline-none"
         isDisable={true}
-        onValidate={(event: ChangeEvent<HTMLInputElement>) =>
-          onValidate(event.target.name, event.target.value)
-        }
+        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
         onChange={onChange}
       />
       <Input
@@ -91,9 +81,7 @@ const ArticleForm = () => {
         label="Preface"
         placeholder="Describe about the article shortly"
         inputStyle="w-full input input-bordered focus:outline-none"
-        onValidate={(event: ChangeEvent<HTMLInputElement>) =>
-          onValidate(event.target.name, event.target.value)
-        }
+        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
         onChange={onChange}
         error={errors?.preface}
       />
@@ -101,10 +89,7 @@ const ArticleForm = () => {
         <label className="label">
           <span className="label-text">Content</span>
         </label>
-        <MarkdownEditor
-          markdown={articleInput?.content ?? ''}
-          onChange={onChangeMarkdown}
-        />
+        <MarkdownEditor markdown={articleInput?.content ?? ''} onChange={onChangeMarkdown} />
       </div>
       <div className="self-end mt-8">
         <button className="btn btn-primary">Create</button>

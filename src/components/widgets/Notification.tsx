@@ -1,10 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import Icon from '~/components/elements/Icon'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 
 const Notification = () => {
   const [notification, setNotification] = useRecoilState(notificationState)
@@ -41,9 +38,7 @@ const Notification = () => {
   return (
     <div
       className={`fixed top-5 z-10 ${
-        notification?.isShow
-          ? 'animate-slideIn right-5'
-          : 'animate-slideOut -right-full'
+        notification?.isShow ? 'animate-slideIn right-5' : 'animate-slideOut -right-full'
       }`}
     >
       <div className="m-auto">
@@ -53,14 +48,8 @@ const Notification = () => {
               <Icon name={notification.type} style={`w-6 h-6 ${iconColor}`} />
             </div>
             <div className="ml-2 mr-6 text-xs">
-              <span className={`font-semibold ${iconColor}`}>
-                {notification.title}
-              </span>
-              {notification.message && (
-                <span className="block text-gray-500">
-                  {notification.message}
-                </span>
-              )}
+              <span className={`font-semibold ${iconColor}`}>{notification.title}</span>
+              {notification.message && <span className="block text-gray-500">{notification.message}</span>}
             </div>
           </div>
           <Icon

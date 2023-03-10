@@ -4,10 +4,7 @@ import { useSetRecoilState } from 'recoil'
 import CategoryForm from '~/components/widgets/CategoryForm'
 import { ICategory } from '~/models/category'
 import { UPDATE_CATEGORY } from '~/mutations/category'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 
 interface Props {
   category: ICategory
@@ -41,12 +38,7 @@ const CategoryDetails = ({ category }: Props) => {
 
   return (
     <div className="flex flex-col w-full max-w-3xl">
-      <CategoryForm
-        operator="update"
-        isSubmitting={mutation.loading}
-        category={category}
-        onSubmit={mutate}
-      />
+      <CategoryForm operator="update" isSubmitting={mutation.loading} category={category} onSubmit={mutate} />
     </div>
   )
 }

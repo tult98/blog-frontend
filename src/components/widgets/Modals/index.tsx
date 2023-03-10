@@ -15,12 +15,7 @@ const Modal = () => {
             <label htmlFor="global-modal" className="btn">
               Cancel
             </label>
-            <button
-              className={`btn btn-primary ${
-                isLoading ? 'loading btn-disabled' : ''
-              }`}
-              onClick={onConfirm}
-            >
+            <button className={`btn btn-primary ${isLoading ? 'loading btn-disabled' : ''}`} onClick={onConfirm}>
               Confirm
             </button>
           </div>

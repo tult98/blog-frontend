@@ -5,10 +5,7 @@ import { ChangeEvent, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import Input from '~/components/elements/Input'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
-import {
-  notificationState,
-  NOTIFICATION_TYPE,
-} from '~/recoil/atoms/notificationState'
+import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 import { isValidEmail } from '~/utils/validators'
 
 const LoginForm = () => {
@@ -101,12 +98,8 @@ const LoginForm = () => {
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-            Welcome Back!
-          </h2>
-          <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">
-            Login to your account
-          </p>
+          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Welcome Back!</h2>
+          <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Login to your account</p>
         </div>
 
         <div className="relative max-w-md mx-auto mt-8 md:mt-16">
@@ -114,10 +107,7 @@ const LoginForm = () => {
             <div className="px-4 py-6 sm:px-8 sm:py-7">
               <div className="space-y-5">
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="text-base font-medium text-gray-900"
-                  >
+                  <label htmlFor="email" className="text-base font-medium text-gray-900">
                     {' '}
                     Email address{' '}
                   </label>
@@ -144,19 +134,14 @@ const LoginForm = () => {
                       </svg>
                     }
                     error={errors?.email}
-                    onValidate={(event: ChangeEvent<HTMLInputElement>) =>
-                      validateEmail(event.target.value)
-                    }
+                    onValidate={(event: ChangeEvent<HTMLInputElement>) => validateEmail(event.target.value)}
                     onChange={onChangeText}
                   />
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="email"
-                      className="text-base font-medium text-gray-900"
-                    >
+                    <label htmlFor="email" className="text-base font-medium text-gray-900">
                       {' '}
                       Password{' '}
                     </label>
@@ -192,9 +177,7 @@ const LoginForm = () => {
                         />
                       </svg>
                     }
-                    onValidate={(event: ChangeEvent<HTMLInputElement>) =>
-                      validatePassword(event.target.value)
-                    }
+                    onValidate={(event: ChangeEvent<HTMLInputElement>) => validatePassword(event.target.value)}
                     onChange={onChangeText}
                     error={errors?.password}
                   />
@@ -221,9 +204,7 @@ const LoginForm = () => {
                     Log in
                   </button>
                 </div>
-                {serverError && (
-                  <p className="text-sm text-red-500">{serverError}</p>
-                )}
+                {serverError && <p className="text-sm text-red-500">{serverError}</p>}
                 <div className="text-center">
                   <p className="text-base text-gray-600">
                     Don’t have an account?{' '}
