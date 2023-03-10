@@ -1,21 +1,22 @@
-import '@uiw/react-md-editor/markdown-editor.css'
 import '@uiw/react-markdown-preview/markdown.css'
+import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
-const MarkdownEditor = () => {
-  const [markdown, setMarkdown] = useState<string>('')
+interface Props {
+  markdown: string
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
+const MarkdownEditor = ({ markdown, onChange }: Props) => {
   const onChangeMarkdown = (
-    value?: string,
+    _?: string,
     event?: ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    if (value) {
-      setMarkdown(value)
-    } else if (event) {
-      setMarkdown(event.target.value)
+    if (event) {
+      onChange(event)
     }
   }
 

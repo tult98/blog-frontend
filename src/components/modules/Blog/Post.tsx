@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { IPost } from '~/models/post'
+import { IPost } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
 
 interface Props {

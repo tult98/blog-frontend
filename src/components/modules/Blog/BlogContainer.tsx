@@ -1,4 +1,4 @@
-import { IPost } from '~/models/post'
+import { IPost } from '~/models/article'
 import Post from '~/components/modules/Blog/Post'
 
 const dumpData = [

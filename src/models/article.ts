@@ -11,3 +11,11 @@ export interface IPost {
   category?: ICategory
   tags?: ITag[]
 }
+
+export interface ArticleInput {
+  title: string
+  slug: string
+  preface: string
+  content: string
+  coverImage?: string
+}

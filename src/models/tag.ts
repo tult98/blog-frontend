@@ -1,4 +1,4 @@
-import { IPost } from '~/models/post'
+import { IPost } from '~/models/article'
 
 export interface ITag {
   id: string
