@@ -27,6 +27,7 @@
     "sharp": "^0.31.1"
   },
   "devDependencies": {
+    "@next/swc-linux-arm64-gnu": "^13.2.4",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
