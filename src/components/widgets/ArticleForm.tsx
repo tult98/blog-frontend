@@ -1,11 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import Input from '~/components/elements/Input'
+import Input from '~/components/Input'
+import FileInput from '~/components/Input/FileInput'
 import MarkdownEditor from '~/components/widgets/MarkdownEditor'
 import { ArticleInput } from '~/models/article'
+import { IMAGE_EXTENSIONS } from '~/utils/fileUtils'
 
 const ArticleForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>()
   const [articleInput, setArticleInput] = useState<Partial<ArticleInput>>()
+  const [coverImage, setCoverImage] = useState<File>()
+
+  console.log('====================', coverImage)
 
   useEffect(() => {
     let slug = ''
@@ -47,6 +52,12 @@ const ArticleForm = () => {
     }
   }
 
+  const onSelectImage = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setCoverImage(event.target.files[0])
+    }
+  }
+
   return (
     <div className="flex flex-col w-full pb-12 space-y-4">
       <Input
@@ -61,6 +72,7 @@ const ArticleForm = () => {
         onChange={onChange}
         error={errors?.title}
       />
+      <FileInput label="Cover image" accept={IMAGE_EXTENSIONS} onChange={onSelectImage} />
       <Input
         type="text"
         name="slug"
