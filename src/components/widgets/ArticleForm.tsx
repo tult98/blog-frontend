@@ -43,8 +43,13 @@ const ArticleForm = () => {
     })
   }
 
-  const onChangeMarkdown = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    if (event) {
+  const onChangeMarkdown = (value?: string, event?: ChangeEvent<HTMLTextAreaElement>) => {
+    if (value) {
+      setArticleInput({
+        ...articleInput,
+        content: value,
+      })
+    } else if (event) {
       setArticleInput({
         ...articleInput,
         content: event.target.value,
