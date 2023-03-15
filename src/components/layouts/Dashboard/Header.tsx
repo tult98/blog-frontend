@@ -13,7 +13,7 @@ const Header = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://avatars0.githubusercontent.com/u/29749097?v=4" />
+              <Image src="/avatar.jpg" width={300} height={300} alt="avatar" />
             </div>
           </label>
           <ul tabIndex={0} className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import useInterSecting from '~/hooks/useInterSecting'
-import avatar from '../../../../../public/avatar.jpg'
+// import avatar from '../../../../../public/avatar.jpg'
 
 const AboutMe = ({ isInView }: { isInView: boolean }) => {
   const { htmlRef: aboutMeRef, isInterSecting } = useInterSecting()
@@ -56,7 +56,7 @@ const AboutMe = ({ isInView }: { isInView: boolean }) => {
           </ul>
         </div>
         <div className="items-center justify-center hidden w-full h-full md:flex md:flex-row">
-          <Image src={avatar} alt="avatar" className="object-cover rounded-full" width={300} height={300} />
+          <Image src={'avatar.jpg'} alt="avatar" className="object-cover rounded-full" width={300} height={300} />
         </div>
       </div>
     </section>
