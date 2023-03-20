@@ -1,20 +1,31 @@
-import { ChangeEvent } from 'react'
+import { ApolloCache, DefaultContext, MutationFunctionOptions, OperationVariables } from '@apollo/client'
+import { Dispatch, SetStateAction } from 'react'
 
 export const IMAGE_EXTENSIONS = '.jpg, .jpeg, .png'
 
-export const onUploadImage = async (
-  dataTransfer: DataTransfer,
-  markdown: string,
-  onChangeMarkdown: (value: string, event?: ChangeEvent<HTMLTextAreaElement>) => void,
-) => {
+export const onUploadImage = async ({
+  data,
+  createPresignedUrls,
+  setFiles,
+}: {
+  data: DataTransfer
+  createPresignedUrls: (
+    options: MutationFunctionOptions<any, OperationVariables, DefaultContext, ApolloCache<any>>,
+  ) => Promise<any>
+  setFiles: Dispatch<SetStateAction<File[] | undefined>>
+}) => {
   const files: File[] = []
 
-  for (let index = 0; index < dataTransfer.items.length; index += 1) {
-    const file = dataTransfer.files.item(index)
+  for (let index = 0; index < data.items.length; index += 1) {
+    const file = data.files.item(index)
 
     if (file) {
       files.push(file)
     }
   }
-  onChangeMarkdown(`${markdown}\n![]('https://web.dev/read-files/#select-dnd')`)
+  setFiles(files)
+
+  createPresignedUrls({
+    variables: { filenames: files.map((file) => file.name) },
+  })
 }

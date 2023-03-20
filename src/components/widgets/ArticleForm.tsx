@@ -10,8 +10,6 @@ const ArticleForm = () => {
   const [articleInput, setArticleInput] = useState<Partial<ArticleInput>>()
   const [coverImage, setCoverImage] = useState<File>()
 
-  console.log('====================', coverImage)
-
   useEffect(() => {
     let slug = ''
     if (articleInput?.title) {
