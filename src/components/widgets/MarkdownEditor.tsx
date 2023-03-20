@@ -1,7 +1,7 @@
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
-import { ChangeEvent, ClipboardEventHandler } from 'react'
+import { ChangeEvent } from 'react'
 import { onUploadImage } from '~/utils/fileUtils'
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
