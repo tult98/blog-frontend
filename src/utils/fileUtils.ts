@@ -15,7 +15,6 @@ export const onUploadImage = async ({
   setFiles: Dispatch<SetStateAction<File[] | undefined>>
 }) => {
   const files: File[] = []
-
   for (let index = 0; index < data.items.length; index += 1) {
     const file = data.files.item(index)
 
@@ -28,4 +27,13 @@ export const onUploadImage = async ({
   createPresignedUrls({
     variables: { filenames: files.map((file) => file.name) },
   })
+}
+
+export const insertImageToCaretPosition = (
+  markdown: string,
+  caretPosition: number,
+  filename: string,
+  url: string,
+): string => {
+  return `${markdown.slice(0, caretPosition)}![${filename}](${url})${markdown.slice(caretPosition)}`
 }
