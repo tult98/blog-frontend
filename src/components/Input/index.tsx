@@ -1,34 +1,18 @@
-import { ChangeEvent } from 'react'
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form'
 
 interface Props {
   type: string
-  name: string
   id: string
   label?: string
   placeholder?: string
-  value: string
   icon?: JSX.Element
-  error?: string
+  error?: FieldError
   inputStyle?: string
   isDisable?: boolean
-  onValidate: (event: ChangeEvent<HTMLInputElement>) => void
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  register: UseFormRegisterReturn
 }
 
-const Input = ({
-  type,
-  name,
-  id,
-  label,
-  placeholder,
-  value,
-  icon,
-  error,
-  inputStyle,
-  isDisable = false,
-  onValidate,
-  onChange,
-}: Props) => {
+const Input = ({ type, id, label, placeholder, icon, error, inputStyle, isDisable = false, register }: Props) => {
   return (
     <>
       <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600 form-control">
@@ -40,21 +24,18 @@ const Input = ({
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">{icon}</div>
 
         <input
-          type={type}
-          name={name}
+          {...register} // return onChange, onBur, name, ref
           id={id}
+          type={type}
+          disabled={isDisable}
           placeholder={placeholder}
           className={`${
             inputStyle ??
             'block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600'
           }`}
-          value={value}
-          disabled={isDisable}
-          onBlur={onValidate}
-          onChange={onChange}
         />
       </div>
-      <p className="error-message">{error}</p>
+      <p className="error-message">{error?.message}</p>
     </>
   )
 }

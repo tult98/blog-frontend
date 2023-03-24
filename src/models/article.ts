@@ -1,3 +1,4 @@
+import * as yup from 'yup'
 import { ICategory } from '~/models/category'
 import { ITag } from '~/models/tag'
 
@@ -19,3 +20,11 @@ export interface ArticleInput {
   content: string
   coverImage?: string
 }
+
+export const articleSchema = yup.object({
+  title: yup.string().required(),
+  slug: yup.string().required(),
+  thumbnail: yup.string().required(),
+  preface: yup.string().required(),
+  content: yup.string().required(),
+})

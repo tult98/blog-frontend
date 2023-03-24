@@ -16,8 +16,8 @@ const MarkdownEditor = ({ markdown, onChange }: Props) => {
   // @ts-expect-error
   const [mutate, { data, loading, error }] =
     useMutation<{ createPresignedUrls: { presignedUrls: string[] } }>(CREATE_PRESIGNED_URLS)
-  const [files, setFiles] = useState<File[]>()
   const markdownRef = useRef<HTMLTextAreaElement>()
+  const [files, setFiles] = useState<File[]>()
   const [caretPosition, setCaretPosition] = useState<number>(0)
   const [isMdEditorLoaded, setIsMDeditorLoaded] = useState<boolean>(false)
 

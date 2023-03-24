@@ -1,14 +1,30 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ChangeEvent, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Input from '~/components/Input'
 import FileInput from '~/components/Input/FileInput'
 import MarkdownEditor from '~/components/widgets/MarkdownEditor'
-import { ArticleInput } from '~/models/article'
+import { ArticleInput, articleSchema } from '~/models/article'
 import { IMAGE_EXTENSIONS } from '~/utils/fileUtils'
 
+type FormData = {
+  title: string
+  thumbnail: string
+  slug: string
+  preface: string
+  content: string
+}
+
 const ArticleForm = () => {
-  const [errors, setErrors] = useState<Record<string, string>>()
+  // const [errors, setErrors] = useState<Record<string, string>>()
   const [articleInput, setArticleInput] = useState<Partial<ArticleInput>>()
+  // @ts-expect-error
   const [coverImage, setCoverImage] = useState<File>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ mode: 'all', resolver: yupResolver(articleSchema) })
 
   useEffect(() => {
     let slug = ''
@@ -20,26 +36,6 @@ const ArticleForm = () => {
       slug,
     })
   }, [articleInput?.title])
-
-  const onValidate = (name: string, value: string, shouldUpdateState = true) => {
-    const newErrors = { ...errors }
-    if (!value) {
-      newErrors[name] = 'This field is required.'
-    } else {
-      delete newErrors[name]
-    }
-    if (shouldUpdateState) {
-      setErrors(newErrors)
-    }
-    return newErrors
-  }
-
-  const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setArticleInput({
-      ...articleInput,
-      [event.target.name]: event.target.value,
-    })
-  }
 
   const onChangeMarkdown = (value?: string, event?: ChangeEvent<HTMLTextAreaElement>) => {
     if (value) {
@@ -61,54 +57,54 @@ const ArticleForm = () => {
     }
   }
 
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
   return (
     <div className="flex flex-col w-full pb-12 space-y-4">
-      <Input
-        type="text"
-        name="title"
-        id="title"
-        value={articleInput?.title ?? ''}
-        label="Title"
-        placeholder="Enter your title"
-        inputStyle="w-full input input-bordered focus:outline-none"
-        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
-        onChange={onChange}
-        error={errors?.title}
-      />
-      <FileInput label="Cover image" accept={IMAGE_EXTENSIONS} onChange={onSelectImage} />
-      <Input
-        type="text"
-        name="slug"
-        id="slug"
-        value={articleInput?.slug ?? ''}
-        label="Slug"
-        placeholder="Slug will be updated base on the title"
-        inputStyle="w-full input input-bordered focus:outline-none"
-        isDisable={true}
-        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
-        onChange={onChange}
-      />
-      <Input
-        type="text"
-        name="Preface"
-        id="preface"
-        value={articleInput?.preface ?? ''}
-        label="Preface"
-        placeholder="Describe about the article shortly"
-        inputStyle="w-full input input-bordered focus:outline-none"
-        onValidate={(event: ChangeEvent<HTMLInputElement>) => onValidate(event.target.name, event.target.value)}
-        onChange={onChange}
-        error={errors?.preface}
-      />
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Content</span>
-        </label>
-        <MarkdownEditor markdown={articleInput?.content ?? ''} onChange={onChangeMarkdown} />
-      </div>
-      <div className="self-end mt-8">
-        <button className="btn btn-primary">Create</button>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          type="text"
+          id="title"
+          label="Title"
+          placeholder="Enter your title"
+          inputStyle="w-full input input-bordered focus:outline-none"
+          register={register('title', { required: true })}
+          error={errors?.title}
+        />
+        <FileInput label="Cover image" accept={IMAGE_EXTENSIONS} onChange={onSelectImage} />
+        <Input
+          type="text"
+          id="slug"
+          label="Slug"
+          placeholder="Slug will be updated base on the title"
+          inputStyle="w-full input input-bordered focus:outline-none"
+          isDisable={true}
+          register={register('slug', { required: true })}
+          error={errors?.slug}
+        />
+        <Input
+          type="text"
+          id="preface"
+          label="Preface"
+          placeholder="Describe about the article shortly"
+          inputStyle="w-full input input-bordered focus:outline-none"
+          register={{ ...register('preface', { required: true }) }}
+          error={errors?.preface}
+        />
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Content</span>
+          </label>
+          <MarkdownEditor markdown={articleInput?.content ?? ''} onChange={onChangeMarkdown} />
+        </div>
+        <div className="self-end mt-8">
+          <button className="btn btn-primary" type="submit">
+            Create
+          </button>
+        </div>
+      </form>
     </div>
   )
 }
