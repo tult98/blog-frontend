@@ -19,7 +19,13 @@ export interface IUserInput extends Omit<IUser, 'role' | 'createdAt' | 'updatedA
 
 export const loginSchema = yup.object({
   email: yup.string().required('Email is required.').email('Email is invalid.'),
-  password: yup.string().required('Password is required.').matches(PASSWORD_REGEX),
+  password: yup
+    .string()
+    .required('Password is required.')
+    .matches(
+      PASSWORD_REGEX,
+      'Password must contains at least 8 characters, one lower case, one upper case and one number.',
+    ),
 })
 
 export const registerSchema = yup.object({

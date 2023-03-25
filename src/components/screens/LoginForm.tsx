@@ -1,73 +1,33 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { signIn, SignInResponse } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
-import Input from '~/components/Input'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
+import Input from '~/components/Input'
+import { IUserInput, loginSchema } from '~/models/user'
 import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
-import { isValidEmail } from '~/utils/validators'
 
 const LoginForm = () => {
-  const [account, setAccount] = useState<Record<string, string>>({
-    email: '',
-    password: '',
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
   const setNotification = useSetRecoilState(notificationState)
   const router = useRouter()
   const [submitting, setSubmitting] = useState<boolean>(false)
   const [serverError, setServerError] = useState<string>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Pick<IUserInput, 'email' | 'password'>>({
+    mode: 'all',
+    resolver: yupResolver(loginSchema),
+  })
 
-  const validateEmail = (email: string, shouldUpdateErrors = true) => {
-    const newErrors = { ...errors }
-    if (!email) {
-      newErrors.email = 'Please enter your email address.'
-    } else if (!isValidEmail(email)) {
-      newErrors.email = 'This is invalid email address.'
-    } else {
-      delete newErrors.email
-    }
-    if (shouldUpdateErrors) {
-      setErrors(newErrors)
-    }
-    return newErrors
-  }
-
-  const validatePassword = (password: string, shouldUpdateErrors = true) => {
-    const newErrors = { ...errors }
-    if (!password) {
-      newErrors.password = 'This field is required.'
-    } else {
-      delete newErrors.password
-    }
-    if (shouldUpdateErrors) {
-      setErrors(newErrors)
-    }
-    return newErrors
-  }
-
-  const onChangeText = (event: ChangeEvent<HTMLInputElement>) => {
-    const newAccount = { ...account }
-    newAccount[event.target.name] = event.target.value
-    setAccount(newAccount)
-  }
-
-  const onSubmit = async () => {
-    let newErrors: Record<string, string> = {}
-    newErrors = {
-      ...newErrors,
-      ...validateEmail(account.email, false),
-      ...validatePassword(account.password, false),
-    }
-    if (Object.keys(newErrors)?.length) {
-      setErrors(newErrors)
-      return
-    }
-    // no error
+  const onSubmit = async (data: Pick<IUserInput, 'email' | 'password'>) => {
     setSubmitting(true)
     const { error, ok, url } = (await signIn('credentials', {
-      ...account,
+      ...data,
       redirect: false,
       callbackUrl: '/',
     })) as SignInResponse
@@ -105,7 +65,7 @@ const LoginForm = () => {
         <div className="relative max-w-md mx-auto mt-8 md:mt-16">
           <div className="overflow-hidden bg-white rounded-md shadow-md">
             <div className="px-4 py-6 sm:px-8 sm:py-7">
-              <div className="space-y-5">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div>
                   <label htmlFor="email" className="text-base font-medium text-gray-900">
                     {' '}
@@ -113,10 +73,8 @@ const LoginForm = () => {
                   </label>
                   <Input
                     type="email"
-                    name="email"
                     id="email"
                     placeholder="Enter email to get started"
-                    value={account.email}
                     icon={
                       <svg
                         className="w-5 h-5"
@@ -133,9 +91,8 @@ const LoginForm = () => {
                         />
                       </svg>
                     }
+                    register={register('email')}
                     error={errors?.email}
-                    onValidate={(event: ChangeEvent<HTMLInputElement>) => validateEmail(event.target.value)}
-                    onChange={onChangeText}
                   />
                 </div>
 
@@ -157,10 +114,8 @@ const LoginForm = () => {
                   </div>
                   <Input
                     type="password"
-                    name="password"
                     id="password"
                     placeholder="Enter your password"
-                    value={account.password}
                     icon={
                       <svg
                         className="w-5 h-5"
@@ -177,19 +132,17 @@ const LoginForm = () => {
                         />
                       </svg>
                     }
-                    onValidate={(event: ChangeEvent<HTMLInputElement>) => validatePassword(event.target.value)}
-                    onChange={onChangeText}
+                    register={register('password')}
                     error={errors?.password}
                   />
                 </div>
 
                 <div>
                   <button
-                    type="button"
+                    type="submit"
                     className={`inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700 ${
                       submitting ? 'opacity-60' : ''
                     }`}
-                    onClick={onSubmit}
                   >
                     {submitting && (
                       <LoadingIndicator
@@ -216,7 +169,7 @@ const LoginForm = () => {
                     </Link>
                   </p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
