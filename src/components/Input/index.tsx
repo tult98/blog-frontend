@@ -4,6 +4,7 @@ interface Props {
   type: string
   id: string
   label?: string
+  labelStyle?: string
   placeholder?: string
   icon?: JSX.Element
   error?: FieldError
