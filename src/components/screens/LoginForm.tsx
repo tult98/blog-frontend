@@ -20,7 +20,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Pick<IUserInput, 'email' | 'password'>>({
-    mode: 'all',
+    mode: 'onBlur',
     resolver: yupResolver(loginSchema),
   })
 

@@ -24,7 +24,7 @@ const ArticleForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ mode: 'all', resolver: yupResolver(articleSchema) })
+  } = useForm<FormData>({ mode: 'onBlur', resolver: yupResolver(articleSchema) })
 
   useEffect(() => {
     let slug = ''

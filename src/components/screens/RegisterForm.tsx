@@ -20,7 +20,7 @@ const RegisterForm = (): JSX.Element => {
     getValues,
     formState: { errors },
   } = useForm<IUserInput>({
-    mode: 'all',
+    mode: 'onBlur',
     resolver: yupResolver(registerSchema),
   })
 
