@@ -68,9 +68,7 @@ const MarkdownEditor = ({ value, onChange }: Props) => {
         setIsMDeditorLoaded(true)
       }
     }
-    if (value) {
-      onChange(value)
-    }
+    onChange(value ?? '')
   }
 
   const onUpdateCaretPosition = () => {
