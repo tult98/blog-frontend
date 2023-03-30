@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { REQUIRED_ERROR_MESSAGE } from '~/utils/validators'
 export interface ICategory {
   id: string
   title: string
@@ -10,8 +11,12 @@ export interface IMeta {
   total: number
 }
 
-export const categorySchema = yup.object({
-  title: yup.string().required('Title is required.'),
-  slug: yup.string().required('Slug is required'),
-  description: yup.string().required('Description is required.'),
-})
+export const categorySchema = yup
+  .object({
+    title: yup.string().required(REQUIRED_ERROR_MESSAGE),
+    slug: yup.string().required(REQUIRED_ERROR_MESSAGE),
+    description: yup.string().required(REQUIRED_ERROR_MESSAGE),
+  })
+  .required()
+
+export type CategoryData = yup.InferType<typeof categorySchema>

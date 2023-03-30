@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import Input from '~/components/Input'
-import { IUserInput, loginSchema } from '~/models/user'
+import { CredentialFormData, IUserInput, loginSchema } from '~/models/user'
 import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 
 const LoginForm = () => {
@@ -19,7 +19,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Pick<IUserInput, 'email' | 'password'>>({
+  } = useForm<CredentialFormData>({
     mode: 'onBlur',
     resolver: yupResolver(loginSchema),
   })

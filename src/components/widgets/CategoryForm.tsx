@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '~/components/Input'
-import { categorySchema, ICategory } from '~/models/category'
+import { CategoryData, categorySchema, ICategory } from '~/models/category'
 
 type OPERATOR = 'create' | 'update'
 
@@ -23,7 +23,7 @@ const CategoryForm = ({ category, isSubmitting, operator, onSubmit }: Props) => 
     setValue,
     watch,
     formState: { errors },
-  } = useForm<Omit<ICategory, 'id'>>({
+  } = useForm<CategoryData>({
     mode: 'onBlur',
     resolver: yupResolver(categorySchema),
     defaultValues: category,
@@ -36,7 +36,7 @@ const CategoryForm = ({ category, isSubmitting, operator, onSubmit }: Props) => 
     }
   }, [watchTitle])
 
-  const onSubmitForm = (data: Omit<ICategory, 'id'>) => {
+  const onSubmitForm = (data: CategoryData) => {
     const categoryInput = { title: data.title, description: data.description }
     onSubmit({
       variables:

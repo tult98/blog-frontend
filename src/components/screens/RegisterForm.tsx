@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import Input from '~/components/Input'
-import { IUserInput, registerSchema } from '~/models/user'
+import { IUserInput, registerSchema, RegisterFormData } from '~/models/user'
 import { REGISTER } from '~/mutations/auth'
 import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 
@@ -19,7 +19,7 @@ const RegisterForm = (): JSX.Element => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<IUserInput>({
+  } = useForm<RegisterFormData>({
     mode: 'onBlur',
     resolver: yupResolver(registerSchema),
   })
@@ -53,7 +53,7 @@ const RegisterForm = (): JSX.Element => {
     }
   }, [data, setNotification])
 
-  const onSubmit = (data: IUserInput) => {
+  const onSubmit = (data: RegisterFormData) => {
     //NOTE:  don't need to send confirmPassword to backend
     const account = { ...data } as Partial<IUserInput>
     delete account.confirmPassword
