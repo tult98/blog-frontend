@@ -1,60 +1,32 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Input from '~/components/Input'
 import FileInput from '~/components/Input/FileInput'
 import MarkdownEditor from '~/components/widgets/MarkdownEditor'
-import { ArticleInput, articleSchema } from '~/models/article'
+import { ArticleData, articleSchema } from '~/models/article'
 import { IMAGE_EXTENSIONS } from '~/utils/fileUtils'
 
-type FormData = {
-  title: string
-  thumbnail: string
-  slug: string
-  preface: string
-  content: string
-}
-
 const ArticleForm = () => {
-  // const [errors, setErrors] = useState<Record<string, string>>()
-  const [articleInput, setArticleInput] = useState<Partial<ArticleInput>>()
-  // @ts-expect-error
-  const [coverImage, setCoverImage] = useState<File>()
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
-  } = useForm<FormData>({ mode: 'onBlur', resolver: yupResolver(articleSchema) })
+  } = useForm<ArticleData>({
+    mode: 'onBlur',
+    resolver: yupResolver(articleSchema),
+  })
+  const watchContent = watch('content')
+  const watchTitle = watch('title')
 
   useEffect(() => {
-    let slug = ''
-    if (articleInput?.title) {
-      slug = articleInput.title.trim().toLowerCase().split(' ').join('-')
-    }
-    setArticleInput({
-      ...articleInput,
-      slug,
-    })
-  }, [articleInput?.title])
+    setValue('slug', watchTitle?.toLowerCase().trim().split(' ').join('-'))
+  }, [watchTitle])
 
-  const onChangeMarkdown = (value?: string, event?: ChangeEvent<HTMLTextAreaElement>) => {
-    if (value) {
-      setArticleInput({
-        ...articleInput,
-        content: value,
-      })
-    } else if (event) {
-      setArticleInput({
-        ...articleInput,
-        content: event.target.value,
-      })
-    }
-  }
-
-  const onSelectImage = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setCoverImage(event.target.files[0])
-    }
+  const onChangeMarkdown = (value: string) => {
+    setValue('content', value)
   }
 
   const onSubmit = (data: any) => {
@@ -73,7 +45,12 @@ const ArticleForm = () => {
           register={register('title', { required: true })}
           error={errors?.title}
         />
-        <FileInput label="Cover image" accept={IMAGE_EXTENSIONS} onChange={onSelectImage} />
+        <FileInput
+          label="Cover image"
+          accept={IMAGE_EXTENSIONS}
+          register={register('thumbnail')}
+          error={errors?.thumbnail}
+        />
         <Input
           type="text"
           id="slug"
@@ -97,7 +74,8 @@ const ArticleForm = () => {
           <label className="label">
             <span className="label-text">Content</span>
           </label>
-          <MarkdownEditor markdown={articleInput?.content ?? ''} onChange={onChangeMarkdown} />
+          <MarkdownEditor value={watchContent} onChange={onChangeMarkdown} />
+          {errors?.content && <p className="error-message">{errors?.content?.message}</p>}
         </div>
         <div className="self-end mt-8">
           <button className="btn btn-primary" type="submit">

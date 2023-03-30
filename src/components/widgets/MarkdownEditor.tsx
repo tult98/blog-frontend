@@ -2,17 +2,17 @@ import { useMutation } from '@apollo/client'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CREATE_PRESIGNED_URLS } from '~/mutations/file'
 import { insertImageToCaretPosition, onUploadImage } from '~/utils/fileUtils'
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 interface Props {
-  markdown: string
-  onChange: (value?: string, event?: ChangeEvent<HTMLTextAreaElement>) => void
+  onChange: (value: string) => void
+  value: string
 }
 
-const MarkdownEditor = ({ markdown, onChange }: Props) => {
+const MarkdownEditor = ({ value, onChange }: Props) => {
   // @ts-expect-error
   const [mutate, { data, loading, error }] =
     useMutation<{ createPresignedUrls: { presignedUrls: string[] } }>(CREATE_PRESIGNED_URLS)
@@ -36,12 +36,7 @@ const MarkdownEditor = ({ markdown, onChange }: Props) => {
         // it cannot be re-uploaded when caretPosition is changed
         setFiles(undefined)
         onChange(
-          insertImageToCaretPosition(
-            markdown,
-            caretPosition,
-            files[index].name.split('.')[0],
-            results.url.split('?')[0],
-          ),
+          insertImageToCaretPosition(value, caretPosition, files[index].name.split('.')[0], results.url.split('?')[0]),
         )
       } catch (error: unknown) {
         console.error('Failed to upload the images.', error)
@@ -64,7 +59,7 @@ const MarkdownEditor = ({ markdown, onChange }: Props) => {
     }
   }, [isMdEditorLoaded])
 
-  const onChangeMarkdown = (value?: string, event?: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeMarkdown = (value?: string) => {
     if (!markdownRef.current) {
       const mdEditor = document.getElementById('markdown-editor') as HTMLTextAreaElement | null
       if (mdEditor) {
@@ -75,8 +70,6 @@ const MarkdownEditor = ({ markdown, onChange }: Props) => {
     }
     if (value) {
       onChange(value)
-    } else if (event) {
-      onChange(undefined, event)
     }
   }
 
@@ -88,7 +81,7 @@ const MarkdownEditor = ({ markdown, onChange }: Props) => {
 
   return (
     <MDEditor
-      value={markdown}
+      value={value}
       textareaProps={{
         id: 'markdown-editor',
       }}

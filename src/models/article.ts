@@ -26,9 +26,8 @@ export const articleSchema = yup
   .object({
     title: yup.string().required(REQUIRED_ERROR_MESSAGE),
     slug: yup.string(),
-    thumbnail: yup.mixed().test('required', 'You need to provide a file', (file) => {
-      // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded
-      if (file) return true
+    thumbnail: yup.mixed().test('required', REQUIRED_ERROR_MESSAGE, (file: any) => {
+      if (file[0]) return true
       return false
     }),
     preface: yup.string().required(REQUIRED_ERROR_MESSAGE),
