@@ -4,7 +4,7 @@ import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { CREATE_PRESIGNED_URLS } from '~/mutations/file'
-import { insertImageToCaretPosition, onUploadImage } from '~/utils/fileUtils'
+import { insertTextToCaretPosition, onUploadImage } from '~/utils/fileUtils'
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 interface Props {
@@ -29,15 +29,17 @@ const MarkdownEditor = ({ value, onChange }: Props) => {
     const { presignedUrls } = data.createPresignedUrls
     presignedUrls.forEach(async (url, index) => {
       try {
+        const insertedText = `![Uploading ${files[index].name}…]()`
+        const newMarkdownValue = insertTextToCaretPosition(value, caretPosition, insertedText)
+        onChange(newMarkdownValue)
         const results = await fetch(url, {
           method: 'PUT',
           body: files[index],
         })
-        // it cannot be re-uploaded when caretPosition is changed
+        // prevent re-uploaded when caretPosition is changed
         setFiles(undefined)
-        onChange(
-          insertImageToCaretPosition(value, caretPosition, files[index].name.split('.')[0], results.url.split('?')[0]),
-        )
+        const replacedText = `![${files[index].name}](${results.url.split('?')[0]})`
+        onChange(newMarkdownValue.replace(insertedText, replacedText))
       } catch (error: unknown) {
         console.error('Failed to upload the images.', error)
       }

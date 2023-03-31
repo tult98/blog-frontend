@@ -29,11 +29,13 @@ export const onUploadImage = async ({
   })
 }
 
-export const insertImageToCaretPosition = (
+export const insertTextToCaretPosition = (
   markdown: string,
   caretPosition: number,
-  filename: string,
-  url: string,
+  // filename: string,
+  // url: string,
+  text: string,
 ): string => {
-  return `${markdown.slice(0, caretPosition)}![${filename}](${url})${markdown.slice(caretPosition)}`
+  // return `${markdown.slice(0, caretPosition)}![${filename}](${url})${markdown.slice(caretPosition)}`
+  return `${markdown.slice(0, caretPosition)}${text}${markdown.slice(caretPosition)}`
 }
