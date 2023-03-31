@@ -35,4 +35,4 @@ export const articleSchema = yup
   })
   .required()
 
-export type ArticleData = yup.InferType<typeof articleSchema>
+export type ArticleFormData = yup.InferType<typeof articleSchema>

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import Input from '~/components/Input'
 import FileInput from '~/components/Input/FileInput'
 import MarkdownEditor from '~/components/widgets/MarkdownEditor'
-import { ArticleData, articleSchema } from '~/models/article'
+import { ArticleFormData, articleSchema } from '~/models/article'
 import { IMAGE_EXTENSIONS } from '~/utils/fileUtils'
 
 const ArticleForm = () => {
@@ -14,7 +14,7 @@ const ArticleForm = () => {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<ArticleData>({
+  } = useForm<ArticleFormData>({
     mode: 'onBlur',
     resolver: yupResolver(articleSchema),
   })
@@ -29,7 +29,7 @@ const ArticleForm = () => {
     setValue('content', value)
   }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ArticleFormData) => {
     console.log(data)
   }
 
@@ -42,7 +42,7 @@ const ArticleForm = () => {
           label="Title"
           placeholder="Enter your title"
           inputStyle="w-full input input-bordered focus:outline-none"
-          register={register('title', { required: true })}
+          register={register('title')}
           error={errors?.title}
         />
         <FileInput
@@ -58,7 +58,7 @@ const ArticleForm = () => {
           placeholder="Slug will be updated base on the title"
           inputStyle="w-full input input-bordered focus:outline-none"
           isDisable={true}
-          register={register('slug', { required: true })}
+          register={register('slug')}
           error={errors?.slug}
         />
         <Input
@@ -67,7 +67,7 @@ const ArticleForm = () => {
           label="Preface"
           placeholder="Describe about the article shortly"
           inputStyle="w-full input input-bordered focus:outline-none"
-          register={{ ...register('preface', { required: true }) }}
+          register={{ ...register('preface') }}
           error={errors?.preface}
         />
         <div className="form-control">
