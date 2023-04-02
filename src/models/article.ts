@@ -7,6 +7,7 @@ export interface IPost {
   id: string
   title: string
   slug: string
+  preface: string
   cover_image: string
   content: string
   updated_at: Date | string

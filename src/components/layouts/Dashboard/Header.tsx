@@ -1,37 +1,21 @@
 import Image from 'next/image'
+import Icon from '~/components/elements/Icon'
 
 const Header = () => {
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1 hover:cursor-pointer">
+    <div className="fixed top-0 z-10 justify-end sm:justify-center navbar bg-base-100">
+      <div className="absolute left-8 hover:cursor-pointer">
         <Image src="/blog-logo.png" alt="blog-logo" width={120} height={100} />
       </div>
-      <div className="flex-none gap-2">
-        <div className="form-control">
-          <input type="text" placeholder="Type to search" className="input input-bordered focus:outline-none" />
-        </div>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <Image src="/avatar.jpg" width={300} height={300} alt="avatar" />
-            </div>
-          </label>
-          <ul tabIndex={0} className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
+      <div className="relative py-1.5 form-control hidden sm:inline-block">
+        <Icon name="search" style="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-4 text-[#3E34F3]" />
+        <input
+          type="text"
+          placeholder="What do you want to find?"
+          className="pl-12 pr-4 rounded input input-bordered focus:outline-none min-w-[15rem] lg:min-w-[30rem]"
+        />
       </div>
+      <Icon name="menu" style="w-5 h-5 sm:hidden" />
     </div>
   )
 }

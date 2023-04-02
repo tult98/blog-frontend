@@ -28,6 +28,7 @@ module.exports = {
       },
       screens: {
         'max-md': { max: '767px' },
+        'max-xl': { max: '1220px' },
       },
       animation: {
         fadeInButton: 'fadeInButton 0.4s ease-in-out forwards',
@@ -80,6 +81,7 @@ module.exports = {
       fontFamily: {
         calibre: ['Calibre'],
         sfmono: ['SF Mono'],
+        sourceSansPro: ['Source Sans Pro', 'sans-serif'],
       },
       fontSize: {
         small: '0.8125rem',

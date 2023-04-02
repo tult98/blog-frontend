@@ -9,39 +9,22 @@ interface Props {
 const Post = ({ post }: Props) => {
   return (
     <div>
-      <Image
-        src={post.cover_image}
-        layout="intrinsic"
-        alt="cover image"
-        width={880}
-        height={400}
-        className="rounded-lg"
-      />
-      <article className="flex flex-col items-center p-4 text-slate-600">
-        <div className="max-w-screen-md">
-          <h1 className="mt-2 text-xl font-bold text-slate-900">{post.title}</h1>
-          <p className="text-sm text-slate-400">
-            {post.category && (
-              <span className="mr-1">
-                In{' '}
-                <span className="underline decoration-sky-500 text-slate-700 hover:cursor-pointer">
-                  {post.category?.title}
-                </span>
-              </span>
-            )}
-            {post.tags?.length && (
-              <span>
-                Tags{' '}
-                <span className="underline decoration-sky-500 text-slate-700 hover:cursor-pointer">
-                  {post.tags?.map((tag) => tag.name).join(',')}
-                </span>
-              </span>
-            )}
-            <span className="ml-1">{formatTimeFromUTC(new Date(post.updated_at), 'MMMM-dd-yyyy')}</span>
-          </p>
-          <p className="my-3.5">{post.content}</p>
-        </div>
-      </article>
+      <div className="relative w-full h-40 mb-6">
+        <Image src={post.cover_image} alt="" className="rounded" fill={true} />
+      </div>
+      <p className="text-[#959DAA] uppercase mb-1 tracking-[0.125em] text-sm leading-5">
+        {formatTimeFromUTC(new Date(post.updated_at), 'MMMM dd, yyyy')}
+      </p>
+      <p className="mb-2 text-xl font-bold">{post.title}</p>
+      <div className="flex">
+        <a
+          href=""
+          className="inline-block m-1 px-1.5 py-px uppercase border border-[#d9cfff] hover:bg-[#ebe6ff80] hover:border-[#7156d9] rounded text-[#3f20ba] leading-[18px] text-xs"
+        >
+          {post.category?.title}
+        </a>
+      </div>
+      <p className="pt-4 pb-6 text-sm leading-[1.5] text-[#959DAA]">{post.preface}</p>
     </div>
   )
 }

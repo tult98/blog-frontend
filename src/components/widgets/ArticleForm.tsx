@@ -6,18 +6,17 @@ import { useSetRecoilState } from 'recoil'
 import Input from '~/components/Input'
 import FileInput from '~/components/Input/FileInput'
 import MarkdownEditor from '~/components/widgets/MarkdownEditor'
-import { ArticleFormData, ArticleInstance, articleSchema } from '~/models/article'
-import { CREATE_ARTICLE } from '~/mutations/article'
+import { ArticleFormData, articleSchema } from '~/models/article'
 import { CREATE_PRESIGNED_URLS } from '~/mutations/file'
-import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
+import { NOTIFICATION_TYPE, notificationState } from '~/recoil/atoms/notificationState'
 import { IMAGE_EXTENSIONS } from '~/utils/fileUtils'
 
 const ArticleForm = () => {
   const setNotificationInfo = useSetRecoilState(notificationState)
   const [mutate, { data, loading, error }] =
     useMutation<{ createPresignedUrls: { presignedUrls: string[] } }>(CREATE_PRESIGNED_URLS)
-  const [createArticleFunction, {}] = useMutation<{ createArticle: ArticleInstance }>(CREATE_ARTICLE)
-
+  // const [createArticleFunction, {}] = useMutation<{ createArticle: ArticleInstance }>(CREATE_ARTICLE)
+  // @ts-expect-error
   const [coverUrl, setCoverUrl] = useState<string>()
   const [isCoverUploading, setIsCoverUploading] = useState<boolean>(false)
   const {
@@ -30,13 +29,16 @@ const ArticleForm = () => {
     mode: 'onBlur',
     resolver: yupResolver(articleSchema),
   })
+  // @ts-expect-error
   const [watchTitle, watchContent, watchThumbnail] = watch(['title', 'content', 'thumbnail'])
 
   const onChangeMarkdown = (value: string) => {
     setValue('content', value)
   }
 
-  const onSubmit = (data: ArticleFormData) => {}
+  const onSubmit = (data: ArticleFormData) => {
+    console.log(data)
+  }
 
   useEffect(() => {
     if ((watchThumbnail as FileList)?.length) {
