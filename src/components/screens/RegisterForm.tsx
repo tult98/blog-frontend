@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { signIn } from 'next-auth/react'
+// import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -17,7 +17,7 @@ const RegisterForm = (): JSX.Element => {
   const {
     register,
     handleSubmit,
-    getValues,
+    // getValues,
     formState: { errors },
   } = useForm<RegisterFormData>({
     mode: 'onBlur',
@@ -44,12 +44,12 @@ const RegisterForm = (): JSX.Element => {
         type: NOTIFICATION_TYPE.INFORMING,
         title: 'You account has been created! Logging you in...',
       })
-      const data = getValues()
-      signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        callbackUrl: '/',
-      })
+      // const data = getValues()
+      // signIn('credentials', {
+      //   email: data.email,
+      //   password: data.password,
+      //   callbackUrl: '/',
+      // })
     }
   }, [data, setNotification])
 

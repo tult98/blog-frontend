@@ -1,20 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { signIn, SignInResponse } from 'next-auth/react'
+// import { signIn, SignInResponse } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil'
 import LoadingIndicator from '~/components/elements/LoadingIndicator'
 import Input from '~/components/Input'
 import { CredentialFormData, IUserInput, loginSchema } from '~/models/user'
-import { notificationState, NOTIFICATION_TYPE } from '~/recoil/atoms/notificationState'
 
 const LoginForm = () => {
-  const setNotification = useSetRecoilState(notificationState)
-  const router = useRouter()
+  // const setNotification = useSetRecoilState(notificationState)
+  // const router = useRouter()
   const [submitting, setSubmitting] = useState<boolean>(false)
-  const [serverError, setServerError] = useState<string>()
+  // const [serverError, setServerError] = useState<string>()
   const {
     register,
     handleSubmit,
@@ -25,33 +22,34 @@ const LoginForm = () => {
   })
 
   const onSubmit = async (data: Pick<IUserInput, 'email' | 'password'>) => {
+    console.log(data)
     setSubmitting(true)
-    const { error, ok, url } = (await signIn('credentials', {
-      ...data,
-      redirect: false,
-      callbackUrl: '/',
-    })) as SignInResponse
+    // const { error, ok, url } = (await signIn('credentials', {
+    //   ...data,
+    //   redirect: false,
+    //   callbackUrl: '/',
+    // })) as SignInResponse
 
-    if (ok) {
-      setNotification({
-        isShow: true,
-        type: NOTIFICATION_TYPE.INFORMING,
-        title: 'You have been logged in.',
-        autoClose: true,
-      })
-      router.push(url as string)
-    }
-    if (error) {
-      setNotification({
-        isShow: true,
-        type: NOTIFICATION_TYPE.DANGEROUS,
-        title: 'Login failed',
-        message: 'Cannot log in into your account.',
-        autoClose: true,
-      })
-      setServerError('Email or password is incorrect.')
-    }
-    setSubmitting(false)
+    // if (ok) {
+    //   setNotification({
+    //     isShow: true,
+    //     type: NOTIFICATION_TYPE.INFORMING,
+    //     title: 'You have been logged in.',
+    //     autoClose: true,
+    //   })
+    //   router.push(url as string)
+    // }
+    // if (error) {
+    //   setNotification({
+    //     isShow: true,
+    //     type: NOTIFICATION_TYPE.DANGEROUS,
+    //     title: 'Login failed',
+    //     message: 'Cannot log in into your account.',
+    //     autoClose: true,
+    //   })
+    //   setServerError('Email or password is incorrect.')
+    // }
+    // setSubmitting(false)
   }
 
   return (
@@ -157,7 +155,7 @@ const LoginForm = () => {
                     Log in
                   </button>
                 </div>
-                {serverError && <p className="text-sm text-red-500">{serverError}</p>}
+                {/* {serverError && <p className="text-sm text-red-500">{serverError}</p>} */}
                 <div className="text-center">
                   <p className="text-base text-gray-600">
                     Don’t have an account?{' '}
