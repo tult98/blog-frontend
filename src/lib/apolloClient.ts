@@ -1,5 +1,4 @@
-import { ApolloClient, from, HttpLink, InMemoryCache, NormalizedCacheObject, StoreObject } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject, StoreObject } from '@apollo/client'
 // import { CustomSession } from 'pages/api/auth/[...nextauth]'
 import { useMemo } from 'react'
 
@@ -13,23 +12,23 @@ export enum ServerErrorCode {
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
-  const authLink = setContext(async (_, { headers }) => {
-    // const session = (await getSession()) as CustomSession | null
-    return {
-      headers: {
-        ...headers,
-        // authorization: session?.accessToken ?? '',
-      },
-    }
-  })
+  // const authLink = setContext(async (_, { headers }) => {
+  //   // const session = (await getSession()) as CustomSession | null
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       // authorization: session?.accessToken ?? '',
+  //     },
+  //   }
+  // })
 
   const httpLink = new HttpLink({
-    uri: process.env.GRAPHQL_SERVER_ENDPOINT,
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ?? 'http://localhost:4000',
   })
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([authLink, httpLink]),
+    link: httpLink,
     cache: new InMemoryCache(),
   })
 }
