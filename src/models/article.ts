@@ -1,29 +1,29 @@
 import * as yup from 'yup'
-import { ICategory } from '~/models/category'
-import { ITag } from '~/models/tag'
+import { CategoryEntityResponse } from '~/models/category'
+import { Meta, UploadFileEntityResponse } from '~/utils/common'
 import { REQUIRED_ERROR_MESSAGE } from '~/utils/validators'
 
-export interface IPost {
-  id: string
+export interface Article {
   title: string
-  slug: string
-  preface: string
-  cover_image: string
+  coverImage: UploadFileEntityResponse
   content: string
-  updated_at: Date | string
-  category?: ICategory
-  tags?: ITag[]
-}
-
-export interface ArticleInstance {
-  id: string
-  title: string
-  slug: string
+  category: CategoryEntityResponse
+  // tags
   preface: string
-  content: string
-  thumbnail: string
+  slug: string
   createdAt: Date
   updatedAt: Date
+  publishedAt: Date
+}
+
+export interface ArticleEntity {
+  id: string
+  attributes: Article
+}
+
+export interface ArticleEntityResponseCollection {
+  data: ArticleEntity[]
+  meta: Meta
 }
 
 export const articleSchema = yup

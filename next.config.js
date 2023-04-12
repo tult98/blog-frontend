@@ -4,6 +4,6 @@ module.exports = removeImports({
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['hips.hearstapps.com', 'awcdn1.ahmad.works'],
+    domains: ['localhost', 'blog-admin'], // for communication between docker container
   },
 })
