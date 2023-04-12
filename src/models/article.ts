@@ -21,6 +21,10 @@ export interface ArticleEntity {
   attributes: Article
 }
 
+export interface ArticleEntityResponse {
+  data: ArticleEntity
+}
+
 export interface ArticleEntityResponseCollection {
   data: ArticleEntity[]
   meta: Meta

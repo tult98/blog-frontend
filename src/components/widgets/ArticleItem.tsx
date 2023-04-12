@@ -6,11 +6,7 @@ interface Props {
   article: Article
 }
 
-const Article = ({ article }: Props) => {
-  console.log(
-    '====================',
-    `${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}${article.coverImage.data.attributes.url}`,
-  )
+const ArticleItem = ({ article }: Props) => {
   return (
     <div>
       <div className="relative w-full h-40 mb-6">
@@ -38,4 +34,4 @@ const Article = ({ article }: Props) => {
   )
 }
 
-export default Article
+export default ArticleItem

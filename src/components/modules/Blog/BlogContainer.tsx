@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import Article from '~/components/modules/Blog/Article'
+import Article from '~/components/widgets/ArticleItem'
 import { ArticleEntity, ArticleEntityResponseCollection } from '~/models/article'
 import { GET_ARTICLES } from '~/queries/article'
 
@@ -31,5 +31,7 @@ const BlogContainer = () => {
     </section>
   )
 }
+
+// NOTE: this should be server side rendering in the future
 
 export default BlogContainer
