@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Article } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
 
@@ -8,7 +9,7 @@ interface Props {
 
 const ArticleItem = ({ article }: Props) => {
   return (
-    <div>
+    <Link href={`/blog/${article.slug}`}>
       <div className="relative w-full mb-6 aspect-[2/1]">
         <Image
           src={`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}${article.coverImage.data.attributes.url}`}
@@ -30,7 +31,7 @@ const ArticleItem = ({ article }: Props) => {
         </a>
       </div>
       <p className="pt-4 pb-6 text-sm leading-[1.5] text-[#959DAA]">{article.preface}</p>
-    </div>
+    </Link>
   )
 }
 

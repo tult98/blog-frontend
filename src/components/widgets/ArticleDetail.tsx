@@ -14,7 +14,7 @@ const ArticleDetail = ({ article }: Props) => {
         <p className="mb-3 text-[#959DAA] uppercase tracking-[2px] leading-5 text-[13px]">
           {formatTimeFromUTC(new Date(article.publishedAt), 'MMMM dd, yyyy')}
         </p>
-        <p className="text-[56px] leading-[1.14286] font-bold text-[#2F353F]">{article.title}</p>
+        <h1>{article.title}</h1>
         <div className="flex">
           <a
             href=""
