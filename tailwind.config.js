@@ -27,6 +27,8 @@ module.exports = {
         '150px': '150px',
       },
       screens: {
+        tablet: '900px',
+        laptop: '1220px', // breakpoint for blog page
         'max-md': { max: '767px' },
         'max-xl': { max: '1220px' },
       },

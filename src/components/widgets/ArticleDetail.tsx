@@ -24,7 +24,7 @@ const ArticleDetail = ({ article }: Props) => {
           </a>
         </div>
         <p className="my-8 text-sm text-[#959DAA]">{article.preface}</p>
-        <div className="mt-4 relative h-[300px] aspect-[2/1] mb-[90px]">
+        <div className="mt-4 relative w-full h-auto aspect-[2/1] mb-[90px]">
           <Image
             src={`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}${article.coverImage.data.attributes.url}`}
             alt="cover image"

@@ -8,9 +8,9 @@ const BlogLayout = ({ children }: Props) => {
   return (
     <div className="flex flex-col items-center sourceSansPro">
       <Header />
-      <section className="grid grid-cols-1 lg:grid lg:grid-cols-12 max-w-[1220px] px-10 gap-x-20 mt-32">
-        <main className="col-span-1 lg:col-span-9">{children}</main>
-        <aside className="col-span-1 lg:col-span-3">
+      <section className="flex flex-col tablet:flex-row px-10 mt-32 max-w-[1220px]">
+        <main className="grow">{children}</main>
+        <aside className="basis-[250px] ml-0 tablet:ml-[96px] mt-8 tablet:mt-0 flex flex-col shrink-0 laptop:basis-[312px] laptop:ml-[128px]">
           <p className="uppercase tracking-[3px] leading-[1.42857] text-xl font-bold">
             Receive my new post in your inbox?
           </p>
