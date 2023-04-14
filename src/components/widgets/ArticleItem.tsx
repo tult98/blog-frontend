@@ -9,11 +9,11 @@ interface Props {
 const ArticleItem = ({ article }: Props) => {
   return (
     <div>
-      <div className="relative w-full h-40 mb-6">
+      <div className="relative w-full mb-6 aspect-[2/1]">
         <Image
           src={`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}${article.coverImage.data.attributes.url}`}
           alt=""
-          className="rounded"
+          className="object-cover rounded"
           fill={true}
         />
       </div>
