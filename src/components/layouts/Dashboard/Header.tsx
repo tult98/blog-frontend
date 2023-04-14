@@ -3,7 +3,7 @@ import Icon from '~/components/elements/Icon'
 
 const Header = () => {
   return (
-    <div className="fixed top-0 z-10 justify-end sm:justify-center navbar bg-base-100">
+    <header className="fixed top-0 z-10 justify-end sm:justify-center navbar bg-base-100">
       <div className="absolute left-8 hover:cursor-pointer">
         <Image src="/blog-logo.png" alt="blog-logo" width={120} height={100} />
       </div>
@@ -16,7 +16,7 @@ const Header = () => {
         />
       </div>
       <Icon name="menu" style="w-5 h-5 sm:hidden" />
-    </div>
+    </header>
   )
 }
 
