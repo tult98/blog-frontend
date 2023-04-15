@@ -1,31 +1,35 @@
-import type { NextPage } from 'next'
-import BlogContainer from '~/components/modules/Blog/BlogContainer'
+import type { GetStaticProps } from 'next'
+import BlogContainer, { Props } from '~/components/modules/Blog/BlogContainer'
 import TabHeader from '~/components/widgets/TabHeader'
+import { initializeApollo } from '~/lib/apolloClient'
+import { ArticleEntityResponseCollection } from '~/models/article'
+import { GET_ARTICLES } from '~/queries/article'
 
-const Home: NextPage = () => {
+const Home = ({ articles }: Props) => {
   return (
     <>
       <TabHeader name="Blogs" />
       <div className="relative flex flex-col items-center min-h-screen">
-        <BlogContainer />
+        <BlogContainer articles={articles} />
       </div>
     </>
   )
 }
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   console.log(context)
-//   return {
-//     props: {},
-//   }
-// }
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient = initializeApollo({})
+  const {
+    data: { articles },
+  } = await apolloClient.query<{ articles: ArticleEntityResponseCollection }>({
+    query: GET_ARTICLES,
+  })
 
-// export const getStaticPaths: GetStaticPaths = async (context) => {
-//   console.log(context)
-//   return {
-//     paths: [],
-//     fallback: false,
-//   }
-// }
+  return {
+    props: {
+      articles: articles.data,
+    },
+    revalidate: 60, // revalidate after 60s
+  }
+}
 
 export default Home

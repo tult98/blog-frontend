@@ -23,12 +23,9 @@ const ArticleItem = ({ article }: Props) => {
       </p>
       <p className="mb-2 text-xl font-bold">{article.title}</p>
       <div className="flex">
-        <a
-          href=""
-          className="inline-block m-1 px-1.5 py-px uppercase border border-[#d9cfff] hover:bg-[#ebe6ff80] hover:border-[#7156d9] rounded text-[#3f20ba] leading-[18px] text-xs"
-        >
+        <p className="inline-block m-1 px-1.5 py-px uppercase border border-[#d9cfff] hover:bg-[#ebe6ff80] hover:border-[#7156d9] rounded text-[#3f20ba] leading-[18px] text-xs">
           Sample category
-        </a>
+        </p>
       </div>
       <p className="pt-4 pb-6 text-sm leading-[1.5] text-[#959DAA]">{article.preface}</p>
     </Link>
