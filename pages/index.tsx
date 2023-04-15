@@ -3,8 +3,6 @@ import BlogContainer from '~/components/modules/Blog/BlogContainer'
 import TabHeader from '~/components/widgets/TabHeader'
 
 const Home: NextPage = () => {
-  // const { data, error, loading } = useQuery(ME)
-
   return (
     <>
       <TabHeader name="Blogs" />
@@ -14,5 +12,20 @@ const Home: NextPage = () => {
     </>
   )
 }
+
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   console.log(context)
+//   return {
+//     props: {},
+//   }
+// }
+
+// export const getStaticPaths: GetStaticPaths = async (context) => {
+//   console.log(context)
+//   return {
+//     paths: [],
+//     fallback: false,
+//   }
+// }
 
 export default Home

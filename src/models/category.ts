@@ -1,6 +1,3 @@
-import * as yup from 'yup'
-import { REQUIRED_ERROR_MESSAGE } from '~/utils/validators'
-
 export interface ICategory {
   id: string
   title: string
@@ -30,13 +27,3 @@ interface CategoryEntity {
 export interface CategoryEntityResponse {
   data: CategoryEntity
 }
-
-export const categorySchema = yup
-  .object({
-    title: yup.string().required(REQUIRED_ERROR_MESSAGE),
-    slug: yup.string().required(REQUIRED_ERROR_MESSAGE),
-    description: yup.string().required(REQUIRED_ERROR_MESSAGE),
-  })
-  .required()
-
-export type CategoryData = yup.InferType<typeof categorySchema>

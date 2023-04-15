@@ -1,4 +1,4 @@
-import Header from '~/components/layouts/Dashboard/Header'
+import Header from '~/components/layouts/BlogHeader/Header'
 
 interface Props {
   children: React.ReactNode
@@ -6,7 +6,7 @@ interface Props {
 
 const BlogLayout = ({ children }: Props) => {
   return (
-    <div className="flex flex-col items-center sourceSansPro">
+    <div className="flex flex-col items-center font-sourceSansPro">
       <Header />
       <section className="flex flex-col tablet:flex-row px-10 mt-32 max-w-[1220px]">
         <main className="grow">{children}</main>
@@ -26,7 +26,5 @@ const BlogLayout = ({ children }: Props) => {
     </div>
   )
 }
-
-// NOTE: this should be server side rendering in the future
 
 export default BlogLayout
