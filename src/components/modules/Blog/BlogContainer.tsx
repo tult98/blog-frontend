@@ -1,16 +1,16 @@
 import BlogLayout from '~/components/layouts/BlogLayout'
 import ArticleItem from '~/components/widgets/ArticleItem'
-import TagListNav from '~/components/widgets/TagListNav'
 import { ArticleEntity } from '~/models/article'
+import { TagEntity } from '~/models/tag'
 
 export interface Props {
   articles: ArticleEntity[]
+  tags: TagEntity[]
 }
 
-const BlogContainer = ({ articles }: Props) => {
+const BlogContainer = ({ articles, tags }: Props) => {
   return (
-    <BlogLayout>
-      <TagListNav />
+    <BlogLayout tags={tags}>
       <p className="mb-12 font-bold tracking-[3px] text-xl leading-[1.42857] text-[#2f353f]">WHAT&apos;S NEW</p>
       <div className="grid grid-cols-1 mt-16 md:grid-cols-2 lg:mt-20 gap-x-8 gap-y-8">
         {articles.map((article: ArticleEntity) => (

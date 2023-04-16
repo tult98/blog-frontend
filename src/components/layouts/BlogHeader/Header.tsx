@@ -4,7 +4,7 @@ import Icon from '~/components/elements/Icon'
 
 const Header = () => {
   return (
-    <header className="mb-[33px] sticky top-0 z-10 w-full">
+    <header className="mb-[33px] sticky top-0 z-10 w-full bg-white">
       <div className="max-w-[1220px] w-full h-[72px] px-10 grid grid-cols-4 items-center">
         <Link className="col-span-1 hover:cursor-pointer" href="/">
           <Image src="/blog-logo.png" alt="blog-logo" width={120} height={100} />
