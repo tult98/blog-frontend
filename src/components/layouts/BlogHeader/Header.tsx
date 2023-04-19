@@ -13,7 +13,7 @@ const Header = () => {
           <Icon name="search" style="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-4 text-[#3E34F3]" />
           <input
             type="text"
-            placeholder="What do you want to learn about GraphQL?"
+            placeholder="Type here to search"
             className="pl-12 pr-4 rounded input input-bordered focus:outline-none min-w-[15rem] lg:min-w-[30rem]"
           />
         </div>
