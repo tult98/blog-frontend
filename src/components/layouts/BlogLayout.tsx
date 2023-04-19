@@ -9,7 +9,7 @@ interface Props {
 
 const BlogLayout = ({ children, tags }: Props) => {
   return (
-    <div className="flex flex-col items-center font-sourceSansPro">
+    <div className="flex flex-col items-center w-full font-sourceSansPro">
       <Header />
       {tags && <TagListNav tags={tags} />}
       <section className="flex flex-col tablet:flex-row px-10 mt-12 max-w-[1220px]">
