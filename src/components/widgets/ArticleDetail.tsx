@@ -56,6 +56,7 @@ const ArticleDetail = ({ article }: Props) => {
                 />
               ),
               img: ({ node, ...props }) => <img style={{ margin: '60px 0px' }} {...props} />,
+              a: ({ node, ...props }) => <a className="text-[#7156D9] no-underline hover:underline" {...props} />,
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '')
                 return !inline && match ? (
