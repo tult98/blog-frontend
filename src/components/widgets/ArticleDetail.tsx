@@ -1,9 +1,9 @@
 import Image from 'next/image'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import BlogLayout from '~/components/layouts/BlogLayout'
 import { Article } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 // @ts-expect-error NOTE: error with type declaration of this dependency
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
@@ -41,7 +41,8 @@ const ArticleDetail = ({ article }: Props) => {
             remarkPlugins={[remarkGfm]}
             components={{
               h2: ({ node, ...props }) => <h2 className="heading-2" {...props} />,
-              ul: ({ ...props }) => (
+              h3: ({ node, ...props }) => <h3 style={{ paddingTop: '60px', paddingBottom: '32px' }} {...props} />,
+              ul: ({ node, ...props }) => (
                 <ul
                   style={
                     props.className === 'contains-task-list'
@@ -54,6 +55,7 @@ const ArticleDetail = ({ article }: Props) => {
                   {...props}
                 />
               ),
+              img: ({ node, ...props }) => <img style={{ margin: '60px 0px' }} {...props} />,
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '')
                 return !inline && match ? (
