@@ -2,6 +2,10 @@ import Image from 'next/image'
 import BlogLayout from '~/components/layouts/BlogLayout'
 import { Article } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+// @ts-expect-error NOTE: error with type declaration of this dependency
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
 interface Props {
   article: Article
@@ -32,7 +36,41 @@ const ArticleDetail = ({ article }: Props) => {
             className="object-cover object-left rounded-lg"
           />
         </div>
-        <article dangerouslySetInnerHTML={{ __html: article.content }} />
+        <article>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h2: ({ node, ...props }) => <h2 className="heading-2" {...props} />,
+              ul: ({ ...props }) => (
+                <ul
+                  style={
+                    props.className === 'contains-task-list'
+                      ? {
+                          listStyle: 'none',
+                          paddingInlineStart: '20px',
+                        }
+                      : {}
+                  }
+                  {...props}
+                />
+              ),
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                  <SyntaxHighlighter {...props} language={match[1]} PreTag="div">
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code {...props} className={className}>
+                    {children}
+                  </code>
+                )
+              },
+            }}
+          >
+            {article.content}
+          </ReactMarkdown>
+        </article>
       </>
     </BlogLayout>
   )
