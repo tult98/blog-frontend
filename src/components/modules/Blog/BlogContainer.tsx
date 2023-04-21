@@ -20,7 +20,7 @@ const BlogContainer = ({ articles, tags, pagination }: Props) => {
           <ArticleItem article={article.attributes} key={article.id} />
         ))}
       </div>
-      <Pagination currentPage={pagination.page} totalPage={pagination.pageCount} />
+      {pagination.pageCount > 1 && <Pagination currentPage={pagination.page} totalPage={pagination.pageCount} />}
     </BlogLayout>
   )
 }
