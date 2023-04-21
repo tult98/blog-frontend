@@ -1,14 +1,17 @@
 import BlogLayout from '~/components/layouts/BlogLayout'
 import ArticleItem from '~/components/widgets/ArticleItem'
+import Pagination from '~/components/widgets/Pagination'
 import { ArticleEntity } from '~/models/article'
 import { TagEntity } from '~/models/tag'
+import { IPagination } from '~/utils/common'
 
 export interface Props {
   articles: ArticleEntity[]
   tags: TagEntity[]
+  pagination: IPagination
 }
 
-const BlogContainer = ({ articles, tags }: Props) => {
+const BlogContainer = ({ articles, tags, pagination }: Props) => {
   return (
     <BlogLayout tags={tags}>
       <p className="mb-12 font-bold tracking-[3px] text-xl leading-[1.42857] text-[#2f353f]">WHAT&apos;S NEW</p>
@@ -17,6 +20,7 @@ const BlogContainer = ({ articles, tags }: Props) => {
           <ArticleItem article={article.attributes} key={article.id} />
         ))}
       </div>
+      <Pagination currentPage={pagination.page} totalPage={pagination.pageCount} />
     </BlogLayout>
   )
 }

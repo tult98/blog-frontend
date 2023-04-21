@@ -1,5 +1,5 @@
 import { CategoryEntityResponse } from '~/models/category'
-import { Meta, UploadFileEntityResponse } from '~/utils/common'
+import { IMeta, UploadFileEntityResponse } from '~/utils/common'
 
 export interface Article {
   title: string
@@ -25,5 +25,5 @@ export interface ArticleEntityResponse {
 
 export interface ArticleEntityResponseCollection {
   data: ArticleEntity[]
-  meta: Meta
+  meta: IMeta
 }

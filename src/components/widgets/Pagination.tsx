@@ -1,34 +1,47 @@
-import Icon from '~/components/elements/Icon'
-
 interface Props {
   currentPage: number
   totalPage: number
-  siblingCount?: number
+  pageRangeDisplayed?: number
 }
 
-const Pagination = ({ currentPage, totalPage }: Props) => {
+const Pagination = ({ currentPage, totalPage, pageRangeDisplayed = 5 }: Props) => {
+  const pagination = () => {
+    const items = []
+    if (totalPage < pageRangeDisplayed) {
+      for (let index = 1; index <= totalPage; index++) {
+        items.push(index)
+      }
+      return items
+    }
+    let leftSide = 1
+    let rightSide = totalPage
+    if (currentPage - Math.floor(pageRangeDisplayed / 2) < leftSide) {
+      // do nothing
+    } else {
+      leftSide =
+        totalPage - pageRangeDisplayed + 1 < currentPage - Math.floor(pageRangeDisplayed / 2)
+          ? totalPage - pageRangeDisplayed + 1
+          : currentPage - Math.floor(pageRangeDisplayed / 2)
+    }
+    for (let index = leftSide; index <= rightSide; index++) {
+      if (items.length >= pageRangeDisplayed) {
+        break
+      }
+      items.push(index)
+    }
+    return items
+  }
+
+  const items = pagination()
+
   return (
-    <div className="flex flex-row items-center space-x-2">
-      <p className="ml-2">
-        Page{' '}
-        <strong>
-          {currentPage} of {totalPage}
-        </strong>
-      </p>
-      <div className="flex flex-row items-center btn-group">
-        <button className={`btn hover:btn-active ${currentPage === 1 ? 'btn-disabled' : ''}`}>
-          <Icon name="doubleChevronLeft" style="w-4 h-4" />
-        </button>
-        <button className={`btn hover:btn-active ${currentPage === 1 ? 'btn-disabled' : ''}`}>
-          <Icon name="chevronLeft" style="w-4 h-4" />
-        </button>
-        <button className="btn hover:btn-active">{currentPage}</button>
-        <button className={`btn hover:btn-active ${currentPage === totalPage ? 'btn-disabled' : ''}`}>
-          <Icon name="doubleChevronRight" style="w-4 h-4" />
-        </button>
-        <button className={`btn hover:btn-active ${currentPage === totalPage ? 'btn-disabled' : ''}`}>
-          <Icon name="chevronRight" style="w-4 h-4" />
-        </button>
+    <div className="flex flex-row justify-center">
+      <div className="flex flex-row items-center space-x-4">
+        {items.map((item) => (
+          <p className={`font-bold ${currentPage === item ? 'text-[#7156d9]' : ''}`} key={item}>
+            {Number(item)}
+          </p>
+        ))}
       </div>
     </div>
   )

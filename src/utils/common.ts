@@ -1,12 +1,12 @@
-export type Pagination = {
+export interface IPagination {
   total: number
   page: number
   pageSize: number
   pageCount: number
 }
 
-export type Meta = {
-  pagination: Pagination
+export interface IMeta {
+  pagination: IPagination
 }
 
 interface UploadFile {

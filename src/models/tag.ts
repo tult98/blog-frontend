@@ -1,4 +1,4 @@
-import { Meta } from '~/utils/common'
+import { IMeta } from '~/utils/common'
 
 interface Tag {
   name: string
@@ -16,5 +16,5 @@ export interface TagEntity {
 
 export interface TagEntityResponseCollection {
   data: TagEntity[]
-  meta: Meta
+  meta: IMeta
 }

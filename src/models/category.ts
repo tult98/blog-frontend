@@ -7,10 +7,6 @@ export interface ICategory {
   updatedAt: Date
 }
 
-export interface IMeta {
-  total: number
-}
-
 interface Category {
   name: string
   slug: string

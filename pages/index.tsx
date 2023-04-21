@@ -7,12 +7,12 @@ import { TagEntityResponseCollection } from '~/models/tag'
 import { GET_ARTICLES } from '~/queries/article'
 import { GET_TAGS } from '~/queries/tag'
 
-const Home = ({ articles, tags }: Props) => {
+const Home = ({ articles, tags, pagination }: Props) => {
   return (
     <>
       <TabHeader name="Blogs" />
       <div className="relative flex flex-col items-center min-h-screen">
-        <BlogContainer articles={articles} tags={tags} />
+        <BlogContainer articles={articles} tags={tags} pagination={pagination} />
       </div>
     </>
   )
@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       articles: articles.data,
       tags: tags.data,
+      pagination: articles.meta.pagination,
     },
     revalidate: 60, // revalidate after 60s
   }
