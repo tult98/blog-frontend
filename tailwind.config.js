@@ -83,7 +83,7 @@ module.exports = {
       fontFamily: {
         calibre: ['Calibre'],
         sfmono: ['SF Mono'],
-        sourceSansPro: ['Source Sans Pro', 'sans-serif'],
+        sourceSansPro: ['var(--font-source-sans-pro)', 'sans-serif'],
       },
       fontSize: {
         small: '0.8125rem',

@@ -1,6 +1,33 @@
 import Header from '~/components/layouts/BlogHeader/Header'
 import TagListNav from '~/components/widgets/TagListNav'
 import { TagEntity } from '~/models/tag'
+import localFont from 'next/font/local'
+
+const font = localFont({
+  src: [
+    {
+      path: './../../../public/fonts/SourceSansPro-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './../../../public/fonts/SourceSansPro-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './../../../public/fonts/SourceSansPro-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './../../../public/fonts/SourceSansPro-Italic.ttf',
+      weight: '400',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-source-sans-pro',
+})
 
 interface Props {
   children: React.ReactNode
@@ -9,7 +36,7 @@ interface Props {
 
 const BlogLayout = ({ children, tags }: Props) => {
   return (
-    <div className="flex flex-col items-center w-full font-sourceSansPro">
+    <div className={`flex flex-col items-center w-full ${font.variable} font-sourceSansPro`}>
       <Header />
       {tags && <TagListNav tags={tags} />}
       <section className="flex flex-col tablet:flex-row px-10 mt-12 max-w-[1220px]">

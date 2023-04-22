@@ -1,5 +1,4 @@
 import { ApolloProvider } from '@apollo/client'
-// import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 import Notification from '~/components/widgets/Notification'
@@ -11,12 +10,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      {/* <SessionProvider session={session}> */}
       <RecoilRoot>
         <Notification />
         <Component {...pageProps} />
       </RecoilRoot>
-      {/* </SessionProvider> */}
     </ApolloProvider>
   )
 }
