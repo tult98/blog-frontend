@@ -9,7 +9,7 @@ interface Props {
 
 const ArticleItem = ({ article }: Props) => {
   return (
-    <Link href={`/blog/${article.slug}`}>
+    <Link href={`/blog/posts/${article.slug}`}>
       <div className="relative w-full mb-6 aspect-[2/1]">
         <Image
           src={`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}${article.coverImage.data.attributes.url}`}
