@@ -1,4 +1,4 @@
-import type { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import BlogContainer, { IArticleListing } from '~/components/modules/Blog/BlogContainer'
 import TabHeader from '~/components/widgets/TabHeader'
 import { initializeApollo } from '~/lib/apolloClient'
@@ -7,7 +7,7 @@ import { TagEntityResponseCollection } from '~/models/tag'
 import { GET_ARTICLES } from '~/queries/article'
 import { GET_TAGS } from '~/queries/tag'
 
-const Home = ({ articles, tags, pagination }: IArticleListing) => {
+const BlogListingPage = ({ articles, tags, pagination }: IArticleListing) => {
   return (
     <>
       <TabHeader name="Blogs" />
@@ -18,18 +18,40 @@ const Home = ({ articles, tags, pagination }: IArticleListing) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: Array.from({ length: 5 }, (_, index) => index + 1).map((item) => {
+      return { params: { page: item.toString() } }
+    }),
+    fallback: 'blocking',
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { params } = context
   const apolloClient = initializeApollo({})
   const {
     data: { articles },
   } = await apolloClient.query<{ articles: ArticleEntityResponseCollection }>({
     query: GET_ARTICLES,
+    variables: {
+      pagination: { start: ((Number(params?.page) ?? 1) - 1) * 12, limit: 12 },
+    },
   })
+
+  if (!articles.data?.length) {
+    return { notFound: true }
+  }
 
   const {
     data: { tags },
   } = await apolloClient.query<{ tags: TagEntityResponseCollection }>({
     query: GET_TAGS,
+    variables: {
+      pagination: {
+        limit: 1000, // get all the tags
+      },
+    },
   })
 
   return {
@@ -38,8 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
       tags: tags.data,
       pagination: articles.meta.pagination,
     },
-    revalidate: 60, // revalidate after 60s
   }
 }
 
-export default Home
+export default BlogListingPage

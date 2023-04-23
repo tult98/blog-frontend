@@ -5,13 +5,13 @@ import { ArticleEntity } from '~/models/article'
 import { TagEntity } from '~/models/tag'
 import { IPagination } from '~/utils/common'
 
-export interface Props {
+export interface IArticleListing {
   articles: ArticleEntity[]
   tags: TagEntity[]
   pagination: IPagination
 }
 
-const BlogContainer = ({ articles, tags, pagination }: Props) => {
+const BlogContainer = ({ articles, tags, pagination }: IArticleListing) => {
   return (
     <BlogLayout tags={tags}>
       <p className="mb-12 font-bold tracking-[3px] text-xl leading-[1.42857] text-[#2f353f]">WHAT&apos;S NEW</p>
