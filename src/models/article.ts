@@ -1,4 +1,5 @@
 import { CategoryEntityResponse } from '~/models/category'
+import { TagRelationResponseCollection } from '~/models/tag'
 import { IMeta, UploadFileEntityResponse } from '~/utils/common'
 
 export interface Article {
@@ -6,7 +7,7 @@ export interface Article {
   coverImage: UploadFileEntityResponse
   content: string
   category: CategoryEntityResponse
-  // tags
+  tags: TagRelationResponseCollection
   preface: string
   slug: string
   createdAt: Date

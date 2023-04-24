@@ -18,3 +18,7 @@ export interface TagEntityResponseCollection {
   data: TagEntity[]
   meta: IMeta
 }
+
+export interface TagRelationResponseCollection {
+  data: TagEntity[]
+}
