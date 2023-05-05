@@ -4,7 +4,6 @@ import remarkGfm from 'remark-gfm'
 import BlogLayout from '~/components/layouts/BlogLayout'
 import { Article } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
-// @ts-expect-error NOTE: error with type declaration of this dependency
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
 interface Props {
@@ -60,6 +59,8 @@ const ArticleDetail = ({ article }: Props) => {
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '')
                 return !inline && match ? (
+                  // FIXME: fix this error later
+                  // @ts-expect-error
                   <SyntaxHighlighter {...props} language={match[1]} PreTag="div">
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>

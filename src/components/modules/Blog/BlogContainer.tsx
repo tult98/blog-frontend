@@ -7,8 +7,8 @@ import { IPagination } from '~/utils/common'
 
 export interface IArticleListing {
   articles: ArticleEntity[]
-  tags: TagEntity[]
   pagination: IPagination
+  tags?: TagEntity[]
 }
 
 const BlogContainer = ({ articles, tags, pagination }: IArticleListing) => {
