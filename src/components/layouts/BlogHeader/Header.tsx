@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Icon from '~/components/elements/Icon'
+import SearchBar from '~/components/layouts/BlogHeader/SearchBar'
 
 const Header = () => {
   return (
@@ -9,14 +10,7 @@ const Header = () => {
         <Link className="col-span-1 hover:cursor-pointer" href="/">
           <Image src="/blog-logo.png" alt="blog-logo" width={120} height={100} />
         </Link>
-        <div className="relative col-span-2 py-3 overflow-hidden border border-gray-300 rounded whitespace-nowrap">
-          <Icon name="search" style="w-6 h-6 absolute top-1/2 -translate-y-1/2 left-4 text-[#3E34F3]" />
-          <input
-            type="text"
-            placeholder="Type here to search"
-            className="pl-12 pr-4 rounded input input-bordered focus:outline-none min-w-[15rem] lg:min-w-[30rem]"
-          />
-        </div>
+        <SearchBar />
         <Icon name="menu" style="w-5 h-5 sm:hidden" />
       </div>
     </header>
