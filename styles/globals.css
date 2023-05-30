@@ -71,6 +71,9 @@
     margin-inline-end: 0px;
     padding-inline-start: 40px;
   }
+  .hit-list {
+    padding-inline-start: 0px !important;
+  }
   ul {
     display: block;
     list-style-type: disc;
