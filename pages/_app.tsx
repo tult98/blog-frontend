@@ -9,12 +9,15 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
-  const searchClient = algoliasearch('XS4WHY6HLX', '53f6c4be0dc933caba7ba43d215fc4a1')
+  const searchClient = algoliasearch(
+    process.env.NEXT_PUBLIC_SEARCH_APPLICATION_ID ?? '',
+    process.env.NEXT_PUBLIC_SEARCH_ONLY_API_KEY ?? '',
+  )
 
   return (
     <ApolloProvider client={apolloClient}>
       <RecoilRoot>
-        <InstantSearch searchClient={searchClient} indexName="dev_blog">
+        <InstantSearch searchClient={searchClient} indexName={process.env.NEXT_PUBLIC_SEARCH_INDEX_NAME}>
           <Notification />
           <Component {...pageProps} />
         </InstantSearch>
