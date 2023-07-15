@@ -49,14 +49,16 @@ const AboutMe = ({ isInView }: { isInView: boolean }) => {
           <ul className="relative grid grid-cols-2 mt-5 text-slate">
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">JavaScript (ES6+)</li>
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">Typescript</li>
+            <li className="flex flex-row items-center pl-4 mb-2 skill-item">Python</li>
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">React</li>
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">Graphql</li>
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">NextJS</li>
             <li className="flex flex-row items-center pl-4 mb-2 skill-item">NodeJS</li>
+            <li className="flex flex-row items-center pl-4 mb-2 skill-item">Django</li>
           </ul>
         </div>
         <div className="items-center justify-center hidden w-full h-full md:flex md:flex-row">
-          <Image src={'avatar.jpg'} alt="avatar" className="object-cover rounded-full" width={300} height={300} />
+          <Image src={'/avatar.jpg'} alt="avatar" className="object-cover rounded-full" width={300} height={300} />
         </div>
       </div>
     </section>

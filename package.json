@@ -11,7 +11,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.9",
     "algoliasearch": "^4.17.1",
     "date-fns": "^2.29.3",
     "graphql": "^16.6.0",

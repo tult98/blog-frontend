@@ -23,13 +23,22 @@ const DEFAULT_COMPANIES: ICompany[] = [
   },
   {
     name: 'Xpon Digital',
-    isActive: true,
+    isActive: false,
     title: 'Fullstack Developer',
-    workingTime: 'August 2022 - Present',
+    workingTime: 'August 2022 - May 2023',
     responsibility: [
       'Improve the lighthouse score by 50%.',
       'Update version Next.js to the latest from version 5.x.',
       'Setup development environment for team, migrate to function component, TypeScript, and refactoring code base.',
+    ],
+  },
+  {
+    name: 'FPT SmartCloud',
+    isActive: true,
+    title: 'Fullstack Developer',
+    workingTime: 'May 2023 - Present',
+    responsibility: [
+      'Response for technical debt like handle authentication, authorization from server side, improve performance, refactor code base, ... etc.',
     ],
   },
 ]
