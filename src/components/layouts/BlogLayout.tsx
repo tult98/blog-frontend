@@ -1,4 +1,4 @@
-import Header from '~/components/layouts/BlogHeader/Header'
+import Header from '~/components/layouts/Blog/Header'
 import TagListNav from '~/components/widgets/TagListNav'
 import { TagEntity } from '~/models/tag'
 import localFont from 'next/font/local'

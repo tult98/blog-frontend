@@ -2,7 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0px;
+  line-height: calc(1em + 0.75rem);
+  -webkit-font-smoothing: antialiased;
+}
+
 @layer base {
+  :root {
+    --color-text: 222deg 22% 5%;
+    --color-background: 0deg 0% 100%;
+    /* --color-blurred-background: 0deg 0% 100% / 0.85; */
+    --color-primary: 245deg 100% 60%;
+    --color-secondary: 333deg 100% 45%;
+    --color-tertiary: 255deg 85% 30%;
+    --color-decorative: 200deg 75% 65%;
+    --color-muted: 210deg 55% 92%;
+    /* --color-muted-background: 210deg 55% 92% / 0.85; */
+    --color-info: 245deg 100% 60%;
+    --color-success: 160deg 100% 40%;
+    /* --color-success-background: 160deg 100% 40% / 0.1; */
+    --color-error: 340deg 95% 50%;
+    /* --color-error-background: 340deg 95% 43% / 0.1; */
+    --color-alert: 37deg 100% 50%;
+    /* --color-alert-background: 52deg 100% 50% / 0.25; */
+    --color-venn-0: 190deg 100% 65%;
+    --color-venn-1: 340deg 100% 65%;
+    --color-gray-100: 225deg 25% 95%;
+    --color-gray-200: 225deg 16% 90%;
+    --color-gray-300: 225deg 8% 80%;
+    --color-gray-400: 225deg 8% 70%;
+    --color-gray-500: 225deg 7% 60%;
+    --color-gray-600: 225deg 15% 50%;
+    --color-gray-700: 225deg 12% 40%;
+    --color-gray-900: 225deg 25% 20%;
+    --color-gray-1000: 225deg 15% 15%;
+    --color-subtle-background: 225deg 25% 95%;
+    --color-subtle-floating: 0deg 0% 100%;
+    --color-homepage-light: 204deg 67% 85%;
+    --color-homepage-dark: 202deg 71% 90%;
+    --color-homepage-bg: 204deg 67% 85%;
+    --syntax-bg: 225deg 25% 97%;
+    --syntax-highlight: 225deg 25% 93%;
+    --syntax-txt: 210deg 0% 16%;
+    --syntax-comment: 203deg 35% 40%;
+    --syntax-prop: 320deg 100% 43%;
+    --syntax-bool: 296deg 100% 36%;
+    --syntax-val: 197deg 15% 49%;
+    --syntax-str: 248deg 100% 60%;
+    --syntax-name: 276deg 100% 50%;
+    --syntax-del: 0deg 100% 67%;
+    --syntax-regex: 252deg 100% 43%;
+    --syntax-fn: 216deg 100% 53%;
+    --prefers-dark: false;
+  }
   body {
     @apply text-base bg-white;
   }
@@ -114,9 +167,6 @@
   .portfolio-navigation-item-sm {
     @apply px-2 py-2 text-xl font-medium opacity-100 cursor-pointer hover:text-green;
   }
-  .heading-2 {
-    @apply mt-[90px] mb-8;
-  }
 }
 
 @layer utilities {
@@ -126,6 +176,10 @@
 
   .error-message {
     @apply mt-2 text-sm text-red-500;
+  }
+
+  .heading-2 {
+    @apply uppercase tracking-[2px] text-secondary text-base font-medium;
   }
 }
 

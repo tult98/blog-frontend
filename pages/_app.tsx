@@ -2,7 +2,7 @@
 import type { AppProps } from 'next/app'
 // import { InstantSearch } from 'react-instantsearch-hooks-web'
 import { RecoilRoot } from 'recoil'
-import Notification from '~/components/widgets/Notification'
+// import Notification from '~/components/widgets/Notification'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
@@ -14,8 +14,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <RecoilRoot>
       {/* <InstantSearch searchClient={searchClient} indexName={process.env.NEXT_PUBLIC_SEARCH_INDEX_NAME}> */}
-      <Notification />
-      <Component {...pageProps} />
+      {/* <Notification /> */}
+      <div className="flex flex-row justify-center">
+        <Component {...pageProps} />
+      </div>
       {/* </InstantSearch> */}
     </RecoilRoot>
   )
