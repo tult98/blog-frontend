@@ -1,8 +1,10 @@
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import localFont from 'next/font/local'
 import Header from '~/components/layouts/Blog/Header'
 import PopularContent from '~/components/layouts/Blog/PopularContent'
 import PostItem from '~/components/layouts/Blog/PostItem'
 import TopicList from '~/components/layouts/Blog/TopicList'
+import { getDatabase } from '~/services/database'
 import { IPost } from '~/types/blogTypes'
 
 const dumpPosts: IPost[] = [
@@ -66,6 +68,12 @@ const Home = () => {
       </main>
     </>
   )
+}
+
+export const getStaticProps = async () => {
+  const database = await getDatabase()
+
+  return { props: { posts: database?.results as PageObjectResponse[] }, revalidate: 10 }
 }
 
 export default Home

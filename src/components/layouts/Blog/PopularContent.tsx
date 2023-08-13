@@ -34,7 +34,7 @@ const PopularContent = () => {
       <div className="flex flex-col mt-8 -ml-8 space-y-4">
         {dumpPopularPosts.map((post, index) => (
           <div key={index} className="flex items-start space-x-4 group hover:cursor-pointer">
-            <div className="min-w-[20px] min-h-[20px] w-5 h-5 translate-y-1 group-hover:translate-x-2 group-hover:duration-200">
+            <div className="min-w-[20px] min-h-[20px] w-5 h-5 translate-y-1 group-hover:translate-x-2 duration-200 group-hover:duration-200">
               <Icon name="smallArrowRight" style="w-full h-full text-primary" />
             </div>
             <p className="font-medium text-gray-1000 leading-[1.45] text-[1.1875rem]">{post.title}</p>
