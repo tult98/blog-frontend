@@ -1,7 +1,10 @@
+import { CheckBoxBlock, DateBlock, MultiSelectBlock, RichTextBlock, TitleBlock } from '~/theme/notionTypes'
+
 export interface IPost {
-  id: string
-  title: string
-  subtitle?: string
-  preface?: string
-  content: string
+  title: TitleBlock
+  subtitle?: RichTextBlock
+  preface?: RichTextBlock
+  is_published: CheckBoxBlock
+  published_at: DateBlock
+  tags: MultiSelectBlock
 }

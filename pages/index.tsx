@@ -7,24 +7,6 @@ import TopicList from '~/components/layouts/Blog/TopicList'
 import { getDatabase } from '~/services/database'
 import { IPost } from '~/types/blogTypes'
 
-const dumpPosts: IPost[] = [
-  {
-    id: '1',
-    title: 'Animated Pride Flags',
-    preface:
-      "Happy Pride month! In this tutorial, I'll share a handful of my favourite animation tricks. Yo'll learn how to build an animated wavy pride flag using CSS keyframes and linear gradients. We'll also see how to make it dynamic using React. 🏳️‍🌈",
-    content: 'this is content',
-  },
-  {
-    id: '2',
-    title: 'The “const” Deception',
-    subtitle: 'Exploring the difference between assignment and mutation in JavaScript',
-    preface:
-      "The “const” keyword in JavaScript is used to create constants, variables that can't change. Curiously, though, we do seem to be able to edit objects and arrays that are created using “const”. In this tutorial, we're going to dig into the incredibly-important distinction between “assignment” and “mutation” in JavaScript.",
-    content: 'this is content',
-  },
-]
-
 const wotFardFont = localFont({
   src: [
     {
@@ -46,7 +28,7 @@ const wotFardFont = localFont({
   variable: '--font-wot-fard',
 })
 
-const Home = () => {
+const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
   return (
     <>
       <main className={`${wotFardFont.variable} font-sans w-screen flex flex-col items-center overflow-x-hidden`}>
@@ -55,8 +37,8 @@ const Home = () => {
           <section className="col-span-2">
             <h2 className="heading-2 mb-9">Recently published</h2>
             <div className="flex flex-col space-y-12">
-              {dumpPosts.map((post) => (
-                <PostItem key={post.id} post={post} />
+              {posts.map((post) => (
+                <PostItem key={post.id} post={post.properties as unknown as IPost} />
               ))}
             </div>
           </section>
