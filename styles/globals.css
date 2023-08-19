@@ -110,11 +110,6 @@
     color: rgb(242, 92, 193);
     background-color: rgb(235, 238, 240);
   }
-  li {
-    font-size: 21px;
-    line-height: 32px;
-    margin-bottom: 32px;
-  }
   ol {
     display: block;
     list-style-type: decimal;
@@ -126,15 +121,6 @@
   }
   .hit-list {
     padding-inline-start: 0px !important;
-  }
-  ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
   }
   blockquote {
     margin: 60px 0px;

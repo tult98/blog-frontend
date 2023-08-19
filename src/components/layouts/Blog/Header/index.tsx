@@ -4,7 +4,7 @@ import Navigation from '~/components/layouts/Blog/Header/Navigation'
 const Header = ({ disableWave = false }: { disableWave?: boolean }) => {
   return (
     <div className="h-[400px] w-full bg-gradient-to-r from-homepage-dark to-homepage-light relative flex justify-between">
-      <header className="flex flex-row px-24 mt-12 h-fit max-w-[1100px]">
+      <header className="flex flex-row px-24 mt-12 h-fit max-w-[1100px] space-x-6">
         <Logo />
         <Navigation />
       </header>
