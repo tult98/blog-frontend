@@ -1,6 +1,13 @@
+import Logo from '~/components/layouts/Blog/Header/Logo'
+import Navigation from '~/components/layouts/Blog/Header/Navigation'
+
 const Header = ({ disableWave = false }: { disableWave?: boolean }) => {
   return (
-    <header className="h-[400px] w-full bg-gradient-to-r from-homepage-dark to-homepage-light relative">
+    <div className="h-[400px] w-full bg-gradient-to-r from-homepage-dark to-homepage-light relative flex justify-between">
+      <header className="flex flex-row px-24 mt-12 h-fit max-w-[1100px]">
+        <Logo />
+        <Navigation />
+      </header>
       {!disableWave && (
         <div className="absolute left-0 right-0 bottom-0 w-full h-[90px] z-10">
           <svg
@@ -15,7 +22,7 @@ const Header = ({ disableWave = false }: { disableWave?: boolean }) => {
           </svg>
         </div>
       )}
-    </header>
+    </div>
   )
 }
 

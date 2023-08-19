@@ -81,6 +81,10 @@ module.exports = {
         fadeOutFromRight: 'fadeOutFromRight 0.5s ease-in-out forwards',
         slideUpLittle: 'slideUpLittle 0.2s ease-in-out forwards',
         appear: 'appear 0.2s ease-in-out forwards',
+        logoAppearBottom: '150ms ease 1050ms 1 normal both running logoAppear',
+        logoAppearTop: '600ms cubic-bezier(0.27, 0.22, 0.44, 1.03) 1200ms 1 normal both running logoAppear',
+        textSlideLeft: '300ms cubic-bezier(0.27, 0.22, 0.44, 1.03) 750ms 1 normal both running textSlideLeft',
+        textSlideRight: '300ms cubic-bezier(0.27, 0.22, 0.44, 1.03) 825ms 1 normal both running textTranslateRight',
       },
       keyframes: {
         fadeInButton: {
@@ -118,6 +122,17 @@ module.exports = {
         appear: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
+        },
+        logoAppear: {
+          '100%': { strokeDashoffset: 0 },
+        },
+        textSlideLeft: {
+          '0%': { transform: 'translateX(6px)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        textTranslateRight: {
+          '0%': { transform: 'translateX(-6px)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
       fontFamily: {
