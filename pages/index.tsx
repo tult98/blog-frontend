@@ -3,10 +3,11 @@ import PopularContent from '~/components/layouts/Blog/PopularContent'
 import PostItem from '~/components/layouts/Blog/PostItem'
 import TopicList from '~/components/layouts/Blog/TopicList'
 import BlogLayout from '~/components/layouts/BlogLayout'
-import { getDatabase } from '~/services/database'
+import { request } from '~/services/request'
 import { IPost } from '~/types/blogTypes'
 
 const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
+  console.log('===============', posts)
   return (
     <BlogLayout>
       <div className="max-w-[1100px] px-8 pt-16 grid grid-cols-3 gap-x-24 gap-y-16">
@@ -28,9 +29,12 @@ const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
 }
 
 export const getStaticProps = async () => {
-  const database = await getDatabase()
-
-  return { props: { posts: database?.results as PageObjectResponse[] }, revalidate: 10 }
+  try {
+    const { data } = await request.post(`databases/${process.env.NOTION_DATABASE_ID}/query`)
+    return { props: { posts: data?.results ?? [] } }
+  } catch (error) {
+    console.error('fetch database failed:', error)
+  }
 }
 
 export default Home
