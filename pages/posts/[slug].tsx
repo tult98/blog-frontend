@@ -1,11 +1,13 @@
+import { ListBlockChildrenResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { GetStaticProps } from 'next'
 import TableOfContent from '~/components/layouts/Blog/TableOfContent'
 import BlogLayout from '~/components/layouts/BlogLayout'
-import { request } from '~/services/request'
+import { getDatabase } from '~/services/database'
+import { notion } from '~/services/notion'
 import { IPost } from '~/types/blogTypes'
 import { getTableOfContents } from '~/utils/common'
 
-const PostDetails = ({ post }: { post: any }) => {
+const PostDetails = ({ post }: { post: ListBlockChildrenResponse }) => {
   const headings = getTableOfContents(post)
 
   return (
@@ -26,39 +28,26 @@ const PostDetails = ({ post }: { post: any }) => {
 }
 
 export const getStaticProps: GetStaticProps = async (props) => {
-  try {
-    const { data: pages } = await request.post(`/databases/${process.env.NOTION_DATABASE_ID}/query`, {
-      filter: {
-        property: 'slug',
-        rich_text: {
-          equals: props.params?.slug as string,
-        },
-      },
-    })
+  const page = await notion.databases.query({
+    database_id: process.env.NOTION_DATABASE_ID as string,
+    filter: { property: 'slug', rich_text: { equals: props.params?.slug as string } },
+  })
 
-    if (!pages?.results?.length) throw new Error('Page not found')
+  if (!page?.results?.length) return { props: {} }
 
-    const { data: post } = await request.get(`/blocks/${pages.results[0].id}/children?page_size=100`)
-    return { props: { post }, revalidate: 10 }
-  } catch (error) {
-    console.error('error', error)
-    return { props: {}, revalidate: 10 }
-  }
+  const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
+  return { props: { post }, revalidate: 10 }
 }
 
 export const getStaticPaths = async () => {
-  try {
-    const { data } = await request.post(`/databases/${process.env.NOTION_DATABASE_ID}/query`)
+  const database = await getDatabase()
 
-    const paths = data?.results?.map((page: any) => {
-      const post = page.properties as unknown as IPost
-      return { params: { slug: post.slug.rich_text[0]?.plain_text } }
-    })
-    return { paths, fallback: 'blocking' }
-  } catch (error) {
-    console.error('fetch database failed:', error)
-    return { paths: [], fallback: 'blocking' }
-  }
+  const paths = database?.results?.map((page) => {
+    const post = (page as PageObjectResponse).properties as unknown as IPost
+    return { params: { slug: post.slug.rich_text[0]?.plain_text } }
+  })
+
+  return { paths, fallback: 'blocking' }
 }
 
 export default PostDetails
