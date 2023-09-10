@@ -24,7 +24,7 @@ const renderHeading = (heading: BlockObjectResponse) => {
 
 const TableOfContent = ({ headings }: { headings: (PartialBlockObjectResponse | BlockObjectResponse)[] }) => {
   return (
-    <aside className="grow-0 shrink basis-[250px] sticky top-[148px] ml-auto">
+    <aside className="sticky grow-0 shrink basis-[250px] top-[148px]">
       <p className="text-gray-900 text-base font-medium uppercase leading-[2px] mb-4">Table of contents</p>
       {headings.map((heading, index) => (
         <React.Fragment key={index}>{renderHeading(heading as BlockObjectResponse)}</React.Fragment>

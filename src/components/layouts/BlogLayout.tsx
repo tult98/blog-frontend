@@ -29,7 +29,7 @@ interface Props {
 
 const BlogLayout = ({ children, disableWave = false }: Props) => {
   return (
-    <main className={`${wotFardFont.variable} font-sans w-screen flex flex-col items-center overflow-x-hidden`}>
+    <main className={`${wotFardFont.variable} font-sans w-screen flex flex-col items-center`}>
       <Header disableWave={disableWave} />
       {children}
     </main>
