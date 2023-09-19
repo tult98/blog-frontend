@@ -6,10 +6,11 @@ import {
 import { GetStaticProps } from 'next'
 import React from 'react'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
+import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import TableOfContent from '~/components/layouts/Blog/TableOfContent'
-import BlogLayout from '~/components/layouts/BlogLayout'
 import { getDatabase } from '~/services/database'
 import { notion } from '~/services/notion'
+import { TitleBlock } from '~/theme/notionTypes'
 import { IPost } from '~/types/blogTypes'
 import { getTableOfContents } from '~/utils/common'
 
@@ -22,11 +23,11 @@ const renderBlockByType = (block: BlockObjectResponse) => {
   }
 }
 
-const PostDetails = ({ post }: { post: ListBlockChildrenResponse }) => {
+const PostDetails = ({ post, title }: { post: ListBlockChildrenResponse; title: string }) => {
   const headings = getTableOfContents(post)
 
   return (
-    <BlogLayout disableWave={true}>
+    <BlogLayout disableWave={true} title={title}>
       <main className="mt-[70px]">
         <div className="max-w-[1100px] pt-12 flex flex-row justify-center items-start relative space-x-16">
           <article className="grow shrink basis-[686px]">
@@ -47,10 +48,12 @@ export const getStaticProps: GetStaticProps = async (props) => {
     filter: { property: 'slug', rich_text: { equals: props.params?.slug as string } },
   })
 
+  const pageObject = page.results[0] as PageObjectResponse
+
   if (!page?.results?.length) return { props: {} }
 
   const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
-  return { props: { post }, revalidate: 10 }
+  return { props: { post, title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text }, revalidate: 10 }
 }
 
 export const getStaticPaths = async () => {

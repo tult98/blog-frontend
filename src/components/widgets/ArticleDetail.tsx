@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import BlogLayout from '~/components/layouts/BlogLayout'
+import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import { Article } from '~/models/article'
 import { formatTimeFromUTC } from '~/utils/dateUtils'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'

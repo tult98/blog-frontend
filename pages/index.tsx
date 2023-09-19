@@ -2,7 +2,7 @@ import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import PopularContent from '~/components/layouts/Blog/PopularContent'
 import PostItem from '~/components/layouts/Blog/PostItem'
 import TopicList from '~/components/layouts/Blog/TopicList'
-import BlogLayout from '~/components/layouts/BlogLayout'
+import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import { getDatabase } from '~/services/database'
 import { IPost } from '~/types/blogTypes'
 
