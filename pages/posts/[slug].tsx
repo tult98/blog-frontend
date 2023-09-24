@@ -5,6 +5,7 @@ import {
 } from '@notionhq/client/build/src/api-endpoints'
 import { GetStaticProps } from 'next'
 import React from 'react'
+import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
 import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import TableOfContent from '~/components/layouts/Blog/TableOfContent'
@@ -18,6 +19,8 @@ const renderBlockByType = (block: BlockObjectResponse) => {
   switch (block.type) {
     case 'paragraph':
       return <ParagraphBlock block={block as any} />
+    case 'heading_2':
+      return <HeadingBlock block={block as any} />
     default:
       return null
   }
