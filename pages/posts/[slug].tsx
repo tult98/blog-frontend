@@ -5,6 +5,7 @@ import {
 } from '@notionhq/client/build/src/api-endpoints'
 import { GetStaticProps } from 'next'
 import React from 'react'
+import CalloutBlock from '~/components/layouts/Blog/Block/CalloutBlock'
 import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
 import QuoteBlock from '~/components/layouts/Blog/Block/QuoteBlock'
@@ -24,6 +25,8 @@ const renderBlockByType = (block: BlockObjectResponse) => {
       return <HeadingBlock block={block as any} />
     case 'quote':
       return <QuoteBlock block={block as any} />
+    case 'callout':
+      return <CalloutBlock block={block as any} />
     default:
       return null
   }
@@ -35,8 +38,8 @@ const PostDetails = ({ post, title }: { post: ListBlockChildrenResponse; title: 
   return (
     <BlogLayout disableWave={true} title={title}>
       <main className="mt-[70px]">
-        <div className="max-w-[1100px] pt-12 flex flex-row justify-center items-start relative space-x-16">
-          <article className="grow shrink basis-[686px]">
+        <div className="max-w-[1100px] pt-12 flex flex-row justify-between items-start relative">
+          <article className="shrink basis-[686px]">
             {post.results.map((block) => (
               <React.Fragment key={block.id}>{renderBlockByType(block as BlockObjectResponse)}</React.Fragment>
             ))}
