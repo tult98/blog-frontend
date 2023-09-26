@@ -7,6 +7,7 @@ import { GetStaticProps } from 'next'
 import React from 'react'
 import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
+import QuoteBlock from '~/components/layouts/Blog/Block/QuoteBlock'
 import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import TableOfContent from '~/components/layouts/Blog/TableOfContent'
 import { getDatabase } from '~/services/database'
@@ -21,6 +22,8 @@ const renderBlockByType = (block: BlockObjectResponse) => {
       return <ParagraphBlock block={block as any} />
     case 'heading_2':
       return <HeadingBlock block={block as any} />
+    case 'quote':
+      return <QuoteBlock block={block as any} />
     default:
       return null
   }

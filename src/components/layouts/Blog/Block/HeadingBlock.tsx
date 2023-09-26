@@ -13,7 +13,7 @@ const HeadingBlock = ({ block }: { block: HeadingBlockObjectResponse }) => {
   // @ts-ignore next-line
   const headingId = block[block.type].rich_text[0].plain_text.toLowerCase().replace(/ /g, '-')
   return (
-    <p id={headingId} className="mt-[96px] mb-8 text-tertiary font-bold break-words text-[2rem]">
+    <p id={headingId} className="mt-24 mb-8 text-[2rem] font-bold break-words text-tertiary">
       {/* @ts-ignore next-line */}
       {block[block.type].rich_text[0].plain_text}
     </p>
