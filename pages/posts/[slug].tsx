@@ -19,10 +19,12 @@ import { getTableOfContents } from '~/utils/common'
 
 const renderBlockByType = (block: BlockObjectResponse) => {
   switch (block.type) {
-    case 'paragraph':
-      return <ParagraphBlock block={block as any} />
     case 'heading_2':
       return <HeadingBlock block={block as any} />
+    case 'heading_3':
+      return <HeadingBlock block={block as any} />
+    case 'paragraph':
+      return <ParagraphBlock block={block as any} />
     case 'quote':
       return <QuoteBlock block={block as any} />
     case 'callout':
