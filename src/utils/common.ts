@@ -1,4 +1,5 @@
-import { ListBlockChildrenResponse } from '@notionhq/client/build/src/api-endpoints'
+import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { IListItemBlock } from '~/components/layouts/Blog/Block/ListItemBlock'
 
 export interface IPagination {
   total: number
@@ -41,10 +42,10 @@ export interface UploadFileEntityResponse {
   data: UploadFileEntity
 }
 
-export const getTableOfContents = (page: ListBlockChildrenResponse) => {
-  const headings = page.results.filter((block: any) => block.type.startsWith('heading'))
+export const getTableOfContents = (blocks: (BlockObjectResponse | IListItemBlock)[]) => {
+  const headings = blocks.filter((block: any) => block.type.startsWith('heading'))
 
-  return headings
+  return headings as BlockObjectResponse[]
 }
 
 export const getTextStyleByAnnotations = (annotations: IAnnotation) => {
@@ -69,3 +70,5 @@ export const TEXT_COLORS = {
   pink: 'text-[#FFC0CB]',
   red: 'text-[#FF0000]',
 }
+
+export const LIST_TYPES = ['bulleted_list_item', 'numbered_list_item']

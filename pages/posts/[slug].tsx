@@ -1,12 +1,9 @@
-import {
-  BlockObjectResponse,
-  ListBlockChildrenResponse,
-  PageObjectResponse,
-} from '@notionhq/client/build/src/api-endpoints'
+import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { GetStaticProps } from 'next'
 import React from 'react'
 import CalloutBlock from '~/components/layouts/Blog/Block/CalloutBlock'
 import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
+import ListItemBlock, { IListItemBlock } from '~/components/layouts/Blog/Block/ListItemBlock'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
 import QuoteBlock from '~/components/layouts/Blog/Block/QuoteBlock'
 import BlogLayout from '~/components/layouts/Blog/BlogLayout'
@@ -15,9 +12,10 @@ import { getDatabase } from '~/services/database'
 import { notion } from '~/services/notion'
 import { TitleBlock } from '~/theme/notionTypes'
 import { IPost } from '~/types/blogTypes'
+import { formatNotionBlocks } from '~/utils/blockUtils'
 import { getTableOfContents } from '~/utils/common'
 
-const renderBlockByType = (block: BlockObjectResponse) => {
+const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
   switch (block.type) {
     case 'heading_2':
       return <HeadingBlock block={block as any} />
@@ -29,22 +27,24 @@ const renderBlockByType = (block: BlockObjectResponse) => {
       return <QuoteBlock block={block as any} />
     case 'callout':
       return <CalloutBlock block={block as any} />
+    case 'list_item':
+      return <ListItemBlock blocks={(block as IListItemBlock).blocks} />
     default:
       return null
   }
 }
 
-const PostDetails = ({ post, title }: { post: ListBlockChildrenResponse; title: string }) => {
-  const headings = getTableOfContents(post)
+const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListItemBlock)[]; title: string }) => {
+  const headings = getTableOfContents(blocks)
 
   return (
     <BlogLayout disableWave={true} title={title}>
       <main className="mt-[70px]">
         <div className="max-w-[1100px] pt-12 flex flex-row justify-between items-start relative">
           <article className="shrink basis-[686px]">
-            {post.results.map((block) => (
-              <React.Fragment key={block.id}>{renderBlockByType(block as BlockObjectResponse)}</React.Fragment>
-            ))}
+            {blocks.map((block, index) => {
+              return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
+            })}
           </article>
           <TableOfContent headings={headings} />
         </div>
@@ -64,7 +64,11 @@ export const getStaticProps: GetStaticProps = async (props) => {
   if (!page?.results?.length) return { props: {} }
 
   const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
-  return { props: { post, title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text }, revalidate: 10 }
+  const formattedBlocks = formatNotionBlocks(post.results as BlockObjectResponse[])
+  return {
+    props: { blocks: formattedBlocks, title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text },
+    revalidate: 10,
+  }
 }
 
 export const getStaticPaths = async () => {

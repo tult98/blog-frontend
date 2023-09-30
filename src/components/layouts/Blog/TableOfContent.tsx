@@ -1,4 +1,4 @@
-import { BlockObjectResponse, PartialBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import React from 'react'
 
 const renderHeading = (heading: BlockObjectResponse) => {
@@ -22,7 +22,7 @@ const renderHeading = (heading: BlockObjectResponse) => {
   return null
 }
 
-const TableOfContent = ({ headings }: { headings: (PartialBlockObjectResponse | BlockObjectResponse)[] }) => {
+const TableOfContent = ({ headings }: { headings: BlockObjectResponse[] }) => {
   return (
     <aside className="sticky grow-0 shrink basis-[250px] top-[148px]">
       <p className="text-gray-900 text-base font-medium uppercase leading-[2px] mb-4">Table of contents</p>
