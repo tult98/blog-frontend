@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import React from 'react'
 import CalloutBlock from '~/components/layouts/Blog/Block/CalloutBlock'
 import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
+import ImageBlock from '~/components/layouts/Blog/Block/ImageBlock'
 import ListItemBlock, { IListItemBlock } from '~/components/layouts/Blog/Block/ListItemBlock'
 import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
 import QuoteBlock from '~/components/layouts/Blog/Block/QuoteBlock'
@@ -29,6 +30,8 @@ const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
       return <CalloutBlock block={block as any} />
     case 'list_item':
       return <ListItemBlock blocks={(block as IListItemBlock).blocks} />
+    case 'image':
+      return <ImageBlock block={block} />
     default:
       return null
   }

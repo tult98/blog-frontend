@@ -3,6 +3,6 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost', 'blog-admin'], // for communication between docker container
+    domains: ['localhost', 's3.us-west-2.amazonaws.com'],
   },
 }
