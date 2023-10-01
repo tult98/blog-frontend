@@ -2,6 +2,7 @@ import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/
 import { GetStaticProps } from 'next'
 import React from 'react'
 import CalloutBlock from '~/components/layouts/Blog/Block/CalloutBlock'
+import CodeBlock from '~/components/layouts/Blog/Block/CodeBlock'
 import HeadingBlock from '~/components/layouts/Blog/Block/HeadingBlock'
 import ImageBlock from '~/components/layouts/Blog/Block/ImageBlock'
 import ListItemBlock, { IListItemBlock } from '~/components/layouts/Blog/Block/ListItemBlock'
@@ -29,9 +30,11 @@ const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
     case 'callout':
       return <CalloutBlock block={block as any} />
     case 'list_item':
-      return <ListItemBlock blocks={(block as IListItemBlock).blocks} />
+      return <ListItemBlock blocks={block.blocks} />
     case 'image':
       return <ImageBlock block={block} />
+    case 'code':
+      return <CodeBlock block={block} />
     default:
       return null
   }
