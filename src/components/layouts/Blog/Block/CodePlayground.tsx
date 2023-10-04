@@ -20,7 +20,12 @@ const CodePlayground = ({ block }: { block: CodeBlockObjectResponse }) => {
 
   return (
     <div className="max-w-[750px] -mx-8 py-6">
-      <Sandpack theme={nightOwl} template={template} files={files} options={{ classes: { 'sp-layout': 'flex-col' } }} />
+      <Sandpack
+        theme={nightOwl}
+        template={template}
+        files={files}
+        options={{ classes: { 'sp-layout': 'flex-col', 'sp-stack': '!w-full !flex-none' } }}
+      />
     </div>
   )
 }
