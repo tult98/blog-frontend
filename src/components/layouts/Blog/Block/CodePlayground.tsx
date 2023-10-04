@@ -3,7 +3,7 @@ import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoint
 import { useEffect, useState } from 'react'
 import { nightOwl } from '@codesandbox/sandpack-themes'
 
-const CodeBlock = ({ block }: { block: CodeBlockObjectResponse }) => {
+const CodePlayground = ({ block }: { block: CodeBlockObjectResponse }) => {
   // FIXME: move this to static site generation later
   const [template, setTemplate] = useState()
   const [files, setFiles] = useState()
@@ -18,7 +18,11 @@ const CodeBlock = ({ block }: { block: CodeBlockObjectResponse }) => {
     }
   }, [block.code])
 
-  return <Sandpack theme={nightOwl} template={template} files={files} />
+  return (
+    <div className="max-w-[750px] -mx-8 py-6">
+      <Sandpack theme={nightOwl} template={template} files={files} options={{ classes: { 'sp-layout': 'flex-col' } }} />
+    </div>
+  )
 }
 
-export default CodeBlock
+export default CodePlayground
