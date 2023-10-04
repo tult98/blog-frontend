@@ -42,18 +42,18 @@
     --color-homepage-light: 204deg 67% 85%;
     --color-homepage-dark: 202deg 71% 90%;
     --color-homepage-bg: 204deg 67% 85%;
-    --syntax-bg: 225deg 25% 97%;
-    --syntax-highlight: 225deg 25% 93%;
-    --syntax-txt: 210deg 0% 16%;
-    --syntax-comment: 203deg 35% 40%;
-    --syntax-prop: 320deg 100% 43%;
-    --syntax-bool: 296deg 100% 36%;
-    --syntax-val: 197deg 15% 49%;
-    --syntax-str: 248deg 100% 60%;
-    --syntax-name: 276deg 100% 50%;
-    --syntax-del: 0deg 100% 67%;
-    --syntax-regex: 252deg 100% 43%;
-    --syntax-fn: 216deg 100% 53%;
+    --color-syntax-bg: 225deg 25% 97%;
+    --color-syntax-highlight: 225deg 25% 93%;
+    --color-syntax-txt: 210deg 0% 16%;
+    --color-syntax-comment: 203deg 35% 40%;
+    --color-syntax-prop: 320deg 100% 43%;
+    --color-syntax-bool: 296deg 100% 36%;
+    --color-syntax-val: 197deg 15% 49%;
+    --color-syntax-str: 248deg 100% 60%;
+    --color-syntax-name: 276deg 100% 50%;
+    --color-syntax-del: 0deg 100% 67%;
+    --color-syntax-regex: 252deg 100% 43%;
+    --color-syntax-fn: 216deg 100% 53%;
     --prefers-dark: false;
   }
   body {

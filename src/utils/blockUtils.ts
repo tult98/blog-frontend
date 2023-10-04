@@ -1,5 +1,13 @@
-import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { BlockObjectResponse, CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { LIST_TYPES } from '~/utils/common'
+
+const formatCodeBlock = (block: CodeBlockObjectResponse) => {
+  const cloneBlock: any = { ...block }
+  if (block.code.language === 'javascript') cloneBlock.code.language = 'jsx'
+  else if (block.code.language === 'typescript') cloneBlock.code.language = 'tsx'
+
+  return cloneBlock
+}
 
 export const formatNotionBlocks = (blocks: BlockObjectResponse[]) => {
   const formattedBlocks: any[] = []
@@ -7,8 +15,14 @@ export const formatNotionBlocks = (blocks: BlockObjectResponse[]) => {
 
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i]
-    const isListItem = LIST_TYPES.includes(block.type)
 
+    // matching language between notion and prismjs
+    if (block.type === 'code') {
+      formattedBlocks.push(formatCodeBlock(block))
+      continue
+    }
+    // handle list items block
+    const isListItem = LIST_TYPES.includes(block.type)
     if (isListItem && (!listItems.length || block.type === listItems[listItems.length - 1]?.type)) {
       listItems.push(block)
     } else if (isListItem) {
