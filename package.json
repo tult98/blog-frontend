@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.8.0",
+    "@codesandbox/sandpack-themes": "^2.0.21",
     "@notionhq/client": "^2.2.10",
     "algoliasearch": "^4.17.1",
     "date-fns": "^2.29.3",

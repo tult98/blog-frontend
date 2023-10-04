@@ -1,6 +1,7 @@
 import { Sandpack } from '@codesandbox/sandpack-react'
 import { CodeBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { useEffect, useState } from 'react'
+import { nightOwl } from '@codesandbox/sandpack-themes'
 
 const CodeBlock = ({ block }: { block: CodeBlockObjectResponse }) => {
   // FIXME: move this to static site generation later
@@ -17,7 +18,7 @@ const CodeBlock = ({ block }: { block: CodeBlockObjectResponse }) => {
     }
   }, [block.code])
 
-  return <Sandpack template={template} files={files} />
+  return <Sandpack theme={nightOwl} template={template} files={files} />
 }
 
 export default CodeBlock
