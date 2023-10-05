@@ -14,7 +14,7 @@ const CalloutBlock = ({ block }: { block: CalloutBlockObjectResponse }) => {
   }, [block])
 
   return (
-    <aside className="relative px-8 py-6 mt-12 mb-16 -mx-8 bg-muted rounded-[4px] border-l-[3px] border-info">
+    <aside className="relative px-8 py-6 mt-12 mb-16 lg:-mx-8 bg-muted rounded-[4px] border-l-[3px] border-info">
       <div className="absolute top-0 left-0 flex items-center justify-center w-12 h-12 p-2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full">
         {calloutIcon}
       </div>

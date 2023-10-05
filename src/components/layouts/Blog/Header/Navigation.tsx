@@ -3,7 +3,7 @@ import Icon from '~/components/elements/Icon'
 
 const Navigation = () => {
   return (
-    <nav className="flex flex-row items-center">
+    <nav className="items-center hidden lg:flex lg:flex-row">
       <ul className="flex flex-row list-none !m-0">
         <li className="!px-5 mb-0 text-base text-text">
           <Link href="/posts">Latest</Link>

@@ -31,7 +31,7 @@ const PopularContent = () => {
   return (
     <div>
       <p className="heading-2">Popular content</p>
-      <div className="flex flex-col mt-8 -ml-8 space-y-4">
+      <div className="flex flex-col mt-8 space-y-4 lg:-ml-8">
         {dumpPopularPosts.map((post, index) => (
           <div key={index} className="flex items-start space-x-4 group hover:cursor-pointer">
             <div className="min-w-[20px] min-h-[20px] w-5 h-5 translate-y-1 group-hover:translate-x-2 duration-200 group-hover:duration-200">
