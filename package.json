@@ -11,23 +11,31 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.6",
-    "@heroicons/react": "^1.0.6",
+    "@codesandbox/sandpack-react": "^2.8.0",
+    "@codesandbox/sandpack-themes": "^2.0.21",
+    "@notionhq/client": "^2.2.10",
+    "algoliasearch": "^4.17.1",
     "date-fns": "^2.29.3",
-    "firebase": "^9.8.3",
-    "next": "^13.1.6",
+    "next": "^13.3.1",
+    "prism-react-renderer": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-instantsearch-hooks-web": "^6.44.0",
+    "react-markdown": "^8.0.7",
     "react-pdf": "^5.7.2",
-    "sharp": "^0.31.1"
+    "react-syntax-highlighter": "^15.5.0",
+    "recoil": "^0.7.6",
+    "remark-gfm": "^3.0.1",
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
     "@types/react-pdf": "^5.0.9",
+    "@types/react-syntax-highlighter": "^15.5.6",
     "autoprefixer": "^10.4.0",
     "eslint": "7",
-    "eslint-config-next": "^13.1.6",
+    "eslint-config-next": "^13.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
@@ -35,7 +43,7 @@
     "postcss": "^8.4.4",
     "prettier": "^2.5.0",
     "tailwindcss": "^3.1.7",
-    "typescript": "4.5.2"
+    "typescript": "^5.0.2"
   },
   "husky": {
     "hooks": {

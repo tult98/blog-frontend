@@ -13,16 +13,14 @@ const Work = ({ isInView }: { isInView: boolean }) => {
     },
     {
       title: 'Uploading products with woocommerce API',
-      description:
-        "Speed up uploading product process by using woo API and managing user's template",
+      description: "Speed up uploading product process by using woo API and managing user's template",
       tags: ['reactjs', 'django', 'firebase'],
       githubURL: 'https://github.com/lethanhtupk/product_uploader_frontend',
       deployURL: 'https://product-uploader-2f031.web.app/',
     },
     {
       title: 'React application boilerplate',
-      description:
-        'A boilerplate for ReactJS project setup with full of modern development tools',
+      description: 'A boilerplate for ReactJS project setup with full of modern development tools',
       tags: ['reactjs', 'typescript', 'webpack', 'eslint'],
       githubURL: 'https://github.com/lethanhtupk/react-application-boilerplate',
     },
@@ -42,10 +40,7 @@ const Work = ({ isInView }: { isInView: boolean }) => {
     >
       <div className="flex flex-row items-center">
         <h1 className="mt-2 mb-10 text-2xl font-semibold md:text-3xl text-slate-lightest">
-          <span className="text-lg font-normal text-green font-sfmono">
-            03.{' '}
-          </span>{' '}
-          Some things I&#39;ve built
+          <span className="text-lg font-normal text-green font-sfmono">03. </span> Some things I&#39;ve built
         </h1>
         <div className="relative w-20 h-px ml-5 md:w-52 bg-navy-lightest -top-5"></div>
       </div>

@@ -1,9 +1,7 @@
 import { useState } from 'react'
 
 const usePortfolioNavigation = () => {
-  const [navigationItemsStatus, setNavigationItemStatus] = useState<
-    Record<string, boolean>
-  >({
+  const [navigationItemsStatus, setNavigationItemStatus] = useState<Record<string, boolean>>({
     about: false,
     experience: false,
     work: false,

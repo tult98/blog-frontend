@@ -19,7 +19,7 @@ const PortfolioHeader = ({ onSwitchSection }: Props) => {
 
   const renderItems = () => {
     return (
-      <>
+      <ul className="flex flex-col items-center list-none">
         <li
           onClick={() => onSwitchSection('about')}
           className="min-w-150px md:min-w-min md:portfolio-navigation-item portfolio-navigation-item-sm animate-fadeIn max-md:animate-none"
@@ -54,7 +54,7 @@ const PortfolioHeader = ({ onSwitchSection }: Props) => {
             Resume
           </div>
         </div>
-      </>
+      </ul>
     )
   }
 

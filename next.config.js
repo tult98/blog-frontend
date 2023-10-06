@@ -3,6 +3,6 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['hips.hearstapps.com', 'awcdn1.ahmad.works'],
+    domains: ['localhost', 's3.us-west-2.amazonaws.com', 'prod-files-secure.s3.us-west-2.amazonaws.com'],
   },
 }

@@ -1,8 +1,4 @@
-const PortfolioIntroduce = ({
-  onSwitchSection,
-}: {
-  onSwitchSection: (sectionName: string) => void
-}) => {
+const PortfolioIntroduce = ({ onSwitchSection }: { onSwitchSection: (sectionName: string) => void }) => {
   return (
     <section className="min-h-screen pb-24 mt-24 md:mt-0">
       <p className="text-sm opacity-0 md:text-base text-green font-sfmono animate-fadeInFromBottom animation-delay-1600">
@@ -15,10 +11,8 @@ const PortfolioIntroduce = ({
         I building things for the web.
       </h1>
       <p className="max-w-lg text-base opacity-0 md:text-xl text-slate animate-fadeInFromBottom animation-delay-1900">
-        I&#39;m a frontend developer who is interested in web development and
-        always eager to learn new techniques to apply in my projects. My
-        strength is logical thinking, programming, teamwork skill, and
-        self-study.
+        I&#39;m a frontend developer who is interested in web development and always eager to learn new techniques to
+        apply in my projects. My strength is logical thinking, programming, teamwork skill, and self-study.
       </p>
       <div className="inline-block opacity-0 animate-fadeInFromBottom animation-delay-2000">
         <div className="styled-btn" onClick={() => onSwitchSection('work')}>

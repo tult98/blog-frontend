@@ -3,7 +3,7 @@ import TabHeader from '~/components/widgets/TabHeader'
 
 const PortfolioPage = () => {
   return (
-    <div className="font-calibre">
+    <div className="w-full font-calibre">
       <TabHeader name="Portfolio" />
       <main>
         <Portfolio />

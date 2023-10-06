@@ -1,9 +1,24 @@
-import { IPost } from '~/models/post'
+import { IMeta } from '~/utils/common'
 
-export interface ITag {
-  id: string
+interface Tag {
   name: string
   slug: string
-  description?: string
-  posts?: IPost[]
+  description: string
+  createdAt: Date
+  updatedAt: Date
+  publishedAt: Date
+}
+
+export interface TagEntity {
+  id: string
+  attributes: Tag
+}
+
+export interface TagEntityResponseCollection {
+  data: TagEntity[]
+  meta: IMeta
+}
+
+export interface TagRelationResponseCollection {
+  data: TagEntity[]
 }

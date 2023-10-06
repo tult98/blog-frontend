@@ -2,10 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0px;
+  line-height: calc(1em + 0.75rem);
+  -webkit-font-smoothing: antialiased;
+}
+
 @layer base {
+  :root {
+    --color-text: 222deg 22% 5%;
+    --color-background: 0deg 0% 100%;
+    --color-primary: 245deg 100% 60%;
+    --color-secondary: 333deg 100% 45%;
+    --color-tertiary: 255deg 85% 30%;
+    --color-decorative: 200deg 75% 65%;
+    --color-muted: 210deg 55% 92%;
+    /* --color-muted-background: 210deg 55% 92% / 0.85; */
+    --color-info: 245deg 100% 60%;
+    --color-success: 160deg 100% 40%;
+    /* --color-success-background: 160deg 100% 40% / 0.1; */
+    --color-error: 340deg 95% 50%;
+    /* --color-error-background: 340deg 95% 43% / 0.1; */
+    --color-alert: 37deg 100% 50%;
+    /* --color-alert-background: 52deg 100% 50% / 0.25; */
+    --color-venn-0: 190deg 100% 65%;
+    --color-venn-1: 340deg 100% 65%;
+    --color-gray-100: 225deg 25% 95%;
+    --color-gray-200: 225deg 16% 90%;
+    --color-gray-300: 225deg 8% 80%;
+    --color-gray-400: 225deg 8% 70%;
+    --color-gray-500: 225deg 7% 60%;
+    --color-gray-600: 225deg 15% 50%;
+    --color-gray-700: 225deg 12% 40%;
+    --color-gray-900: 225deg 25% 20%;
+    --color-gray-1000: 225deg 15% 15%;
+    --color-subtle-background: 225deg 25% 95%;
+    --color-subtle-floating: 0deg 0% 100%;
+    --color-homepage-light: 204deg 67% 85%;
+    --color-homepage-dark: 202deg 71% 90%;
+    --color-homepage-bg: 204deg 67% 85%;
+    --color-syntax-bg: 225deg 25% 97%;
+    --color-syntax-highlight: 225deg 25% 93%;
+    --color-syntax-txt: 210deg 0% 16%;
+    --color-syntax-comment: 203deg 35% 40%;
+    --color-syntax-prop: 320deg 100% 43%;
+    --color-syntax-bool: 296deg 100% 36%;
+    --color-syntax-val: 197deg 15% 49%;
+    --color-syntax-str: 248deg 100% 60%;
+    --color-syntax-name: 276deg 100% 50%;
+    --color-syntax-del: 0deg 100% 67%;
+    --color-syntax-regex: 252deg 100% 43%;
+    --color-syntax-fn: 216deg 100% 53%;
+    --prefers-dark: false;
+  }
   body {
     @apply text-base bg-white;
   }
+  p {
+    font-size: 21px;
+    line-height: 32px;
+  }
+  /* a {
+    color: rgb(113, 86, 217);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  } */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: rgb(47, 53, 63);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol {
+    margin: 0px;
+  }
+  h1 {
+    font-size: 56px;
+    line-height: 1.14286;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 38px;
+    line-height: 1.21053;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 28px;
+    line-height: 1.28571;
+  }
+  code {
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    font-size: 0.9em;
+    color: rgb(242, 92, 193);
+    background-color: rgb(235, 238, 240);
+  }
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+  }
+  .hit-list {
+    padding-inline-start: 0px !important;
+  }
+  blockquote {
+    padding: 0px 2rem;
+    position: relative;
+    font-style: italic;
+    color: var(--color-gray-700);
+    margin-top: 48px;
+    margin-bottom: 48px;
+    width: fit-content;
+  }
+  blockquote::before {
+    content: '“';
+    font-family: 'Times New Roman', serif;
+    font-size: 6em;
+    font-weight: bold;
+    position: absolute;
+    left: -8px;
+    top: 4px;
+    opacity: 0.25;
+  }
+  blockquote::after {
+    content: "”";
+    font-family: 'Times New Roman', serif;
+    font-size: 6em;
+    font-weight: bold;
+    position: absolute;
+    right: 0px;
+    top: 4px;
+    opacity: 0.25;
+  }
+  /* pre {
+    margin: 60px 0px;
+  } */
 }
 
 @layer components {
@@ -23,6 +170,14 @@
 @layer utilities {
   .center {
     @apply absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2;
+  }
+
+  .error-message {
+    @apply mt-2 text-sm text-red-500;
+  }
+
+  .heading-2 {
+    @apply uppercase tracking-[2px] text-secondary text-base font-medium;
   }
 }
 
@@ -77,6 +232,15 @@
   color: #64ffda;
   font-size: 14px;
   line-height: 12px;
+}
+
+.animate-slideIn {
+  transform: translateX(0);
+  transition: 1s ease-in-out;
+}
+
+.animate-slideOut {
+  transition: 1s ease-in-out;
 }
 
 @font-face {
