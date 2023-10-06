@@ -23,7 +23,7 @@ const Header = ({ disableWave = false, title }: { disableWave?: boolean; title?:
   return (
     <div
       className={`lg:h-[400px] ${
-        !!title ? 'h-[400px]' : 'h-[200px]'
+        title ? 'h-[400px]' : 'h-[200px]'
       } w-full bg-gradient-to-r from-homepage-dark to-homepage-light relative flex flex-col justify-between items-center`}
     >
       <header className="flex flex-row lg:mt-12 mt-4 px-4 lg:px-0 h-fit max-w-[1100px] lg:space-x-6 w-full justify-between lg:justify-start">

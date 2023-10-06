@@ -5,8 +5,16 @@ import TopicList from '~/components/layouts/Blog/TopicList'
 import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import { getDatabase } from '~/services/database'
 import { IPost } from '~/types/blogTypes'
+import { useMemo } from 'react'
 
 const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
+  const topicSet = useMemo(() => {
+    const set = new Set<string>()
+    posts.forEach((post) => (post.properties.tags as any).multi_select.forEach((tag: any) => set.add(tag.name)))
+
+    return set
+  }, [posts])
+
   return (
     <BlogLayout>
       <div className="max-w-[1100px] lg:px-8 px-4 pt-16 grid lg:grid-cols-3 grid-cols-1 lg:gap-x-24 gap-y-16">
@@ -19,8 +27,8 @@ const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
           </div>
         </section>
         <aside className="space-y-16">
-          <TopicList />
-          <PopularContent />
+          <TopicList topics={Array.from(topicSet)} />
+          {posts.length >= 5 && <PopularContent />}
         </aside>
       </div>
     </BlogLayout>
