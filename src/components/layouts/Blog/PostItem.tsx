@@ -12,7 +12,7 @@ const PostItem = ({ post }: Props) => {
   const preface = useMemo(() => post?.preface?.rich_text[0]?.plain_text, [post])
 
   return (
-    <Link href={`/posts/${post.slug.rich_text[0]?.plain_text}`}>
+    <Link href={`/posts/${(post.slug as any).formula.string}`}>
       <article className="group hover:cursor-pointer">
         <h3 className="font-bold text-[1.375rem] text-gray-1000 group-hover:text-primary">
           {post.title.title[0]?.plain_text}

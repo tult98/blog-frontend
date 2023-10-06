@@ -14,7 +14,7 @@ const ListItemBlock = ({ blocks }: { blocks: BlockObjectResponse[] }) => {
   return (
     <ul
       style={{ padding: 'revert' }}
-      className={`text-[1.1875rem] list-outside ${
+      className={`text-[1.1875rem] list-outside mb-6 ${
         blocks[0].type === 'bulleted_list_item' ? '!list-disc' : '!list-decimal'
       }`}
     >

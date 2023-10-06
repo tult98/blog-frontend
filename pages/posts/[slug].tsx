@@ -63,7 +63,7 @@ const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListIt
 export const getStaticProps: GetStaticProps = async (props) => {
   const page = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID as string,
-    filter: { property: 'slug', rich_text: { equals: props.params?.slug as string } },
+    filter: { property: 'slug', formula: { string: { equals: props.params?.slug as string } } },
   })
 
   const pageObject = page.results[0] as PageObjectResponse
@@ -83,7 +83,7 @@ export const getStaticPaths = async () => {
 
   const paths = database?.results?.map((page) => {
     const post = (page as PageObjectResponse).properties as unknown as IPost
-    return { params: { slug: post.slug.rich_text[0]?.plain_text } }
+    return { params: { slug: (post.slug as any).formula.string } }
   })
 
   return { paths, fallback: 'blocking' }
