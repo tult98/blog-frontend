@@ -31,7 +31,7 @@ const Header = ({ disableWave = false, title }: { disableWave?: boolean; title?:
         <Navigation />
         <Icon
           name={`${isOpen ? 'close' : 'menu'}`}
-          style="w-8 h-8 text-gray-1000 lg:hidden z-30"
+          style="w-8 h-8 text-gray-1000 lg:hidden z-30 hover:cursor-pointer"
           onClick={onToggleMobileMenu}
         />
         <MobileMenu

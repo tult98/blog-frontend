@@ -39,7 +39,7 @@ const Portfolio = () => {
   return (
     <section className="bg-navy">
       <PortfolioHeader onSwitchSection={onSwitchSection} />
-      <div className="w-4/5 mx-auto max-w-1000px md:w-auto">
+      <div className="w-4/5 mx-auto max-w-1000px lg:w-auto">
         <PortfolioIntroduce onSwitchSection={onSwitchSection} />
         <AboutMe isInView={navigationItemsStatus.about} />
         <Experience isInView={navigationItemsStatus.experience} />
