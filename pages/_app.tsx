@@ -4,11 +4,11 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <RecoilRoot>
-      <div className="flex flex-row justify-center">
+    <div className="flex flex-row justify-center">
+      <RecoilRoot>
         <Component {...pageProps} />
-      </div>
-    </RecoilRoot>
+      </RecoilRoot>
+    </div>
   )
 }
 
