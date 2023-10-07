@@ -47,8 +47,8 @@ const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListIt
   return (
     <BlogLayout disableWave={true} title={title}>
       <main className="mt-[70px]">
-        <div className="max-w-[1100px] pt-12 px-4 lg:px-0 flex flex-row justify-between items-start relative">
-          <article className="shrink basis-[686px]">
+        <div className="max-w-[1100px] pt-12 lg:px-0 flex flex-row justify-between items-start relative">
+          <article className="shrink basis-[686px] w-screen lg:w-auto px-4 lg:px-0">
             {blocks.map((block, index) => {
               return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
             })}
