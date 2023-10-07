@@ -6,8 +6,12 @@ import MobileMenu from '~/components/layouts/PortfolioHeader/MobileMenu'
 
 const Header = ({ disableWave = false, title }: { disableWave?: boolean; title?: string }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false)
 
-  const onToggleMobileMenu = () => setIsOpen(!isOpen)
+  const onToggleMobileMenu = () => {
+    setIsOpen(!isOpen)
+    if (!shouldAnimate) setShouldAnimate(true)
+  }
 
   const items = useMemo(
     () => (
@@ -36,7 +40,7 @@ const Header = ({ disableWave = false, title }: { disableWave?: boolean; title?:
         />
         <MobileMenu
           isOpen={isOpen}
-          shouldAnimate={true}
+          shouldAnimate={shouldAnimate}
           items={items}
           backgroundColor="bg-[#FFFCFC]"
           customStyle="!z-20 !w-full !font-sans lg:hidden"
