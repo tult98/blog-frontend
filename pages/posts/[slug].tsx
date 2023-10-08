@@ -57,11 +57,17 @@ const PostDetails = ({
     <BlogLayout disableWave={true} title={title}>
       <main className="mt-[70px]">
         <div className="max-w-[1100px] pt-12 lg:px-0 flex flex-row justify-between items-start relative">
-          <article className="shrink basis-[686px] w-screen lg:w-auto px-4 lg:px-0">
-            {blocks.map((block, index) => {
-              return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
-            })}
+          <article className="shrink basis-[686px] w-screen lg:w-auto px-4 lg:px-0 mb-12">
+            <div>
+              {blocks.map((block, index) => {
+                return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
+              })}
+            </div>
+            <div className="lg:hidden">
+              <ShareButtons shareUrl={pageUrl} />
+            </div>
           </article>
+
           <aside className="hidden lg:block sticky grow-0 shrink basis-[250px] top-[148px] ">
             <TableOfContent headings={headings} />
             <ShareButtons shareUrl={pageUrl} />
@@ -103,7 +109,7 @@ export const getStaticPaths = async () => {
     return { params: { slug: (post.slug as any).formula.string } }
   })
 
-  return { paths, fallback: 'false' }
+  return { paths, fallback: false }
 }
 
 export default PostDetails

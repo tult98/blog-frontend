@@ -18,7 +18,7 @@ const Home = ({ posts }: { posts: PageObjectResponse[] }) => {
   return (
     <BlogLayout>
       <div className="max-w-[1100px] lg:px-8 px-4 pt-16 grid lg:grid-cols-3 grid-cols-1 lg:gap-x-24 gap-y-16">
-        <section className="lg:col-span-2">
+        <section className="mb-16 lg:col-span-2">
           <h2 className="heading-2 mb-9">Recently published</h2>
           <div className="flex flex-col space-y-12">
             {posts.map((post) => (
