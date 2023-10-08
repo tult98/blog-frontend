@@ -1,4 +1,5 @@
 import localFont from 'next/font/local'
+import Head from 'next/head'
 import Header from '~/components/layouts/Blog/Header'
 
 const wotFardFont = localFont({
@@ -30,10 +31,15 @@ interface Props {
 
 const BlogLayout = ({ children, disableWave = false, title }: Props) => {
   return (
-    <main className={`${wotFardFont.variable} font-sans w-screen flex flex-col items-center`}>
-      <Header disableWave={disableWave} title={title} />
-      {children}
-    </main>
+    <>
+      <Head>
+        <link rel="icon" href="/blog-favicon2.png" />
+      </Head>
+      <main className={`${wotFardFont.variable} font-sans w-screen flex flex-col items-center`}>
+        <Header disableWave={disableWave} title={title} />
+        {children}
+      </main>
+    </>
   )
 }
 
