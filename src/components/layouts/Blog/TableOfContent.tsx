@@ -22,15 +22,13 @@ const renderHeading = (heading: BlockObjectResponse) => {
   return null
 }
 
-const TableOfContent = ({ headings }: { headings: BlockObjectResponse[] }) => {
-  return (
-    <aside className="sticky grow-0 shrink basis-[250px] top-[148px] hidden lg:block">
-      <p className="text-gray-900 text-base font-medium uppercase leading-[2px] mb-4">Table of contents</p>
-      {headings.map((heading, index) => (
-        <React.Fragment key={index}>{renderHeading(heading as BlockObjectResponse)}</React.Fragment>
-      ))}
-    </aside>
-  )
-}
+const TableOfContent = ({ headings }: { headings: BlockObjectResponse[] }) => (
+  <div>
+    <p className="text-gray-900 text-base font-medium uppercase leading-[2px] mb-4">Table of contents</p>
+    {headings.map((heading, index) => (
+      <React.Fragment key={index}>{renderHeading(heading as BlockObjectResponse)}</React.Fragment>
+    ))}
+  </div>
+)
 
 export default TableOfContent

@@ -11,6 +11,7 @@ import ParagraphBlock from '~/components/layouts/Blog/Block/ParagraphBlock'
 import QuoteBlock from '~/components/layouts/Blog/Block/QuoteBlock'
 import BlogLayout from '~/components/layouts/Blog/BlogLayout'
 import TableOfContent from '~/components/layouts/Blog/TableOfContent'
+import ShareButtons from '~/components/widgets/ShareButtons'
 import { getDatabase } from '~/services/database'
 import { notion } from '~/services/notion'
 import { TitleBlock } from '~/theme/notionTypes'
@@ -41,7 +42,15 @@ const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
   }
 }
 
-const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListItemBlock)[]; title: string }) => {
+const PostDetails = ({
+  blocks,
+  title,
+  pageUrl,
+}: {
+  blocks: (BlockObjectResponse | IListItemBlock)[]
+  title: string
+  pageUrl: string
+}) => {
   const headings = getTableOfContents(blocks)
 
   return (
@@ -53,7 +62,10 @@ const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListIt
               return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
             })}
           </article>
-          <TableOfContent headings={headings} />
+          <aside className="hidden lg:block sticky grow-0 shrink basis-[250px] top-[148px] ">
+            <TableOfContent headings={headings} />
+            <ShareButtons shareUrl={pageUrl} />
+          </aside>
         </div>
       </main>
     </BlogLayout>
@@ -61,6 +73,7 @@ const PostDetails = ({ blocks, title }: { blocks: (BlockObjectResponse | IListIt
 }
 
 export const getStaticProps: GetStaticProps = async (props) => {
+  const pageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/posts/${props.params?.slug as string}`
   const page = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID as string,
     filter: { property: 'slug', formula: { string: { equals: props.params?.slug as string } } },
@@ -73,7 +86,11 @@ export const getStaticProps: GetStaticProps = async (props) => {
   const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
   const formattedBlocks = formatNotionBlocks(post.results as BlockObjectResponse[])
   return {
-    props: { blocks: formattedBlocks, title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text },
+    props: {
+      blocks: formattedBlocks,
+      title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text,
+      pageUrl,
+    },
     revalidate: 10,
   }
 }
@@ -86,7 +103,7 @@ export const getStaticPaths = async () => {
     return { params: { slug: (post.slug as any).formula.string } }
   })
 
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: 'false' }
 }
 
 export default PostDetails
