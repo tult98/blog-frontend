@@ -1,5 +1,6 @@
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import React from 'react'
 import CalloutBlock from '~/components/layouts/Blog/Block/CalloutBlock'
 import CodePlayground from '~/components/layouts/Blog/Block/CodePlayground'
@@ -14,7 +15,7 @@ import TableOfContent from '~/components/layouts/Blog/TableOfContent'
 import ShareButtons from '~/components/widgets/ShareButtons'
 import { getDatabase } from '~/services/database'
 import { notion } from '~/services/notion'
-import { TitleBlock } from '~/theme/notionTypes'
+import { RichTextBlock, TitleBlock } from '~/theme/notionTypes'
 import { IPost } from '~/types/blogTypes'
 import { formatNotionBlocks } from '~/utils/blockUtils'
 import { getTableOfContents } from '~/utils/common'
@@ -46,15 +47,26 @@ const PostDetails = ({
   blocks,
   title,
   pageUrl,
+  preface,
+  thumbnail,
 }: {
   blocks: (BlockObjectResponse | IListItemBlock)[]
   title: string
   pageUrl: string
+  preface: string
+  thumbnail?: string
 }) => {
   const headings = getTableOfContents(blocks)
 
   return (
     <BlogLayout disableWave={true} title={title}>
+      <Head>
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:description" content={preface} />
+        {thumbnail && <meta property="og:image" content={thumbnail} />}
+      </Head>
       <main className="mt-[70px]">
         <div className="max-w-[1100px] pt-12 lg:px-0 flex flex-row justify-between items-start relative">
           <article className="shrink basis-[686px] w-screen lg:w-auto px-4 lg:px-0 mb-12">
@@ -79,7 +91,6 @@ const PostDetails = ({
 }
 
 export const getStaticProps: GetStaticProps = async (props) => {
-  const pageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/posts/${props.params?.slug as string}`
   const page = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID as string,
     filter: { property: 'slug', formula: { string: { equals: props.params?.slug as string } } },
@@ -89,12 +100,21 @@ export const getStaticProps: GetStaticProps = async (props) => {
 
   if (!page?.results?.length) return { props: {} }
 
+  const pageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/posts/${props.params?.slug as string}`
+  const preface = (pageObject.properties.preface as RichTextBlock).rich_text.reduce(
+    (acc, cur) => acc + cur.plain_text,
+    '',
+  )
+  const thumbnail = (pageObject.properties.thumbnail as any).files?.[0].url ?? null
+
   const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
   const formattedBlocks = formatNotionBlocks(post.results as BlockObjectResponse[])
   return {
     props: {
       blocks: formattedBlocks,
       title: (pageObject.properties.title as TitleBlock).title?.[0].plain_text,
+      preface,
+      thumbnail,
       pageUrl,
     },
     revalidate: 10,
