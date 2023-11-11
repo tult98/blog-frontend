@@ -105,7 +105,9 @@ export const getStaticProps: GetStaticProps = async (props) => {
     (acc, cur) => acc + cur.plain_text,
     '',
   )
-  const thumbnail = (pageObject.properties.thumbnail as any).files?.[0]?.external?.url ?? null
+  const thumbnail =
+    (pageObject.properties.thumbnail as any).files?.[0]?.external?.url ??
+    (pageObject.properties.thumbnail as any).files?.[0]?.file?.url
 
   const post = await notion.blocks.children.list({ block_id: page.results[0].id, page_size: 100 })
   const formattedBlocks = formatNotionBlocks(post.results as BlockObjectResponse[])
