@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
+import Script from 'next/script'
 import { RecoilRoot } from 'recoil'
 import '../styles/globals.css'
-import Script from 'next/script'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
