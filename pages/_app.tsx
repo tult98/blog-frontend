@@ -14,11 +14,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
       </noscript>
-      <body className="flex flex-row justify-center">
+      <div className="flex flex-row justify-center">
         <RecoilRoot>
           <Component {...pageProps} />
         </RecoilRoot>
-      </body>
+      </div>
       <Script id="google-tag-manager">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
