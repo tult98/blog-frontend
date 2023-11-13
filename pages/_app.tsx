@@ -6,6 +6,19 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-TNQ5SNSD"
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        ></iframe>
+      </noscript>
+      <div className="flex flex-row justify-center">
+        <RecoilRoot>
+          <Component {...pageProps} />
+        </RecoilRoot>
+      </div>
       <Script id="google-tag-manager">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -15,19 +28,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           })(window,document,'script','dataLayer','GTM-TNQ5SNSD');
         `}
       </Script>
-      <body className="flex flex-row justify-center">
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-TNQ5SNSD"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
-        <RecoilRoot>
-          <Component {...pageProps} />
-        </RecoilRoot>
-      </body>
     </>
   )
 }
