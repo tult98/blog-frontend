@@ -61,6 +61,7 @@ const PostDetails = ({
   return (
     <BlogLayout disableWave={true} title={title}>
       <Head>
+        <title>{title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={pageUrl} />
