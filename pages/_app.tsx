@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import Script from 'next/script'
 import { RecoilRoot } from 'recoil'
 import '../styles/globals.css'
+import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <div className="flex flex-row justify-center">
         <RecoilRoot>
           <Component {...pageProps} />
+          <Analytics />
         </RecoilRoot>
       </div>
       <Script id="google-tag-manager">
