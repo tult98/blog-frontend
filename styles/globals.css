@@ -141,7 +141,7 @@
     opacity: 0.25;
   }
   blockquote::after {
-    content: "”";
+    content: '”';
     font-family: 'Times New Roman', serif;
     font-size: 6em;
     font-weight: bold;
@@ -150,9 +150,12 @@
     top: 4px;
     opacity: 0.25;
   }
-  /* pre {
-    margin: 60px 0px;
-  } */
+  image,
+  video,
+  iframe {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
 }
 
 @layer components {
