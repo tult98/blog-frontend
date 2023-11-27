@@ -10,7 +10,14 @@ const ImageBlock = ({ block }: { block: ImageBlockObjectResponse }) => {
 
   return (
     <figure className="flex flex-col py-6">
-      <Image alt="" src={imageUrl} width={0} height={0} style={{ width: '100%', height: 'auto' }} sizes="100vw" />
+      <Image
+        alt=""
+        src={imageUrl}
+        width={0}
+        height={0}
+        style={{ width: '100%', height: 'auto' }}
+        sizes="(min-width: 740px) 644px, 91.9vw"
+      />
       {!!block.image.caption.length && (
         <figcaption className="self-center mt-2 text-sm text-gray-500">{block.image.caption[0].plain_text}</figcaption>
       )}
