@@ -20,7 +20,7 @@ export const getDatabase = async () => {
         {
           property: 'is_updated',
           checkbox: {
-            equals: false,
+            equals: true,
           },
         },
       ],
