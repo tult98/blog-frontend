@@ -10,10 +10,20 @@ export const getDatabase = async () => {
   const database = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID ?? '',
     filter: {
-      property: 'is_published',
-      checkbox: {
-        equals: true,
-      },
+      and: [
+        {
+          property: 'is_published',
+          checkbox: {
+            equals: true,
+          },
+        },
+        {
+          property: 'is_updated',
+          checkbox: {
+            equals: true,
+          },
+        },
+      ],
     },
     sorts: [
       {
