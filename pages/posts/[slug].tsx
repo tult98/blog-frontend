@@ -37,7 +37,11 @@ const renderBlockByType = (block: BlockObjectResponse | IListItemBlock, isFirstH
     case 'image':
       return <ImageBlock block={block} />
     case 'code':
-      return block.code.language !== 'json' ? <CodeSnippet block={block} /> : <CodePlayground block={block} />
+      return block.code.language === 'json' && block.code?.caption?.[0]?.plain_text === 'playground' ? (
+        <CodePlayground block={block} />
+      ) : (
+        <CodeSnippet block={block} />
+      )
     default:
       return null
   }
