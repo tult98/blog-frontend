@@ -20,10 +20,10 @@ import { IPost } from '~/types/blogTypes'
 import { formatNotionBlocks } from '~/utils/blockUtils'
 import { getTableOfContents } from '~/utils/common'
 
-const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
+const renderBlockByType = (block: BlockObjectResponse | IListItemBlock, isFirstHeading = false) => {
   switch (block.type) {
     case 'heading_2':
-      return <HeadingBlock block={block as any} />
+      return <HeadingBlock block={block as any} isFirstHeading={isFirstHeading} />
     case 'heading_3':
       return <HeadingBlock block={block as any} />
     case 'paragraph':
@@ -37,7 +37,11 @@ const renderBlockByType = (block: BlockObjectResponse | IListItemBlock) => {
     case 'image':
       return <ImageBlock block={block} />
     case 'code':
-      return block.code.language !== 'json' ? <CodeSnippet block={block} /> : <CodePlayground block={block} />
+      return block.code.language === 'json' && block.code?.caption?.[0]?.plain_text === 'playground' ? (
+        <CodePlayground block={block} />
+      ) : (
+        <CodeSnippet block={block} />
+      )
     default:
       return null
   }
@@ -57,6 +61,7 @@ const PostDetails = ({
   thumbnail?: string
 }) => {
   const headings = getTableOfContents(blocks)
+  let isFirstHeading = false
 
   return (
     <BlogLayout disableWave={true} title={title}>
@@ -73,6 +78,11 @@ const PostDetails = ({
           <article className="shrink basis-[686px] w-screen lg:w-auto px-4 lg:px-0 mb-12">
             <div>
               {blocks.map((block, index) => {
+                if (block.type === 'heading_2' && !isFirstHeading) {
+                  isFirstHeading = true
+                  return <React.Fragment key={index}>{renderBlockByType(block, true)}</React.Fragment>
+                }
+
                 return <React.Fragment key={index}>{renderBlockByType(block)}</React.Fragment>
               })}
             </div>

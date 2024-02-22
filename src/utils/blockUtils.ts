@@ -7,7 +7,7 @@ const formatCodeBlock = (block: CodeBlockObjectResponse) => {
   else if (block.code.language === 'typescript') cloneBlock.code.language = 'tsx'
 
   // handle playground code block
-  if (block.code.language === 'json') {
+  if (block.code.language === 'json' && block.code?.caption?.[0]?.plain_text === 'playground') {
     const sandpack = JSON.parse(block.code.rich_text[0].plain_text)
     cloneBlock.code.template = sandpack.template
     cloneBlock.code.files = sandpack.files

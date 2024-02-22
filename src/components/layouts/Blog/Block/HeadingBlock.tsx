@@ -2,17 +2,25 @@ import { Heading2BlockObjectResponse, Heading3BlockObjectResponse } from '@notio
 
 type HeadingBlockObjectResponse = Heading2BlockObjectResponse | Heading3BlockObjectResponse
 
-const HeadingBlock = ({ block }: { block: HeadingBlockObjectResponse }) => {
+const HeadingBlock = ({ block, isFirstHeading }: { block: HeadingBlockObjectResponse; isFirstHeading?: boolean }) => {
   // @ts-ignore next-line
   const headingId = block[block.type].rich_text[0].plain_text.toLowerCase().replace(/ /g, '-')
-  if (block.type === 'heading_2') return <Heading2Block block={block} id={headingId} />
+  if (block.type === 'heading_2') return <Heading2Block block={block} id={headingId} isFirstHeading={isFirstHeading} />
   else if (block.type === 'heading_3') return <Heading3Block block={block} id={headingId} />
   return null
 }
 
-const Heading2Block = ({ block, id }: { block: Heading2BlockObjectResponse; id: string }) => {
+const Heading2Block = ({
+  block,
+  id,
+  isFirstHeading,
+}: {
+  block: Heading2BlockObjectResponse
+  id: string
+  isFirstHeading?: boolean
+}) => {
   return (
-    <h2 id={id} className="mt-24 mb-8 text-[2rem] font-bold break-words text-tertiary">
+    <h2 id={id} className={`${isFirstHeading ? 'mt-0' : 'mt-24'} mb-8 text-[2rem] font-bold break-words text-tertiary`}>
       {block.heading_2.rich_text[0].plain_text}
     </h2>
   )

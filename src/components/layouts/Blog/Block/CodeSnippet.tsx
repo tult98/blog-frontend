@@ -12,7 +12,7 @@ const CodeSnippet = ({ block }: { block: CodeBlockObjectResponse }) => {
               <div className="absolute z-[2] top-0 lg:right-[14px] right-6 pt-[2px] px-3 text-[18px] font-medium uppercase text-gray-700 -translate-y-full bg-syntax-bg rounded-t-lg font-sans">
                 {block.code.language}
               </div>
-              <div className="relative p-8 -mx-4 overflow-x-auto whitespace-pre-wrap rounded-md lg:-mx-8 bg-syntax-bg">
+              <div className="relative p-8 -mx-4 overflow-x-auto break-all whitespace-pre-wrap rounded-md lg:-mx-8 bg-syntax-bg">
                 {tokens.map((line, i) => (
                   <div
                     key={i}
